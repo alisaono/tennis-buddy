@@ -23,7 +23,6 @@
 
 	--color-header-blue: hsl(212, 72%, 47%);
 	--color-header-blue-darker: hsl(212, 72%, 32%);
-
 	--color-header-purple: hsl(300, 98%, 25%);
 	--color-header-purple-darker: hsl(300, 98%, 15%);
 
@@ -86,3 +85,19 @@
 #menu-undo .menu-popup {
 	/* Add specific style for Menu popup here. */
 }
+<<<<<<< HEAD
+
+@keyframes anim-move {
+    0% {
+        opacity: var(--init-opacity);
+        transform: translate(var(--init-dX), var(--init-dY));
+        z-index: var(--move-z-index);
+    }
+    
+    100% {
+        opacity: 1;
+        z-index: var(--move-z-index);
+    }
+}
+=======
+>>>>>>> e8b954eb05a7ded569712418a2cffe6fb1efa2a2

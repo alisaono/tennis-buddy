@@ -32,7 +32,13 @@ $(document).ready(function(){
   })
   
   
+  // Types of shots in toolbar.
   let shotTypes = ["forehand", "backhand", "volley", "serve"]
+  
+  // Make court undraggable.
+  $('#tennis-court').on("dragstart", () => {
+    return false;
+  });
   
   // Make player visible and start countdown towards hiding player.
   let playerTimeoutID = null;

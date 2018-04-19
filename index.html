@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <!--
-PS2 - CandyCrush UI
+GR4 - Tennis Buddy Prototype
 -->
 <html>
 
 <head>
 <meta charset="utf-8">
-<title>Candy Crush</title>
+<title>Tennis Buddy</title>
 
 <!-- Use mobile-aware viewport -->
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- Load style sheets -->
-<link rel="stylesheet" href="game.css">
+<link rel="stylesheet" href="main.css">
 
 <!-- Load any supplemental Javascript libraries here -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.2/seedrandom.js"></script>
@@ -32,20 +32,22 @@ PS2 - CandyCrush UI
 <body>
 
 <header>
-  <div class="game-title">Candy<br>Crush!</div>
-  <div id="score-box" class="borderless">
-    <div id ="score">0</div>
-    <div>points</div>
+  <!-- Player name header goes here -->
+  <div id="player-names">
   </div>
-  <div id="button-box">
-    <button id="new-game" class="borderless">New Game</button>
-  </div>
-
 </header>
 
 <main>
-  <div id="game-grid" class="board"></div>
+  <!-- Tennis court goes here -->
+  <div id="tennis-court">
+  </div>
 </main>
+
+<nav>
+  <!-- Right-hand navigation bar goes here -->
+  <div id="nav-bar">
+  </div>
+</nav>
 
 </body>
 

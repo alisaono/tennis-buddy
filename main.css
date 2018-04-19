@@ -72,21 +72,25 @@ body {
     font-family: Helvetica, Arial, sans-serif;
     
     display: flex;
-    flex-direction: var(--body-flex-direction);
-    align-items: center;
+    flex-direction: row;
+    align-items: flex-start;
     justify-content: center;
     
-	min-height: 100vh;
-    overflow: hidden;
+    min-height: 100vh;
  }
 
-/* Top-Level Columns */
+.borderless {
+    border: none;
+    border-radius: 5px;
+}
+
+/* Main-content rows */
 header {
     margin: 5px;
     
     display: flex;
-    flex-direction: var(--header-flex-direction);
-    align-items: var(--header-align-items);
+    flex-direction: row;
+    align-items: center;
     justify-content: center;
 }
 
@@ -99,10 +103,7 @@ main {
     justify-content: center;
 }
 
-.borderless {
-    border: none;
-    border-radius: 5px;
-}
+
 
 /* 1st Column Descendants */
 .game-title {

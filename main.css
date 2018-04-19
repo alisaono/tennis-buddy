@@ -1,250 +1,88 @@
 /* Global variables */
 :root {
 	--color-light-gray: hsl(220, 10%, 85%);
-    
-    /* original candy colors */
+
+	/* original candy colors */
 	--color-red: hsl(0, 80%, 48%);
 	--color-yellow: gold;
 	--color-green: hsl(85, 90%, 37%);
 	--color-orange: hsl(30, 100%, 50%);
 	--color-blue: hsl(210, 80%, 45%);
 	--color-purple: purple;
-    
-    /* custom variants */
-    --color-disabled-gray: hsl(222, 10%, 75%);
-    --color-disabled-text-gray: hsl(220, 4%, 53%);
-    --color-score-gray: hsl(218, 11%, 85%);
-    --color-gray-darker: hsl(222, 10%, 60%);
-    
-    --color-invalid-red: hsl(0, 80%, 64%);
-    
-    --color-control-green: hsl(85, 90%, 37%);
-    --color-control-green-darker: hsl(85, 90%, 22%);
-    
-    --color-header-blue: hsl(212, 72%, 47%);
-    --color-header-blue-darker: hsl(212, 72%, 32%);
-    
-    --color-header-purple: hsl(300, 98%, 25%);
-    --color-header-purple-darker: hsl(300, 98%, 15%);
-	
-    --duration-move: .1s; /* Duration to move by 1 cell */ /* .1s default */
+
+	/* custom variants */
+	--color-disabled-gray: hsl(222, 10%, 75%);
+	--color-disabled-text-gray: hsl(220, 4%, 53%);
+	--color-score-gray: hsl(218, 11%, 85%);
+	--color-gray-darker: hsl(222, 10%, 60%);
+
+	--color-invalid-red: hsl(0, 80%, 64%);
+
+	--color-control-green: hsl(85, 90%, 37%);
+	--color-control-green-darker: hsl(85, 90%, 22%);
+
+	--color-header-blue: hsl(212, 72%, 47%);
+	--color-header-blue-darker: hsl(212, 72%, 32%);
+
+	--color-header-purple: hsl(300, 98%, 25%);
+	--color-header-purple-darker: hsl(300, 98%, 15%);
+
+	--duration-move: .1s; /* Duration to move by 1 cell */ /* .1s default */
 	--duration-fade: .4s; /* .4s default */
 
-    --board-size: calc(400vw / 6);    
-    --header-flex-direction: column;
-    --header-align-items: stretch;
-    --body-flex-direction: column;
-    --title-font-size: 3em;
+	--board-size: calc(400vw / 6);
+	--header-flex-direction: column;
+	--header-align-items: stretch;
+	--body-flex-direction: column;
+	--title-font-size: 3em;
 }
 
-@media (min-width: 350px) {
-    :root {
-        --board-size: calc(400vw / 6);
-        --header-flex-direction: row;
-        --header-align-items: center;
-        --body-flex-direction: column;
-        --title-font-size: 3em;
-    }
+#container {
+	width: 1000px;
+	height: 800px;
+	background-color: gray;
 }
-
-@media (min-width: 600px) {
-    :root {
-        --board-size: 400px;
-        --header-flex-direction: row;
-        --header-align-items: center;
-        --body-flex-direction: column;
-        --title-font-size: 3em;
-    }
+#nav-bar {
+	float: right;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 200px;
+	height: 100%;
+	background-color: red;
 }
-
-@media (min-width: 950px) {
-    :root {
-        --board-size: 400px;
-        --header-flex-direction: column;
-        --header-align-items: stretch;
-        --body-flex-direction: row;
-        --title-font-size: 4em;
-    }
+#nav-bar .menu-item-wrapper {
+	position: relative;
 }
-
-body {
-    margin: auto;
-    font-family: Helvetica, Arial, sans-serif;
-    
-    display: flex;
-    flex-direction: var(--body-flex-direction);
-    align-items: center;
-    justify-content: center;
-    
-	min-height: 100vh;
-    overflow: hidden;
- }
-
-/* Top-Level Columns */
-header {
-    margin: 5px;
-    
-    display: flex;
-    flex-direction: var(--header-flex-direction);
-    align-items: var(--header-align-items);
-    justify-content: center;
+#nav-bar .menu-item {
+	width: 180px;
+	padding: 30px 0;
+	margin-top: 10px;
+	text-align: center;
+	cursor: pointer;
+	background-color: yellow;
 }
-
-main {
-    margin: 5px;
-    
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+#nav-bar .menu-item:hover {
+	/* Change color or something here. */
 }
-
-.borderless {
-    border: none;
-    border-radius: 5px;
+#nav-bar .menu-popup {
+	position: absolute;
+	top: 10px;
+	right: 200px;
+	width: 300px;
+	height: 300px;
+	background-color: white;
+	display: none;
 }
-
-/* 1st Column Descendants */
-.game-title {
-    margin: 0px 0px 5px;
-    
-    color: var(--color-header-blue);
-    font-size: var(--title-font-size);
-    font-weight: bold;
+#menu-menu .menu-popup {
+	/* Add specific style for Menu popup here. */
 }
-
-#button-box {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: center;
+#menu-stats .menu-popup {
+	/* Add specific style for Menu popup here. */
 }
-
-#score-box {
-    margin: 5px;
-    padding: 5px;
-    
-    color: white;
-    background-color: var(--color-score-gray);
-    
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+#menu-score .menu-popup {
+	/* Add specific style for Menu popup here. */
 }
-
-#score {
-    font-size: 4em;
-}
-
-#new-game {
-    margin: 5px;
-    min-height: 2em;
-    
-    color: white;
-    background-color: var(--color-header-blue);
-    font-size: 1.6em;
-}
-
-#new-game:active {
-    background-color: var(--color-header-blue-darker);
-}
-
-/* 2nd Column Descendants */
-.board {
-	/* Variables to use in creating the board */
-	--grid-color: silver;
-	--grid-gap: 1px;
-	--cell-outer: calc(var(--board-size) / var(--size));
-	--cell: calc(var(--cell-outer) - var(--grid-gap));
-    z-index: 0;
-    --fade-z-index: 10;
-    --move-z-index: 20;
-}
-
-#game-grid {
-    margin: 5px;
-    
-    max-width: calc(var(--board-size) + var(--cell));
-    max-height: calc(var(--board-size) + var(--cell));
-
-    display: grid;
-    grid-gap: var(--grid-gap);
-    justify-content: center; 
-}
-
-.game-square {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.candy-square {
-    margin: -1px;
-    
-    border-style: solid;
-    border-width: 1px;
-    border-color: var(--grid-color);
-}
-
-.label-square {
-    font-weight: bold;
-    font-size: calc(var(--cell) / 2);
-}
-
-img.candy {
-    max-width: 80%;
-    max-height: 80%;
-    width: 100%;
-    height: auto;
-    position: relative;
-}
-
-img.candy.hidden {
-    opacity: 0;
-}
-
-img.candy.pulse {
-    animation: 1s cubic-bezier(0.45, 0.05, 0.55, 0.95) 0s infinite anim-pulse
-}
-
-@keyframes anim-pulse {
-    50% {
-        max-width: 95%;
-        max-height: 95%;
-        filter: saturate(200%);
-    }
-}
-
-img.candy.fade{
-    animation: var(--duration-fade) cubic-bezier(0.45, 0.05, 0.55, 0.95) 0s 1 forwards anim-fade;
-}
-
-@keyframes anim-fade {
-    0% {
-        opacity: 1;
-        z-index: var(--fade-z-index);
-    }
-    
-    100% {
-
-        opacity: 0;
-        z-index: var(--fade-z-index);
-    }
-}
-
-img.candy.move{
-    animation: var(--duration-move-real) cubic-bezier(0.45, 0.05, 0.55, 0.95) 0s 1 forwards anim-move;
-}
-
-@keyframes anim-move {
-    0% {
-        opacity: var(--init-opacity);
-        transform: translate(var(--init-dX), var(--init-dY));
-        z-index: var(--move-z-index);
-    }
-    
-    100% {
-        opacity: 1;
-        z-index: var(--move-z-index);
-    }
+#menu-undo .menu-popup {
+	/* Add specific style for Menu popup here. */
 }

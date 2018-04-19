@@ -86,13 +86,18 @@ body {
     justify-content: center;
 }
 
-#logging-toolbar > input {
+.toolbar-button {
     margin: 5px;
     padding: 7px;
 }
 
+.toolbar-button.active {
+}
+
+
 #tennis-court {
     flex: 5;
+    margin: 5px;
     min-width: 100px;
 }
 

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!--
+PS2 - CandyCrush UI
+-->
+<html>
+
+<head>
+<meta charset="utf-8">
+<title>Candy Crush</title>
+
+<!-- Use mobile-aware viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Load style sheets -->
+<link rel="stylesheet" href="game.css">
+
+<!-- Load any supplemental Javascript libraries here -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.2/seedrandom.js"></script>
+
+<!-- Constructible EventTarget polyfill — Only Chrome 64+ supports constructible EventTarget objects natively -->
+<script src="https://unpkg.com/event-target@latest/min.js"></script>
+
+<script src="util.js"></script>
+<script src="candy.js"></script>
+<script src="board.js"></script>
+<script src="rules.js"></script>
+<script src="game.js"></script>
+
+
+</head>
+
+<body>
+
+<header>
+  <div class="game-title">Candy<br>Crush!</div>
+  <div id="score-box" class="borderless">
+    <div id ="score">0</div>
+    <div>points</div>
+  </div>
+  <div id="button-box">
+    <button id="new-game" class="borderless">New Game</button>
+  </div>
+
+</header>
+
+<main>
+  <div id="game-grid" class="board"></div>
+</main>
+
+</body>
+
+</html>

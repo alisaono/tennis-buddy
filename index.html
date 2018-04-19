@@ -14,7 +14,16 @@
   <div id="container">
     <div id="content">
       <div id="player-names">
-	    <span id="player-one">Bob</span> vs. <span id="player-two">Todd</span>
+        <!--<span id="player-one">Bob</span> vs. <span id="player-two">Todd</span> -->
+        <div class="names_header">
+  
+          <div class = "player_label" id="player1">Steve</div>
+          <button id="swap_btn">
+            <img src="./graphics/loop.png" id="swap_icon">
+          </button>
+          <div class = "player_label" id="player2">Jim</div>
+        
+        </div>
       </div>
       
       <div id="logging-ui">
@@ -44,11 +53,110 @@
       </div>
       <div id="menu-stats" class="menu-item-wrapper">
         <div class="menu-item">Stats</div>
-        <div id="menu-popup-stats" class="menu-popup">I am a Stats popup.</div>
+        <div id="menu-popup-stats" class="menu-popup">I am a Stats popup.
+
+          <!--.................Stats Pop Up Menu (Anjians Stuff).................-->
+          <div class="stats_menu_container" id = "score_menu">
+
+            <div class="stats_menu_header_container">
+            Match Statistics
+            </div>
+            
+            <div class="stats_menu_table_container">
+          
+              <div class="stats_menu_table_row">
+                <div>Forehands</div>
+                <img src="graphics/forehand_icon.png" class="stats_icon">
+                <div>35%</div>
+              </div>
+          
+              <div class="stats_menu_table_row">
+                  <div>Backhands</div>
+                  <img src="graphics/backhand_icon.png" class="stats_icon">
+                  <div>50%</div>
+              </div>
+          
+              <div class="stats_menu_table_row">
+                  <div>Volleys</div>
+                  <img src="graphics/volley_icon.png" class="stats_icon">
+                  <div> 8%</div>
+              </div>
+          
+              <div class="stats_menu_table_row">
+                  <div>Slices</div>
+                  <img src="graphics/slice_icon.png" class="stats_icon">
+                  <div> 7%</div>
+              </div>
+          
+            </div>
+          
+            <div class="stats_menu_feedback_container">
+          
+              <button id="stats_menu_btn">Write Feedback</button>
+          
+            </div>
+            
+          </div>
+
+          <!-- .................END................. -->
+        </div>
       </div>
       <div id="menu-score" class="menu-item-wrapper">
         <div class="menu-item">Score</div>
-        <div class="menu-popup">I am a Score popup.</div>
+        <div class="menu-popup">I am a Score popup.
+
+          <!--.................Score Pop Up Menu (Anjians Stuff).................-->
+          <div class="score_menu_container" id = "score_menu">
+            <div class="score_column_container">
+          
+              <div class="set_score_box">
+                <div class="score_player_label">Steve</div>
+              </div>
+          
+              <div class="set_score_box">
+                <div class="set_score_displayed">3</div>
+              </div>
+          
+              <div class="set_score_box">
+                <div class="set_score_displayed">6</div>
+              </div>
+          
+              <div class="score_controller_container">
+          
+                <button class = "score_inc_btn" id="inc_score_p1">+</button>
+                <button class = "score_dec_btn" id="dec_score_p1">-</button>
+                <div class = "score_num" id ="score_p1"><p>40</p></div>
+          
+              </div>
+          
+            </div>
+            <div class="score_column_container">
+          
+                <div class="set_score_box">
+                  <div class="score_player_label">Jim</div>
+                </div>
+            
+                <div class="set_score_box">
+                  <div class="set_score_displayed">6</div>
+                </div>
+            
+                <div class="set_score_box">
+                  <div class="set_score_displayed">5</div>
+                </div>
+            
+                <div class="score_controller_container">
+            
+                  <button class = "score_inc_btn" id="inc_score_p1">+</button>
+                  <button class = "score_dec_btn" id="dec_score_p1">-</button>
+                  <div class = "score_num" id ="score_p1"><p>15</p></div>
+            
+                </div>
+            
+              </div>
+          </div>
+
+        </div>
+        <!-- .................END................. -->
       </div>
       <div id="menu-undo" class="menu-item-wrapper">
         <div class="menu-item">Undo</div>

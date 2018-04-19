@@ -14,26 +14,18 @@
   <div id="container">
     <div id="content">
       <div id="player-names">
-	    <!-- Player name header goes here -->
+	    <span id="player-one">Bob</span> vs. <span id="player-two">Todd</span>
       </div>
       
       <div id="logging-ui">
 	    <div id="logging-toolbar">
-	      <div id="forehand">
-	        <input type="button" value="(F)orehand">
-	      </div>
-	      <div id="backhand">
-	        <input type="button" value="(B)ackhand">
-	      </div>
-	      <div id="volley">
-	        <input type="button" value="(V)olley">
-	      </div>
-	      <div id="serve">
-	        <input type="button" value="(S)erve">
-	      </div>
+	        <input type="button" class="borderless" id="forehand-button" value="(F)orehand">
+	        <input type="button" class="borderless" id="backhand-button" value="(B)ackhand">
+	        <input type="button" class="borderless" id="volley-button" value="(V)olley">
+	        <input type="button" class="borderless" id="serve-button" value="(S)erve">
 	    </div>
 	    <div id="tennis-court">
-	      <!-- Tennis court goes here -->
+	      <img src="graphics/tennis-court.svg" id="tennis-court">
 	    </div>
       </div> 
       <div id="stats-ui">

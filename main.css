@@ -85,7 +85,6 @@
 #menu-undo .menu-popup {
 	/* Add specific style for Menu popup here. */
 }
-<<<<<<< HEAD
 
 @keyframes anim-move {
     0% {
@@ -93,11 +92,9 @@
         transform: translate(var(--init-dX), var(--init-dY));
         z-index: var(--move-z-index);
     }
-    
+
     100% {
         opacity: 1;
         z-index: var(--move-z-index);
     }
 }
-=======
->>>>>>> e8b954eb05a7ded569712418a2cffe6fb1efa2a2

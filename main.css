@@ -41,6 +41,8 @@
 	height: 800px;
 	background-color: gray;
 }
+
+/* Nav Bar Style */
 #nav-bar {
 	float: right;
 	display: flex;
@@ -50,6 +52,7 @@
 	height: 100%;
 	background-color: red;
 }
+/* Nav Bar Items Style */
 #nav-bar .menu-item-wrapper {
 	position: relative;
 }
@@ -64,17 +67,39 @@
 #nav-bar .menu-item:hover {
 	/* Change color or something here. */
 }
-#nav-bar .menu-popup {
+/* Menu Popups Style */
+#nav-bar .menu-popup, #nav-bar .menu-subpopup {
 	position: absolute;
 	top: 10px;
 	right: 200px;
 	width: 300px;
-	height: 300px;
+	height: auto;
 	background-color: white;
 	display: none;
 }
-#menu-menu .menu-popup {
+#menu-menu .menu-popup .menu-popup-container, #menu-menu .menu-subpopup .menu-popup-container {
 	/* Add specific style for Menu popup here. */
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-bottom: 10px;
+}
+#menu-menu .menu-popup .menu-item {
+	width: 280px;
+	padding: 30px 0;
+	margin-top: 10px;
+	text-align: center;
+	cursor: pointer;
+	background-color: yellow;
+}
+#current-matches .menu-subpopup {
+	/* Add specific style for Current Matches popup here. */
+	top: 0;
+	right: 310px;
+	width: 200px;
+}
+#current-matches .menu-subpopup .menu-item {
+	width: 180px;
 }
 #menu-stats .menu-popup {
 	/* Add specific style for Menu popup here. */

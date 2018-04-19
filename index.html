@@ -16,21 +16,37 @@
       <div id="player-names">
 	<!-- Player name header goes here -->
       </div>
-      
+
       <div id="logging-ui">
 	<div id="logging-toolbar"></div>
 	<div id="tennis-court">
 	  <!-- Tennis court goes here -->
 	</div>
-      </div> 
+      </div>
       <div id="stats-ui">
     </div>
 
     <!-- Right-hand navigation bar goes here -->
     <div id="nav-bar">
       <div id="menu-menu" class="menu-item-wrapper">
-        <div class="menu-item">Menu</div>
-        <div class="menu-popup">I am a Menu popup.</div>
+        <div class="menu-item">New Match</div>
+        <div class="menu-popup">
+          <div class="menu-popup-container">
+            <div id="new-match" class="menu-item">New Match</div>
+            <div id="current-matches" class="menu-item-wrapper">
+              <div class="menu-item">Current Matches</div>
+              <div class="menu-subpopup">
+                <div class="menu-popup-container">
+                  <div class="menu-item">Steve</div>
+                  <div class="menu-item">John</div>
+                  <div class="menu-item">Chris</div>
+                </div>
+              </div>
+            </div>
+            <div id="history" class="menu-item">History</div>
+            <div id="end-match" class="menu-item">End Current Match</div>
+          </div>
+        </div>
       </div>
       <div id="menu-stats" class="menu-item-wrapper">
         <div class="menu-item">Stats</div>

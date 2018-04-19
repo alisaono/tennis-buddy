@@ -38,6 +38,7 @@
 
 body {
     font-family: Helvetica, Arial, sans-serif;
+    overflow: hidden;
 }
 
 .borderless {
@@ -92,6 +93,7 @@ body {
 }
 
 .toolbar-button.active {
+    background-color: #ccc;
 }
 
 
@@ -99,6 +101,58 @@ body {
     flex: 5;
     margin: 5px;
     min-width: 100px;
+}
+
+#tennis-player {
+    position: absolute;
+    width: 100px;
+    z-score: 1;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+}
+
+#tennis-player.hidden {
+    display: none;
+}
+
+#tennis-player-red {
+    position: absolute;
+    width: 100px;
+    z-score: 1;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+}
+
+#tennis-player-red.hidden {
+    display: none;
+}
+
+#tennis-ball {
+    position: absolute;
+    width: 20px;
+    z-score: 1;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+}
+
+#tennis-ball.hidden {
+    display: none;
+}
+
+#tennis-ball-red {
+    position: absolute;
+    width: 20px;
+    z-score: 1;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+}
+
+#tennis-ball-red.hidden {
+    display: none;
 }
 
 

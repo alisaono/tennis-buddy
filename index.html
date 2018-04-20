@@ -27,12 +27,6 @@
       </div>
 
       <div id="logging-ui">
-	    <div id="logging-toolbar">
-	        <input type="button" class="toolbar-button borderless" id="forehand-button" value="(F)orehand">
-	        <input type="button" class="toolbar-button borderless" id="backhand-button" value="(B)ackhand">
-	        <input type="button" class="toolbar-button borderless" id="volley-button" value="(V)olley">
-	        <input type="button" class="toolbar-button borderless" id="serve-button" value="(S)erve">
-	    </div>
 	    <div id="tennis-court">
 	      <img src="graphics/tennis-court.svg" id="tennis-court">
           <img src="graphics/tennis-player.svg" class="hidden" id="tennis-player">
@@ -46,9 +40,10 @@
     </div>
 
     <!-- Right-hand navigation bar goes here -->
-    <div id="nav-bar">
-      <div id="menu-menu" class="menu-item-wrapper">
-        <div class="menu-item">New Match</div>
+    <div id="right-column">
+      <div id="nav-bar">
+        <div id="menu-menu" class="menu-item-wrapper">
+        <div class="menu-item">Menu</div>
         <div class="menu-popup">
           <div class="menu-popup-container">
             <div id="new-match" class="menu-item">New Match</div>
@@ -67,7 +62,7 @@
           </div>
         </div>
       </div>
-      <div id="menu-stats" class="menu-item-wrapper">
+        <div id="menu-stats" class="menu-item-wrapper">
         <div class="menu-item">Stats</div>
         <div id="menu-popup-stats" class="menu-popup">
 
@@ -109,7 +104,7 @@
             <div class="stats_menu_feedback_container">
 
               <button id="stats_menu_btn">Write Feedback</button>
-              <div class="menu-subpopup">
+              <div class="menu-subpopup" id="feedback_menu_popup">
                 <div class="feedback_menu_container" id="feedback_menu">
                   <div class="feedback_menu_header_container">
                   Write Feedback
@@ -130,7 +125,7 @@
           <!-- .................END................. -->
         </div>
       </div>
-      <div id="menu-score" class="menu-item-wrapper">
+        <div id="menu-score" class="menu-item-wrapper">
         <div class="menu-item">Score</div>
         <div class="menu-popup">
 
@@ -187,9 +182,22 @@
         </div>
         <!-- .................END................. -->
       </div>
-      <div id="menu-undo" class="menu-item-wrapper">
+        <div id="menu-undo" class="menu-item-wrapper">
         <div class="menu-item">Undo</div>
+        </div>
       </div>
+      
+      
+      <div id="logging-toolbar">
+	    <input type="button" class="toolbar-button borderless" id="forehand-button" value="(F)orehand">
+	    <input type="button" class="toolbar-button borderless" id="backhand-button" value="(B)ackhand">
+        <input type="button" class="toolbar-button borderless" id="volley-button" value="(V)olley">
+        <input type="button" class="toolbar-button borderless" id="serve-button" value="(S)erve">
+      </div>
+    </div>
+      
+      
+      
     </div>
   </div>
 </body>

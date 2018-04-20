@@ -62,7 +62,7 @@ $(document).ready(function(){
     $('#tennis-player').removeClass("hidden");
     playerTimeoutID = setTimeout(() => {
       $('#tennis-player').addClass("hidden");
-    }, 1000);
+    }, 3000);
   }
 
   // Clear player countdowns and hide player.
@@ -79,7 +79,7 @@ $(document).ready(function(){
     $('#tennis-ball').removeClass("hidden");
     ballTimeoutID = setTimeout(() => {
       $('#tennis-ball').addClass("hidden");
-    }, 1000);
+    }, 3000);
   }
 
   // Clear ball countdowns and hide ball.

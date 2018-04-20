@@ -19,7 +19,7 @@ var currentMatchID = 0;
 
 $(document).ready(function(){
   $('body').on('click', function(e){
-    if (e.target.className !== 'menu-item' && e.target.className !== 'menu-popup') {
+    if ($(e.target).closest('.menu-item').length === 0 && $(e.target).closest('.menu-popup').length === 0) {
       $('.menu-popup').hide()
       $('.menu-subpopup').hide()
     }
@@ -36,7 +36,15 @@ $(document).ready(function(){
   })
 
   $('#current-matches').on('click', function(){
-    $(this).children('.menu-subpopup').show()
+    $('#current-matches').children('.menu-subpopup').show()
+  })
+
+  $('#stats_menu_btn').on('click', function(){
+    $(this).parent().children('.menu-subpopup').show()
+  })
+
+  $('#feedback_menu .feedback_btn').on('click', function(){
+    $('#feedback_menu').parent().hide()
   })
 
   // Types of shots in toolbar.

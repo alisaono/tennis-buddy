@@ -3,11 +3,13 @@ var matches = {
   "0": {
     "player1": "Bob",
     "player2": "Todd",
+    "player1SideLeft": true,
     "courtEvents": []
   },
   "1": {
     "player1": "Andrew",
     "player2": "Bill",
+    "player1SideLeft": true,
     "courtEvents": []
   }
 }
@@ -119,15 +121,21 @@ $(document).ready(function(){
   // Catch mouse clicks on the tennis court.
   $('#tennis-court').mousedown(function(e) {
     let courtBounding = document.getElementById("tennis-court").getBoundingClientRect();
-    let xBoundary = courtBounding.left + courtBounding.width/2
-    if (e.clientX < xBoundary) {
+    let xBoundary = courtBounding.left + courtBounding.width/2;
+    let yBoundary = courtBounding.top + courtBounding.height/2;
+    
+    let percentX = (e.clientX - xBoundary)/courtBounding.width;
+    let percentY = (e.clientY - yBoundary)/courtBounding.height;
+    
+    if ((percentX <= 0 && matches[currentMatchID].player1SideLeft) ||
+        (percentX > 0 && !matches[currentMatchID].player1SideLeft)) {
       matches[currentMatchID].courtEvents.push({
         "timestamp": Date.now(),
         "eventType": "shot",
         "playerSide": true,
-        "shotType": activeShotType,
-        "percentX": (e.clientX - courtBounding.left)/courtBounding.width,
-        "percentY": (e.clientY - courtBounding.top)/courtBounding.height
+        "shotType": activeShotType === null ? "unspecified" : activeShotType,
+        "percentX": matches[currentMatchID].player1SideLeft ? percentX : -percentX,
+        "percentY": matches[currentMatchID].player1SideLeft ? percentY : -percentY
       });
       
       let playerBounding = document.getElementById("tennis-player").getBoundingClientRect();
@@ -143,9 +151,9 @@ $(document).ready(function(){
         "timestamp": Date.now(),
         "eventType": "shot",
         "playerSide": false,
-        "shotType": activeShotType,
-        "percentX": (e.clientX - courtBounding.left)/courtBounding.width,
-        "percentY": (e.clientY - courtBounding.top)/courtBounding.height
+        "shotType": activeShotType === null ? "unspecified" : activeShotType,
+        "percentX": matches[currentMatchID].player1SideLeft ? percentX : -percentX,
+        "percentY": matches[currentMatchID].player1SideLeft ? percentY : -percentY
       });
 
       let ballBounding = document.getElementById("tennis-ball").getBoundingClientRect();
@@ -191,23 +199,35 @@ $(document).ready(function(){
   function undo() {
     let lastEvent = matches[currentMatchID].courtEvents.slice(-1)[0];
     if (lastEvent !== undefined) {
+
       if (lastEvent.eventType == "shot") {
         if (lastEvent.playerSide) {
           let courtBounding = document.getElementById("tennis-court").getBoundingClientRect();
-          
+          let xBoundary = courtBounding.left + courtBounding.width/2;
+          let yBoundary = courtBounding.top + courtBounding.height/2;
+    
+          let percentX = matches[currentMatchID].player1SideLeft ? lastEvent.percentX : -lastEvent.percentX;
+          let percentY = matches[currentMatchID].player1SideLeft ? lastEvent.percentY : -lastEvent.percentY;
+
           $('#tennis-player-red').css({
-            "left": courtBounding.left + courtBounding.width * lastEvent.percentX,
-            "top": courtBounding.top + courtBounding.height * lastEvent.percentY
+            "left": xBoundary + courtBounding.width * percentX,
+            "top": yBoundary + courtBounding.height * percentY
           });
           
           stopAllCourtPopups();
           startPlayerRed();
         } else {
           let courtBounding = document.getElementById("tennis-court").getBoundingClientRect();
+          let xBoundary = courtBounding.left + courtBounding.width/2;
+          let yBoundary = courtBounding.top + courtBounding.height/2;
+          
+          let percentX = matches[currentMatchID].player1SideLeft ? lastEvent.percentX : -lastEvent.percentX;
+          let percentY = matches[currentMatchID].player1SideLeft ? lastEvent.percentY : -lastEvent.percentY;
+          
           
           $('#tennis-ball-red').css({
-            "left": courtBounding.left + courtBounding.width * lastEvent.percentX,
-            "top": courtBounding.top + courtBounding.height * lastEvent.percentY
+            "left": xBoundary + courtBounding.width * percentX,
+            "top": yBoundary + courtBounding.height * percentY
           }); 
           
           stopAllCourtPopups();
@@ -221,6 +241,16 @@ $(document).ready(function(){
   // Bind undo to button.
   $('#menu-undo > .menu-item').click(() => {
     undo();
+  });
+  
+  // Helper function for switching sides.
+  function switchSides() {
+    matches[currentMatchID].player1SideLeft = !matches[currentMatchID].player1SideLeft;
+  }
+  
+  // Bind switch sides to button.
+  $('#swap_btn').click(() => {
+    switchSides();
   });
   
 })

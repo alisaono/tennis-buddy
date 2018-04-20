@@ -20,28 +20,33 @@ var currentMatchID = 0;
 $(document).ready(function(){
   $('body').on('click', function(e){
     if (e.target.className !== 'menu-item' && e.target.className !== 'menu-popup') {
-      $(`.menu-popup`).hide()
+      $('.menu-popup').hide()
+      $('.menu-subpopup').hide()
     }
   })
 
-  $('#nav-bar .menu-item').not('#menu-undo > .menu-item').on('click', function(){
+  $('#nav-bar > .menu-item-wrapper > .menu-item').not('#menu-undo .menu-item').on('click', function(){
     let $popup = $(this).parent().children('.menu-popup')
     let hidden = $popup.css('display') === 'none'
-    $(`.menu-popup`).hide()
+    $('.menu-popup').hide()
+    $('.menu-subpopup').hide()
     if (hidden) {
       $popup.show()
     }
   })
-  
-  
+
+  $('#current-matches').on('click', function(){
+    $(this).children('.menu-subpopup').show()
+  })
+
   // Types of shots in toolbar.
   let shotTypes = ["forehand", "backhand", "volley", "serve"]
-  
+
   // Make court undraggable.
   $('#tennis-court').on("dragstart", () => {
     return false;
   });
-  
+
   // Make player visible and start countdown towards hiding player.
   let playerTimeoutID = null;
   function startPlayer() {
@@ -51,7 +56,7 @@ $(document).ready(function(){
       $('#tennis-player').addClass("hidden");
     }, 1000);
   }
-    
+
   // Clear player countdowns and hide player.
   function stopPlayer() {
     clearTimeout(playerTimeoutID);
@@ -68,14 +73,14 @@ $(document).ready(function(){
       $('#tennis-ball').addClass("hidden");
     }, 1000);
   }
-    
+
   // Clear ball countdowns and hide ball.
   function stopBall() {
     clearTimeout(ballTimeoutID);
     $('#tennis-ball').addClass("hidden");
     ballTimeoutID = null;
   }
-  
+
   // Make red player visible and start countdown towards hiding red player.
   let playerRedTimeoutID = null;
   function startPlayerRed() {
@@ -85,7 +90,7 @@ $(document).ready(function(){
       $('#tennis-player-red').addClass("hidden");
     }, 1000);
   }
-    
+
   // Clear red player countdowns and hide red player.
   function stopPlayerRed() {
     clearTimeout(playerRedTimeoutID);
@@ -102,14 +107,14 @@ $(document).ready(function(){
       $('#tennis-ball-red').addClass("hidden");
     }, 1000);
   }
-    
+
   // Clear red ball countdowns and hide red ball.
   function stopBallRed() {
     clearTimeout(ballRedTimeoutID);
     $('#tennis-ball-red').addClass("hidden");
     ballRedTimeoutID = null;
   }
-  
+
   // Clear all countdowns and players/balls.
   function stopAllCourtPopups() {
     stopPlayer();
@@ -117,7 +122,7 @@ $(document).ready(function(){
     stopPlayerRed();
     stopBallRed();
   }
-  
+
   // Catch mouse clicks on the tennis court.
   $('#tennis-court').mousedown(function(e) {
     let courtBounding = document.getElementById("tennis-court").getBoundingClientRect();
@@ -137,13 +142,13 @@ $(document).ready(function(){
         "percentX": matches[currentMatchID].player1SideLeft ? percentX : -percentX,
         "percentY": matches[currentMatchID].player1SideLeft ? percentY : -percentY
       });
-      
+
       let playerBounding = document.getElementById("tennis-player").getBoundingClientRect();
       $('#tennis-player').css({
         "left": e.clientX,
         "top": e.clientY
       });
-      
+
       stopAllCourtPopups();
       startPlayer();
     } else {
@@ -161,12 +166,12 @@ $(document).ready(function(){
         "left": e.clientX,
         "top": e.clientY
       });
-      
+
       stopAllCourtPopups();
       startBall();
     }
   })
-  
+
   // Helper function for toolbar button clicks.
   let activeShotType = null;
   function toolbarClick(shotType) {
@@ -174,12 +179,12 @@ $(document).ready(function(){
     activeShotType = shotType;
     $('#' + shotType + "-button").addClass("active");
   }
-  
+
   // Bind toolbar button clicks.
   shotTypes.forEach(shotType => {
     $('#' + shotType + '-button').click(() => toolbarClick(shotType));
   });
-  
+
   // Keyboard bindings for toolbar buttons.
   $('body').keydown(function(e) {
     if ($('#logging-toolbar').is(':visible')) {
@@ -194,7 +199,7 @@ $(document).ready(function(){
       }
     }
   })
-  
+
   // Helper function for undo.
   function undo() {
     let lastEvent = matches[currentMatchID].courtEvents.slice(-1)[0];
@@ -213,7 +218,7 @@ $(document).ready(function(){
             "left": xBoundary + courtBounding.width * percentX,
             "top": yBoundary + courtBounding.height * percentY
           });
-          
+
           stopAllCourtPopups();
           startPlayerRed();
         } else {
@@ -237,9 +242,11 @@ $(document).ready(function(){
       }
     }
   }
-  
+
   // Bind undo to button.
   $('#menu-undo > .menu-item').click(() => {
+    $('.menu-popup').hide()
+    $('.menu-subpopup').hide()
     undo();
   });
   
@@ -252,5 +259,4 @@ $(document).ready(function(){
   $('#swap_btn').click(() => {
     switchSides();
   });
-  
 })

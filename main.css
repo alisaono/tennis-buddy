@@ -66,7 +66,7 @@ body {
 /* Left Content Bar*/
 #content {
     flex: 5;
-    
+
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -80,7 +80,7 @@ body {
 
 #logging-ui {
     align-self: stretch;
-    
+
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -169,7 +169,7 @@ body {
 /* Navigation Bar*/
 #nav-bar {
     flex: 1;
-    
+
 	float: right;
 	display: flex;
 	flex-direction: column;
@@ -178,6 +178,7 @@ body {
 	height: 100%;
 	background-color: red;
 }
+/* Nav Bar Items Style */
 #nav-bar .menu-item-wrapper {
 	position: relative;
 }
@@ -192,18 +193,39 @@ body {
 #nav-bar .menu-item:hover {
 	/* Change color or something here. */
 }
-#nav-bar .menu-popup {
+/* Menu Popups Style */
+#nav-bar .menu-popup, #nav-bar .menu-subpopup {
 	position: absolute;
 	top: 10px;
 	right: 200px;
 	width: 300px;
-	height: 500px;
+	height: auto;
 	background-color: white;
 	display: none;
 }
-#menu-menu .menu-popup {
+#menu-menu .menu-popup .menu-popup-container, #menu-menu .menu-subpopup .menu-popup-container {
 	/* Add specific style for Menu popup here. */
-
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-bottom: 10px;
+}
+#menu-menu .menu-popup .menu-item {
+	width: 280px;
+	padding: 30px 0;
+	margin-top: 10px;
+	text-align: center;
+	cursor: pointer;
+	background-color: yellow;
+}
+#current-matches .menu-subpopup {
+	/* Add specific style for Current Matches popup here. */
+	top: 0;
+	right: 310px;
+	width: 200px;
+}
+#current-matches .menu-subpopup .menu-item {
+	width: 180px;
 }
 #menu-stats .menu-popup {
 	/* Add specific style for Menu popup here. */
@@ -255,7 +277,7 @@ body {
 #swap_btn{
 
 	width: 20%;
-	
+
 	border-radius: 5%;
 	color: #000000;
 	font-size: var(--font-size);
@@ -358,8 +380,8 @@ body {
 	bottom:100%;
 
 	text-align:center;
-	
-	
+
+
 }
 
 /*-----------------------Score Pop-up Menu ----------------------------*/
@@ -408,7 +430,7 @@ body {
 .stats_icon{
 	width: 0.8in;
 	height: 0.8in;
-	
+
 }
 
 .stats_menu_feedback_container{
@@ -442,7 +464,7 @@ body {
 	display: inline-block;
 	cursor: pointer;
 	margin: 5px;
-	
+
 	height: 80%;
 }
 

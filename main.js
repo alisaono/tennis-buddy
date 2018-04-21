@@ -14,6 +14,82 @@ var matches = {
   }
 }
 
+var dummy_court_stats_0 = {
+  "forehand":[[80,8],
+              [70,15],
+              [85,20],
+              [84,5],
+              [75,13],
+              [60,10]],
+
+  "backhand":[[10,8],
+              [15,15],
+              [13,20],
+              [4,5],
+              [11,13],
+              [20,10]],
+
+  "volley":  [[40,65],
+              [50,55],
+              [44,58],
+              [51,50],
+              [57,50],
+              [55,71]],
+
+  "slice":   [[15,15],
+              [20,30],
+              [5,27]],
+}
+
+function draw_shot_placement(data){
+  var court = document.querySelector('#tennis_stats_court');
+ 	// Clean out all pins
+  while (court.firstChild)
+  {
+    court.removeChild(court.firstChild);
+  }
+
+  for (i=0;i < data['forehand'].length; i++){
+    pin = document.createElement('img');
+    pin.setAttribute('src', "graphics/blue-pin.png");
+    pin.setAttribute('class', 'shot-pin');
+    pin.setAttribute('id', "forehand_"+i);
+    pin.style.left = data['forehand'][i][0]+"%";
+    pin.style.bottom = data['forehand'][i][1]+"%";  
+    court.append(pin);
+  }
+
+  for (i=0;i < data['backhand'].length; i++){
+    pin = document.createElement('img');
+    pin.setAttribute('src', "graphics/red-pin.png");
+    pin.setAttribute('class', 'shot-pin');
+    pin.setAttribute('id', "backhand_"+i);
+    pin.style.left = data['backhand'][i][0]+"%";
+    pin.style.bottom = data['backhand'][i][1]+"%";  
+    court.append(pin);
+  }
+
+  for (i=0;i < data['volley'].length; i++){
+    pin = document.createElement('img');
+    pin.setAttribute('src', "graphics/pink-pin.png");
+    pin.setAttribute('class', 'shot-pin');
+    pin.setAttribute('id', "volley_"+i);
+    pin.style.left = data['volley'][i][0]+"%";
+    pin.style.bottom = data['volley'][i][1]+"%";  
+    court.append(pin);
+  }
+
+  for (i=0;i < data['slice'].length; i++){
+    pin = document.createElement('img');
+    pin.setAttribute('src', "graphics/black-pin.png");
+    pin.setAttribute('class', 'shot-pin');
+    pin.setAttribute('id', "slice_"+i);
+    pin.style.left = data['slice'][i][0]+"%";
+    pin.style.bottom = data['slice'][i][1]+"%";  
+    court.append(pin);
+  }
+}
+
 // Global state for current ongoing match.
 var currentMatchID = 0;
 
@@ -40,7 +116,11 @@ $(document).ready(function(){
   })
 
   $('#stats_menu_btn').on('click', function(){
-    $(this).parent().children('.menu-subpopup').show()
+    $(this).parent().children('.menu-subpopup').show();
+  })
+
+  $('#view-stats-btn').on('click', function(){
+    draw_shot_placement(dummy_court_stats_0);
   })
 
   $('#feedback_menu .feedback_btn').on('click', function(){

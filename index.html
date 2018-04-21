@@ -63,7 +63,7 @@
         </div>
       </div>
         <div id="menu-stats" class="menu-item-wrapper">
-        <div class="menu-item">Stats</div>
+        <div class="menu-item" id = "view-stats-btn">Stats</div>
         <div id="menu-popup-stats" class="menu-popup">
 
           <!--.................Stats Pop Up Menu (Anjians Stuff).................-->
@@ -74,31 +74,49 @@
             </div>
 
             <div class="stats_menu_table_container">
-
-              <div class="stats_menu_table_row">
-                <div>Forehands</div>
-                <img src="graphics/forehand_icon.png" class="stats_icon">
-                <div>35%</div>
+              
+              <div class = "stats_menu_col">
+                  <img src="graphics/tennis-court-stats2.png" class="court_stats_icon">
+                  <div id="tennis_stats_court">
+                    <img src="graphics/blue-pin.png" class="shot-pin">
+                  </div>
               </div>
 
-              <div class="stats_menu_table_row">
-                  <div>Backhands</div>
-                  <img src="graphics/backhand_icon.png" class="stats_icon">
-                  <div>50%</div>
+              <div class = "stats_menu_col" id = "stats-summary">
+                <div class="stats_menu_table_row">
+
+                  <img src="graphics/blue-pin.png" class="shot-pin-display">
+                  <div>Forehands</div>
+                  <img src="graphics/forehand_icon.png" class="stats_icon">
+                  <div>35%</div>
+                </div>
+
+                <div class="stats_menu_table_row">
+                    <img src="graphics/red-pin.png" class="shot-pin-display">
+
+                    <div>Backhands</div>
+                    <img src="graphics/backhand_icon.png" class="stats_icon">
+                    <div>50%</div>
+                </div>
+
+                <div class="stats_menu_table_row">
+                    <img src="graphics/pink-pin.png" class="shot-pin-display">
+
+                    <div>Volleys</div>
+                    <img src="graphics/volley_icon.png" class="stats_icon">
+                    <div> 8%</div>
+                </div>
+
+                <div class="stats_menu_table_row">
+                    <img src="graphics/black-pin.png" class="shot-pin-display">
+
+                    <div>Slices</div>
+                    <img src="graphics/slice_icon.png" class="stats_icon">
+                    <div> 7%</div>
+                </div>
               </div>
 
-              <div class="stats_menu_table_row">
-                  <div>Volleys</div>
-                  <img src="graphics/volley_icon.png" class="stats_icon">
-                  <div> 8%</div>
-              </div>
-
-              <div class="stats_menu_table_row">
-                  <div>Slices</div>
-                  <img src="graphics/slice_icon.png" class="stats_icon">
-                  <div> 7%</div>
-              </div>
-
+              
             </div>
 
             <div class="stats_menu_feedback_container">

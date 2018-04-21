@@ -224,7 +224,7 @@ body {
 	height: auto;
 	background-color: white;
 	display: none;
-    border-radius: 10px;
+    border-radius: 20px;
 }
 #menu-menu .menu-popup .menu-popup-container, #menu-menu .menu-subpopup .menu-popup-container {
 	/* Add specific style for Menu popup here. */
@@ -253,14 +253,18 @@ body {
 #current-matches .menu-subpopup .menu-item {
 	width: 180px;
 }
+
+/*stats menu pop up*/
 #menu-stats .menu-popup {
 	/* Add specific style for Menu popup here. */
 
 	position: absolute;
-	top: 10px;
-	right: 200px;
-	height: 600px;
+	top: -100%;
+	right: 100%;
+	/*height: 600px;*/
+	/*width: 400px;*/
 	background-color: white;
+	opacity: 1;
 	display: none;
     padding: 20px;
 }
@@ -399,7 +403,13 @@ body {
 .stats_menu_container{
 	display: flex;
 	flex-direction: column;
+	align-items: stretch;
+}
 
+.court_stats_icon{
+	max-width: 6in;
+
+	height: 100%;
 }
 
 .stats_menu_header_container{
@@ -415,12 +425,31 @@ body {
 }
 
 .stats_menu_table_container{
+
+	display:flex;
+	flex-direction: row;
+}
+
+.stats_menu_col{
 	display: flex;
 	flex-direction: column;
-	align-items: stretch;
-
+	justify-content: center;
+	position:relative;
 	font-family: Arial;
 	font-size: 0.2in;
+}
+
+.shot-pin{
+	position: absolute;
+	width: 10%;
+	left:80%;
+	bottom:5%;
+	opacity: 0.8;
+}
+
+.shot-pin-display{
+	width: 10%;
+
 }
 
 .stats_menu_table_row{

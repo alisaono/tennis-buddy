@@ -74,56 +74,57 @@
 
       <!-- Scores -->
       <div class="score_menu_container" id="score_menu">
-        <div class="score_column_container" id="score_column_player1">
-
-          <div class="set_score_box">
-            <div class="score_player_label">Steve</div>
-          </div>
-          
-          <!--
-          <div class="set_score_box">
-            <div class="set_score_displayed">3</div>
-          </div>
-
-          <div class="set_score_box">
-            <div class="set_score_displayed">6</div>
-          </div>
-          -->
-
-          <div class="score_controller_container">
-            <div>
-              <div class = "score_inc_btn" id="inc_score_p1">+</div>
-              <div class = "score_dec_btn" id="dec_score_p1">-</div>
+        <div class="score_column_container">
+          <div class="score_column" id="score_column_player1">
+  
+            <div class="set_score_box">
+              <div class="score_player_label">Steve</div>
             </div>
-            <div class = "score_num" id ="score_p1">0</div>
+            
+            <!--
+            <div class="set_score_box">
+              <div class="set_score_displayed">3</div>
+            </div>
+  
+            <div class="set_score_box">
+              <div class="set_score_displayed">6</div>
+            </div>
+            -->
+  
+            <div class="score_controller_container">
+              <div class = "score_num" id ="score_p1">0</div>
+              <div>
+                <div class = "score_inc_btn" id="inc_score_p1">+</div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="score_column" id="score_column_player2">
+  
+            <div class="set_score_box">
+              <div class="score_player_label">Jim</div>
+            </div>
+  
+            <!--
+            <div class="set_score_box">
+              <div class="set_score_displayed">6</div>
+            </div>
+  
+            <div class="set_score_box">
+              <div class="set_score_displayed">5</div>
+            </div>
+            -->
+  
+            <div class="score_controller_container">
+              <div class = "score_num" id ="score_p2">0</div>
+              <div>
+                <div class = "score_inc_btn" id="inc_score_p2">+</div>
+              </div>
+            </div>
+  
           </div>
         </div>
-
-        <div class="score_column_container" id="score_column_player2">
-
-          <div class="set_score_box">
-            <div class="score_player_label">Jim</div>
-          </div>
-
-          <!--
-          <div class="set_score_box">
-            <div class="set_score_displayed">6</div>
-          </div>
-
-          <div class="set_score_box">
-            <div class="set_score_displayed">5</div>
-          </div>
-          -->
-
-          <div class="score_controller_container">
-            <div>
-              <div class = "score_inc_btn" id="inc_score_p2">+</div>
-              <div class = "score_dec_btn" id="dec_score_p2">-</div>
-            </div>
-            <div class = "score_num" id ="score_p2">0</div>
-          </div>
-
-        </div>
+        <div id="score_undo">Undo Score</div>
       </div>
       <!-- /Scores -->
 
@@ -133,7 +134,7 @@
   	    <input type="button" class="toolbar-button borderless" id="backhand-button" value="(B)ackhand">
         <input type="button" class="toolbar-button borderless" id="volley-button" value="(V)olley">
         <input type="button" class="toolbar-button borderless" id="serve-button" value="(S)erve">
-        <div id="menu-undo">Undo</div>
+        <div id="menu-undo">Undo Shot</div>
       </div>
       <!-- /Logging Toolbar -->
     </div>
@@ -301,7 +302,7 @@
         <label><input type="radio" name="user_type" value="coach" checked>Coach</label>
         <label><input type="radio" name="user_type" value="player">Player</label>
       </div>
-      <input id="login-username" type="text" placeholder="Username">
+      <input id="login-username" type="text" placeholder="Username" autofocus>
       <input id="login-password" type="password" placeholder="Password">
       <div id="login-button">Log In</div>
     </div>

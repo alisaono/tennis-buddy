@@ -5,7 +5,7 @@ var matches = {
     "player2": "Jim",
     "player1SideLeft": true,
     "courtEvents": [],
-    "pointEvents": [0,1,1,0,0,0,1,1,1,1,1,0,0,1,1,1,0,0,0,0,0,0,1,1,0,1,1,1,0,0,1,1,1,1,0,0,1,1,0,1,0,1,1,0,0,0,1,1,0,1,1,0,0,1,1,1,0,1,1,0,0,1,0,0,1,1,1,0,0,0,0,0,1,1,0,1,1,0,0,1,1,1,1,0,0,0,1,1,0,1,1,0,0,0,0,1,1,1,0,0,1,1,1,0,1,1,0,0,1,1,1,0,0,0,1,1,1,1,0,0,0,0,1,1,0,0,1,0,0,0,1,1,0,1,1],
+    "pointEvents": [0,1,1,0,0,0,1,1,1,1,1,0,0,1,1,1,0,0,0,0,0,0,1,1,0,1,1,1,0,0,1,1,1,1,0,0,1,1,0,1,0,1,1,0,0,0,1,1,0,1,1,0,0,1,1,1,0,1,1,0,0,1,0,0,1,1,1,0,0,0,0,0,1,1,0,1,1,0,0,1,1,1,1,0,0,0,1,1,0,1,1,0,0,0,0,1,1,1,0,0,1,1,1,0,1,1,0,0,1,1,1,0,0,0,1,1,1,1,0,0,0,0,1,1,0,0,1,0,0,0,1,1,0,1,1,0],
     "setScore": [[3, 6], [6, 5]],
     "gameScore": [1, 3]
   },
@@ -99,7 +99,7 @@ function draw_shot_placement(data){
 var currentMatchID = 0;
 
 $(document).ready(function(){
-  // Update the score at the start of the game
+  // Update the score UI at the start of the game
   updateScore();
   
   $('body').on('click', function(e){
@@ -506,7 +506,7 @@ $(document).ready(function(){
     updateScoreUI();
   }
   
-  // Helper function for changing score, affects state but not UI.
+  // Helper function for changing score.
   function incrementScore(playerId) {
     if (typeof matches[currentMatchID].gameScore[0] !== "string") {
       matches[currentMatchID].pointEvents.push(playerId);
@@ -514,18 +514,19 @@ $(document).ready(function(){
     }
   }
   
-  
-  
+  // Helper function for undoing score.
+  function undoScore() {
+    matches[currentMatchID].pointEvents.pop();
+    updateScore();
+  }
   
   $('.score_inc_btn').on('click', function(){
     let playerId = $(this).attr('id') === 'inc_score_p1' ? 0 : 1;
     incrementScore(playerId);
-    updateScoreUI();
   })
 
-  $('.score_dec_btn').on('click', function(){
-    let currentScore = $(this).attr('id') === 'dec_score_p1' ? parseInt($('#score_p1').text()) : parseInt($('#score_p2').text())
-    console.log(currentScore)
+  $('#score_undo').on('click', function(){
+    undoScore();
   })
 
   function showPlayerView() {
@@ -542,14 +543,29 @@ $(document).ready(function(){
     $('#player-view-content').hide()
   }
 
-  $('#login-button').on('click',function(){
+  // Helper function for logging in
+  function login() {
     if ($('#login-username').val() === '' || $('#login-password').val() === '') { return }
     if ($('input[name="user_type"]:checked').val() === 'coach') {
       showCoachView()
     } else {
       showPlayerView()
-    }
+    }   
+  }
+  
+  // Bind login button
+  $('#login-button').on('click',function(){
+    login();
   })
+  
+  // Bind enter key to log in
+  $('#login-password').keypress((e) => {
+    if (e.key == "Enter") {
+      login();
+      return false;
+    }
+  });
+  
 
   $('.logout').on('click',function(){
     $('#login-type input[value="coach"]').prop('checked', true)

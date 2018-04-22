@@ -1,8 +1,8 @@
 // Global state for ongoing matches. Maps match IDs to match data.
 var matches = {
   "0": {
-    "player1": "Bob",
-    "player2": "Todd",
+    "player1": "Steve",
+    "player2": "Jim",
     "player1SideLeft": true,
     "courtEvents": []
   },
@@ -354,10 +354,25 @@ $(document).ready(function(){
   // Helper function for switching sides.
   function switchSides() {
     matches[currentMatchID].player1SideLeft = !matches[currentMatchID].player1SideLeft;
+    if (matches[currentMatchID].player1SideLeft) {
+
+    } else {
+
+    }
   }
 
   // Bind switch sides to button.
   $('#swap_btn').click(() => {
     switchSides();
   });
+
+  $('.score_inc_btn').on('click', function(){
+    let currentScore = $(this).attr('id') === 'inc_score_p1' ? parseInt($('#score_p1').text()) : parseInt($('#score_p2').text())
+    console.log(currentScore)
+  })
+
+  $('.score_dec_btn').on('click', function(){
+    let currentScore = $(this).attr('id') === 'dec_score_p1' ? parseInt($('#score_p1').text()) : parseInt($('#score_p2').text())
+    console.log(currentScore)
+  })
 })

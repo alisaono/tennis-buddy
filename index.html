@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <title>Tennis Buddy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <link rel="stylesheet" href="main.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="main.js"></script>
@@ -12,24 +13,29 @@
 
 <body>
   <div id="topbar">
-    <div id="menu-stats" class="menu-item-wrapper">
-      <div class="menu-item" id = "view-stats-btn">Stats</div>
-    </div>
-    <div id="menu-menu" class="menu-item-wrapper">
-      <div class="menu-item">Menu</div>
-      <div class="menu-popup">
-        <div class="menu-popup-container">
-          <div id="new-match" class="menu-item">New Match</div>
-          <div id="current-matches" class="menu-item-wrapper">
-            <div class="menu-item">Current Matches</div>
-            <div class="menu-dropdown">
-              <div class="menu-item">Steve</div>
-              <div class="menu-item">John</div>
-              <div class="menu-item">Chris</div>
+    <div id="topbar-logo">Tennis Buddy</div>
+    <div id="topbar-options">
+      <div id="menu-stats" class="menu-item-wrapper">
+        <div class="menu-item" id = "view-stats-btn">Stats</div>
+      </div>
+      <div id="menu-menu" class="menu-item-wrapper">
+        <div class="menu-item">
+          <img src="./graphics/menu-icon.png" alt="Menu">
+        </div>
+        <div class="menu-popup">
+          <div class="menu-popup-container">
+            <div id="new-match" class="menu-item">New Match</div>
+            <div id="current-matches" class="menu-item-wrapper">
+              <div class="menu-item">Current Matches</div>
+              <div class="menu-dropdown">
+                <div class="menu-item">Steve</div>
+                <div class="menu-item">John</div>
+                <div class="menu-item">Chris</div>
+              </div>
             </div>
+            <div id="history" class="menu-item">History</div>
+            <div id="end-match" class="menu-item">End Current Match</div>
           </div>
-          <div id="history" class="menu-item">History</div>
-          <div id="end-match" class="menu-item">End Current Match</div>
         </div>
       </div>
     </div>
@@ -38,12 +44,11 @@
   <div id="container">
     <div id="content">
       <div id="player-names">
-        <!--<span id="player-one">Bob</span> vs. <span id="player-two">Todd</span> -->
         <div class="names_header">
 
           <div class = "player_label" id="player1">Steve</div>
           <button id="swap_btn">
-            <img src="./graphics/loop.png" id="swap_icon">
+            <img src="./graphics/swap.png" id="swap_icon">
           </button>
           <div class = "player_label" id="player2">Jim</div>
 
@@ -107,10 +112,10 @@
 
           <div class="score_controller_container">
             <div>
-              <div class = "score_inc_btn" id="inc_score_p1">+</div>
-              <div class = "score_dec_btn" id="dec_score_p1">-</div>
+              <div class = "score_inc_btn" id="inc_score_p2">+</div>
+              <div class = "score_dec_btn" id="dec_score_p2">-</div>
             </div>
-            <div class = "score_num" id ="score_p1">15</div>
+            <div class = "score_num" id ="score_p2">15</div>
           </div>
 
         </div>
@@ -123,10 +128,9 @@
   	    <input type="button" class="toolbar-button borderless" id="backhand-button" value="(B)ackhand">
         <input type="button" class="toolbar-button borderless" id="volley-button" value="(V)olley">
         <input type="button" class="toolbar-button borderless" id="serve-button" value="(S)erve">
+        <div id="menu-undo">Undo</div>
       </div>
       <!-- /Logging Toolbar -->
-
-      <div id="menu-undo">Undo</div>
     </div>
     <!-- /#right-column -->
   </div>

@@ -65,157 +65,149 @@
 
     <!-- Right-hand navigation bar goes here -->
     <div id="right-column">
-      <div id="nav-bar">
-        <div id="menu-score" class="menu-item-wrapper">
-        <div class="menu-item">Score</div>
-        <div class="menu-popup">
 
-          <!--.................Score Pop Up Menu (Anjians Stuff).................-->
-          <div class="score_menu_container" id = "score_menu">
-            <div class="score_column_container">
+      <!-- Scores -->
+      <div class="score_menu_container" id="score_menu">
+        <div class="score_column_container">
 
-              <div class="set_score_box">
-                <div class="score_player_label">Steve</div>
-              </div>
+          <div class="set_score_box">
+            <div class="score_player_label">Steve</div>
+          </div>
 
-              <div class="set_score_box">
-                <div class="set_score_displayed">3</div>
-              </div>
+          <div class="set_score_box">
+            <div class="set_score_displayed">3</div>
+          </div>
 
-              <div class="set_score_box">
-                <div class="set_score_displayed">6</div>
-              </div>
+          <div class="set_score_box">
+            <div class="set_score_displayed">6</div>
+          </div>
 
-              <div class="score_controller_container">
-
-                <button class = "score_inc_btn" id="inc_score_p1">+</button>
-                <button class = "score_dec_btn" id="dec_score_p1">-</button>
-                <div class = "score_num" id ="score_p1"><p>40</p></div>
-
-              </div>
-
+          <div class="score_controller_container">
+            <div>
+              <div class = "score_inc_btn" id="inc_score_p1">+</div>
+              <div class = "score_dec_btn" id="dec_score_p1">-</div>
             </div>
-            <div class="score_column_container">
+            <div class = "score_num" id ="score_p1">40</div>
+          </div>
+        </div>
 
-                <div class="set_score_box">
-                  <div class="score_player_label">Jim</div>
-                </div>
+        <div class="score_column_container">
 
-                <div class="set_score_box">
-                  <div class="set_score_displayed">6</div>
-                </div>
+          <div class="set_score_box">
+            <div class="score_player_label">Jim</div>
+          </div>
 
-                <div class="set_score_box">
-                  <div class="set_score_displayed">5</div>
-                </div>
+          <div class="set_score_box">
+            <div class="set_score_displayed">6</div>
+          </div>
 
-                <div class="score_controller_container">
+          <div class="set_score_box">
+            <div class="set_score_displayed">5</div>
+          </div>
 
-                  <button class = "score_inc_btn" id="inc_score_p1">+</button>
-                  <button class = "score_dec_btn" id="dec_score_p1">-</button>
-                  <div class = "score_num" id ="score_p1"><p>15</p></div>
-
-                </div>
-
-              </div>
+          <div class="score_controller_container">
+            <div>
+              <div class = "score_inc_btn" id="inc_score_p1">+</div>
+              <div class = "score_dec_btn" id="dec_score_p1">-</div>
+            </div>
+            <div class = "score_num" id ="score_p1">15</div>
           </div>
 
         </div>
-        <!-- .................END................. -->
       </div>
-      </div>
+      <!-- /Scores -->
 
-
+      <!-- Logging Toolbar -->
       <div id="logging-toolbar">
-	    <input type="button" class="toolbar-button borderless" id="forehand-button" value="(F)orehand">
-	    <input type="button" class="toolbar-button borderless" id="backhand-button" value="(B)ackhand">
+  	    <input type="button" class="toolbar-button borderless" id="forehand-button" value="(F)orehand">
+  	    <input type="button" class="toolbar-button borderless" id="backhand-button" value="(B)ackhand">
         <input type="button" class="toolbar-button borderless" id="volley-button" value="(V)olley">
         <input type="button" class="toolbar-button borderless" id="serve-button" value="(S)erve">
       </div>
+      <!-- /Logging Toolbar -->
+
       <div id="menu-undo">Undo</div>
     </div>
+    <!-- /#right-column -->
+  </div>
+  <!-- /#container -->
 
+  <!-- Stats Popup -->
+  <div id="menu-popup-stats" class="menu-popup">
 
+    <div class="stats_menu_container">
 
-    </div>
+      <div class="stats_menu_header_container">
+      Match Statistics
+      </div>
 
-    <div id="menu-popup-stats" class="menu-popup">
+      <div class="stats_menu_table_container">
 
-      <!--.................Stats Pop Up Menu (Anjians Stuff).................-->
-      <div class="stats_menu_container" id = "score_menu">
-
-        <div class="stats_menu_header_container">
-        Match Statistics
+        <div class = "stats_menu_col">
+            <img src="graphics/tennis-court-stats2.png" class="court_stats_icon">
+            <div id="tennis_stats_court">
+              <img src="graphics/blue-pin.png" class="shot-pin">
+            </div>
         </div>
 
-        <div class="stats_menu_table_container">
+        <div class = "stats_menu_col" id = "stats-summary">
+          <div class="stats_menu_table_row">
 
-          <div class = "stats_menu_col">
-              <img src="graphics/tennis-court-stats2.png" class="court_stats_icon">
-              <div id="tennis_stats_court">
-                <img src="graphics/blue-pin.png" class="shot-pin">
-              </div>
+            <img src="graphics/blue-pin.png" class="shot-pin-display">
+            <div>Forehands</div>
+            <img src="graphics/forehand_icon.png" class="stats_icon">
+            <div>35%</div>
           </div>
 
-          <div class = "stats_menu_col" id = "stats-summary">
-            <div class="stats_menu_table_row">
+          <div class="stats_menu_table_row">
+              <img src="graphics/red-pin.png" class="shot-pin-display">
 
-              <img src="graphics/blue-pin.png" class="shot-pin-display">
-              <div>Forehands</div>
-              <img src="graphics/forehand_icon.png" class="stats_icon">
-              <div>35%</div>
-            </div>
-
-            <div class="stats_menu_table_row">
-                <img src="graphics/red-pin.png" class="shot-pin-display">
-
-                <div>Backhands</div>
-                <img src="graphics/backhand_icon.png" class="stats_icon">
-                <div>50%</div>
-            </div>
-
-            <div class="stats_menu_table_row">
-                <img src="graphics/pink-pin.png" class="shot-pin-display">
-
-                <div>Volleys</div>
-                <img src="graphics/volley_icon.png" class="stats_icon">
-                <div> 8%</div>
-            </div>
-
-            <div class="stats_menu_table_row">
-                <img src="graphics/black-pin.png" class="shot-pin-display">
-
-                <div>Slices</div>
-                <img src="graphics/slice_icon.png" class="stats_icon">
-                <div> 7%</div>
-            </div>
+              <div>Backhands</div>
+              <img src="graphics/backhand_icon.png" class="stats_icon">
+              <div>50%</div>
           </div>
 
+          <div class="stats_menu_table_row">
+              <img src="graphics/pink-pin.png" class="shot-pin-display">
 
-        </div>
+              <div>Volleys</div>
+              <img src="graphics/volley_icon.png" class="stats_icon">
+              <div> 8%</div>
+          </div>
 
-        <div class="stats_menu_feedback_container">
+          <div class="stats_menu_table_row">
+              <img src="graphics/black-pin.png" class="shot-pin-display">
 
-          <button id="stats_menu_btn">Write Feedback</button>
-          <div class="menu-subpopup" id="feedback_menu_popup">
-            <div class="feedback_menu_container" id="feedback_menu">
-              <div class="feedback_menu_header_container">
-              Write Feedback
-              </div>
-              <div class="feedback_comment_box_container">
-                <textarea rows="20" cols="40", id="feedback_text" placeholder="Write you feedback here!"></textarea>
-              </div>
-              <div class="feedback_buttons_container">
-                <button class = "feedback_btn" id="send_fb_btn">Send</button>
-                <button class = "feedback_btn" id="cancel_fb_btn">Cancel</button>
-              </div>
-            </div>
+              <div>Slices</div>
+              <img src="graphics/slice_icon.png" class="stats_icon">
+              <div> 7%</div>
           </div>
         </div>
+
 
       </div>
 
-      <!-- .................END................. -->
+      <div class="stats_menu_feedback_container">
+
+        <button id="stats_menu_btn">Write Feedback</button>
+        <div class="menu-subpopup" id="feedback_menu_popup">
+          <div class="feedback_menu_container" id="feedback_menu">
+            <div class="feedback_menu_header_container">
+            Write Feedback
+            </div>
+            <div class="feedback_comment_box_container">
+              <textarea rows="20" cols="40", id="feedback_text" placeholder="Write you feedback here!"></textarea>
+            </div>
+            <div class="feedback_buttons_container">
+              <button class = "feedback_btn" id="send_fb_btn">Send</button>
+              <button class = "feedback_btn" id="cancel_fb_btn">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
+  </div>
+  <!-- /Stats Popup -->
 </body>
 </html>

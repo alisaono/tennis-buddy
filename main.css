@@ -232,11 +232,12 @@ body {
 
 
 #right-column {
-		height: 100%;
+		min-height: calc(100vh - var(--top-bar-height) - 10px);
+		margin-left: 20px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 
@@ -273,7 +274,6 @@ body {
 }
 #menu-undo {
 	margin-top: 10px;
-	margin-left: 10px;
 	background-color: #dc3545;
 	font-size: 20px;
 	color: #FFF;
@@ -288,7 +288,6 @@ body {
     flex-direction: column;
     align-items: stretch;
     justify-content: center;
-		padding-left: 10px;
 }
 
 .toolbar-button {
@@ -325,49 +324,12 @@ body {
 	display: none;
     border-radius: 20px;
 }
-/* #menu-menu .menu-popup .menu-item {
-	width: 260px;
-	padding: 30px 0;
-	margin: 10px;
-  text-align: center;
-  cursor: pointer;
-  background-color: #56b0ed;
-  color: #FFF;
-  border-radius: 10px;
-  font-size: 30px;
-} */
-#current-matches .menu-subpopup {
-	/* Add specific style for Current Matches popup here. */
-	top: 0;
-	right: 310px;
-}
-#current-matches .menu-subpopup .menu-item {
-	width: 180px;
-}
-
-/*stats menu pop up*/
-#menu-stats .menu-popup {
-	/* Add specific style for Menu popup here. */
-/*
-	position: absolute;
-	top: -100%;
-	right: 100%; */
-	/*height: 600px;*/
-	/*width: 400px;*/
-	/* background-color: white;
-	opacity: 1;
-	display: none;
-    padding: 20px; */
-}
 #menu-score .menu-popup {
 	/* Add specific style for Menu popup here. */
     padding: 20px;
 }
 #menu-score .score_num p {
     font-size: 30px;
-}
-#menu-undo .menu-popup {
-	/* Add specific style for Menu popup here. */
 }
 #feedback_menu_popup {
     right: 290px !important;
@@ -431,6 +393,10 @@ body {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-evenly;
+	width: 200px;
+	height: 200px;
+	border: 1px solid #666;
+	border-radius: 6px;
 }
 
 .score_column_container{
@@ -448,47 +414,42 @@ body {
 }
 
 .set_score_displayed{
-	font-family: Arial;
-	font-size: 1in;
+	font-size: 24px;;
 }
 
 .score_player_label{
-	font-family: Arial;
-	font-size: 0.5in;
-
-
+	font-size: 20px;
 }
 
 .score_controller_container{
-	width:100px;
-	height: 100px;
-
+	display: flex;
+	flex-direction: row;
+	border: 1px solid #444;
 }
 
-.score_inc_btn{
-	width: 50%;
-	height: 50%;
+.score_inc_btn, .score_dec_btn {
+	width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: #FFF;
+	background-color: #444;
 }
 
-.score_dec_btn{
-	width: 50%;
-	height: 50%;
+.score_inc_btn {
+	border-bottom: solid 1px #FFF;
 }
 
 .score_num{
-	/*
-*/
-
-	width: 50%;
-	height: 100%;
-	position: relative;
-
-	left:50%;
-	bottom:100%;
-
-	text-align:center;
-
-
+	width: 40px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 20px;
+	background-color: #FFF;
 }
 
 /*-----------------------Score Pop-up Menu ----------------------------*/

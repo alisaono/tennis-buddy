@@ -3,7 +3,7 @@
 	--color-top-bar: #333;
 	--color-top-bar-popup: #444;
 	--color-top-bar-dropdown: #555;
-  --color-background: #f0f0f0;
+    --color-background: #f0f0f0;
 	--color-stats-background: #f0f0f0;
 	--color-stats-feedback-background: #FFF;
 
@@ -61,10 +61,12 @@
 	--toolbar-button-font-color: #444;
 	--toolbar-button-background: #FFF;
 	--toolbar-button-border: 1px solid #AAA;
+    --toolbar-button-background-hover: #d8e9fd;
 	--toolbar-button-background-active: #3D94F6;
 	--toolbar-button-font-color-active: #FFF;
 	--undo-button-margin-top: 10px;
 	--undo-button-background: #dc3545;
+    --undo-button-background-hover: #b6202f;
 	--undo-button-font: 20px;
 	--undo-button-font-color: #FFF;
 	--undo-button-pad: 10px;
@@ -436,7 +438,7 @@ body {
   color: var(--score-board-button-font-color);
 	cursor: pointer;
 }
-.score_inc_btn:hover, hover {
+.score_inc_btn:hover {
 	background-color: var(--score-board-button-color-hover);
 }
 
@@ -463,6 +465,9 @@ body {
 	text-align: center;
 	cursor: pointer;
 }
+#score_undo:hover {
+    background-color: var(--undo-button-background-hover);
+}
 
 /* (...Scores Style) */
 
@@ -476,23 +481,26 @@ body {
 }
 
 .toolbar-button {
-  padding: var(--toolbar-button-pad);
+    padding: var(--toolbar-button-pad);
 	background-color: var(--toolbar-button-background);
 	border: var(--toolbar-button-border);
 	box-shadow: none;
-  color: var(--toolbar-button-font-color);
-  font-size: var(--toolbar-button-font);
+    color: var(--toolbar-button-font-color);
+    font-size: var(--toolbar-button-font);
 	text-align: left;
 }
+.toolbar-button:hover {
+    background-color: var(--toolbar-button-background-hover);
+}
 .toolbar-button:first-child {
-  border-radius: var(--button-radius-normal) var(--button-radius-normal) 0 0;
+    border-radius: var(--button-radius-normal) var(--button-radius-normal) 0 0;
 }
 .toolbar-button:nth-child(4) {
-  border-radius: 0 0 var(--button-radius-normal) var(--button-radius-normal);
+    border-radius: 0 0 var(--button-radius-normal) var(--button-radius-normal);
 }
 .toolbar-button.active {
-  background-color: var(--toolbar-button-background-active);
-	color: var(--toolbar-button-font-color-active);
+    background-color: var(--toolbar-button-background-active);
+    color: var(--toolbar-button-font-color-active);
 }
 
 #menu-undo {
@@ -505,6 +513,10 @@ body {
 	text-align: center;
 	cursor: pointer;
 }
+#menu-undo:hover {
+    background-color: var(--undo-button-background-hover);
+}
+
 /* (...Logging Toolbar Style) */
 /* (...Right Column Style) */
 
@@ -722,67 +734,69 @@ body {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
+    width: 100vw; /* Full width */
+    height: 100vh; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-/* Modal Content */
+/* Modal Window */
 .modal-content {
     background-color: #fefefe;
     margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
+    
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
+.modal-content-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    
+    font-size: 22px;
+    padding: 20px;
+    
+    border-bottom: 3px solid var(--color-top-bar);
+}
+
+/* Modal Content Buttons */
 #point_end_options_container{
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
 	align-items: center;
+    
+    padding: 20px;
 }
 .shot_ending_type{
-	padding: 50px;
+    margin: 40px 10px 20px;
 	border-radius: 20px;
+    
+    min-width: 150px;
 
+    background-color: var(--score-board-button-color);
+	color: var(--score-board-button-font-color);
+
+	font-size: var(--undo-button-font);
+	padding: var(--undo-button-pad);
+	border-radius: var(--button-radius-normal);
+	text-align: center;
+	cursor: pointer;
 }
-.shot_ending_type :hover{
-	opacity: 0.5;
-
-}
-
-#forced_error_btn{
-	background-color: lightcoral;
-	color: black;
-
-}
-#unforced_error_btn{
-	background-color: lightcoral;
-	color: black;
-
-}
-#ace_btn{
-	background-color: lightcoral;
-	color: black;
-
-}
-#winner_btn{
-	background-color: lightcoral;
-	color: black;
-
+.shot_ending_type:hover {
+    background-color: var(--score-board-button-color-hover);
 }
 
-/* The Close Button */
+/* Modal Close Button */
 .close {
     color: #aaaaaa;
-    float: right;
-    font-size: 28px;
+    font-size: 32px;
 	font-weight: bold;
 	text-align: center;
 }
@@ -793,4 +807,6 @@ body {
     text-decoration: none;
     cursor: pointer;
 }
+
+
 

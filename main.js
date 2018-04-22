@@ -355,9 +355,11 @@ $(document).ready(function(){
   function switchSides() {
     matches[currentMatchID].player1SideLeft = !matches[currentMatchID].player1SideLeft;
     if (matches[currentMatchID].player1SideLeft) {
-
+      $('#player_left.player_label').text(matches[currentMatchID].player1)
+      $('#player_right.player_label').text(matches[currentMatchID].player2)
     } else {
-
+      $('#player_right.player_label').text(matches[currentMatchID].player1)
+      $('#player_left.player_label').text(matches[currentMatchID].player2)
     }
   }
 

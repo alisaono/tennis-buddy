@@ -14,7 +14,8 @@ var matches = {
     "player2": "Andrew",
     "player1SideLeft": true,
     "courtEvents": [],
-    "setScore": [[6, 5]],
+    "pointEvents": [0,1,1,0,0,0,1,1,1,1,1,0,0,1,1,1,0,0,0,0,0,0,1,1,0,1,1,1,0,0,1,1,1,1,0,0,1,1],
+    "setScore": [[2, 4]],
     "gameScore": [2, 2]
   }
 }
@@ -101,6 +102,9 @@ var currentMatchID = 0;
 $(document).ready(function(){
   // Update the score UI at the start of the game
   updateScore();
+  
+  // Update the list of matches in menu at the the start of the game
+  updateCurrentMatchesList();
   
   $('body').on('click', function(e){
     if ($(e.target).closest('#menu-menu .menu-item').length === 0 && $(e.target).closest('#menu-menu .menu-popup').length === 0) {
@@ -520,15 +524,58 @@ $(document).ready(function(){
     updateScore();
   }
   
+  // Bind score increment button to changing score.
   $('.score_inc_btn').on('click', function(){
     let playerId = $(this).attr('id') === 'inc_score_p1' ? 0 : 1;
     incrementScore(playerId);
   })
 
+  // Bind undo score button to undoing the score.
   $('#score_undo').on('click', function(){
     undoScore();
   })
 
+  
+  // Helper function for switching matches.
+  function switchMatch(matchId) {
+    currentMatchID = matchId;
+
+    if (matches[currentMatchID].player1SideLeft) {
+      $('#player_left.player_label').text(matches[currentMatchID].player1)
+      $('#player_right.player_label').text(matches[currentMatchID].player2)
+    } else {
+      $('#player_right.player_label').text(matches[currentMatchID].player1)
+      $('#player_left.player_label').text(matches[currentMatchID].player2)
+    }    
+    updateScore();
+  }
+  
+  // Updates the list of matches in the menu and binds the clicks.
+  function updateCurrentMatchesList() {
+    $('#current-matches-list').empty();
+    
+    let nameIds = [];
+    Object.keys(matches).forEach(k => {
+      nameIds.push([matches[k].player1, k]);
+    });
+    
+    nameIds.sort((a, b) => a[0].localeCompare(b[0]));
+    
+    for (let n of nameIds) {
+      let e = $('<div class="menu-item">' + n[0] + '</div>');
+      e.click(() => switchMatch(n[1]));
+      $('#current-matches-list').append(e);
+    }
+  }
+
+  
+  
+  
+  
+  
+  
+  
+  
   function showPlayerView() {
     $('#login-view').hide()
     $('#topbar').hide()

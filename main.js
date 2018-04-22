@@ -95,6 +95,7 @@ var currentMatchID = 0;
 
 $(document).ready(function(){
   $('body').on('click', function(e){
+    if ($('#menu-popup-stats').css('display') !== 'none') { return }
     if ($(e.target).closest('.menu-item').length === 0 && $(e.target).closest('.menu-popup').length === 0) {
       $('.menu-popup').hide()
       $('.menu-subpopup').hide()
@@ -118,27 +119,23 @@ $(document).ready(function(){
   $('#menu-stats > .menu-item').on('click', function(){
     let hidden = $('#menu-popup-stats').css('display') === 'none'
     $('.menu-popup').hide()
-    $('#menu-popup-stats').hide()
-    $('#menu-popup-stats .menu-subpopup').hide()
     if (hidden) {
       $('#menu-popup-stats').show()
+      $('#view-stats-btn').text('Match')
+    } else {
+      $('#menu-popup-stats').hide()
+      $('#view-stats-btn').text('Stats')
     }
-  })
-
-  $('#current-matches').on('click', function(){
-    $('#current-matches').children('.menu-subpopup').show()
-  })
-
-  $('#stats_menu_btn').on('click', function(){
-    $(this).parent().children('.menu-subpopup').show();
   })
 
   $('#view-stats-btn').on('click', function(){
     draw_shot_placement(dummy_court_stats_0);
   })
 
-  $('#feedback_menu .feedback_btn').on('click', function(){
-    $('#feedback_menu').parent().hide()
+  $('#send_fb_btn').on('click', function(){
+    setTimeout(function(){
+      $('#feedback_text').val('')
+    }, 300)
   })
 
   // Types of shots in toolbar.

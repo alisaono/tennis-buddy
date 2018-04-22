@@ -137,27 +137,14 @@
 
   <!-- Stats Popup -->
   <div id="menu-popup-stats" class="menu-popup">
-
-    <div class="stats_menu_container">
-
-      <div class="stats_menu_header_container">
-      Match Statistics
-      </div>
-
+    <div>
       <div class="stats_menu_table_container">
-
-        <div class = "stats_menu_col">
-            <img src="graphics/tennis-court-stats2.png" class="court_stats_icon">
-            <div id="tennis_stats_court">
-              <img src="graphics/blue-pin.png" class="shot-pin">
-            </div>
-        </div>
-
         <div class = "stats_menu_col" id = "stats-summary">
-          <div class="stats_menu_table_row">
+          <div class="stats_menu_table_header">Match Statistics</div>
 
+          <div class="stats_menu_table_row">
             <img src="graphics/blue-pin.png" class="shot-pin-display">
-            <div>Forehands</div>
+            <div class="stats_stroke_name">Forehands</div>
             <img src="graphics/forehand_icon.png" class="stats_icon">
             <div>35%</div>
           </div>
@@ -165,7 +152,7 @@
           <div class="stats_menu_table_row">
               <img src="graphics/red-pin.png" class="shot-pin-display">
 
-              <div>Backhands</div>
+              <div class="stats_stroke_name">Backhands</div>
               <img src="graphics/backhand_icon.png" class="stats_icon">
               <div>50%</div>
           </div>
@@ -173,7 +160,7 @@
           <div class="stats_menu_table_row">
               <img src="graphics/pink-pin.png" class="shot-pin-display">
 
-              <div>Volleys</div>
+              <div class="stats_stroke_name">Volleys</div>
               <img src="graphics/volley_icon.png" class="stats_icon">
               <div> 8%</div>
           </div>
@@ -181,34 +168,26 @@
           <div class="stats_menu_table_row">
               <img src="graphics/black-pin.png" class="shot-pin-display">
 
-              <div>Slices</div>
+              <div class="stats_stroke_name">Slices</div>
               <img src="graphics/slice_icon.png" class="stats_icon">
               <div> 7%</div>
           </div>
         </div>
-
-
-      </div>
-
-      <div class="stats_menu_feedback_container">
-
-        <button id="stats_menu_btn">Write Feedback</button>
-        <div class="menu-subpopup" id="feedback_menu_popup">
-          <div class="feedback_menu_container" id="feedback_menu">
-            <div class="feedback_menu_header_container">
-            Write Feedback
+        <div class = "stats_menu_col">
+            <img src="graphics/tennis-court-stats2.png" class="court_stats_icon">
+            <div id="tennis_stats_court">
+              <img src="graphics/blue-pin.png" class="shot-pin">
             </div>
-            <div class="feedback_comment_box_container">
-              <textarea rows="20" cols="40", id="feedback_text" placeholder="Write you feedback here!"></textarea>
-            </div>
-            <div class="feedback_buttons_container">
-              <button class = "feedback_btn" id="send_fb_btn">Send</button>
-              <button class = "feedback_btn" id="cancel_fb_btn">Cancel</button>
-            </div>
-          </div>
         </div>
       </div>
 
+      <div class="feedback_menu_container" id="feedback_menu">
+        <div class="feedback_menu_header_container">
+          Feedback for Player:
+        </div>
+        <textarea rows="3" id="feedback_text" placeholder="Write your feedback here!"></textarea>
+        <button class="feedback_btn" id="send_fb_btn">Send</button>
+      </div>
     </div>
   </div>
   <!-- /Stats Popup -->

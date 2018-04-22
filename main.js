@@ -106,6 +106,9 @@ $(document).ready(function(){
   // Update the list of matches in menu at the the start of the game
   updateCurrentMatchesList();
   
+  // Update the feedback name in stats view.
+  updateFeedbackPlayer();
+  
   $('body').on('click', function(e){
     if ($(e.target).closest('#menu-menu .menu-item').length === 0 && $(e.target).closest('#menu-menu .menu-popup').length === 0) {
       $('#menu-menu .menu-popup').hide()
@@ -131,7 +134,7 @@ $(document).ready(function(){
     $('.menu-popup').hide()
     if (hidden) {
       $('#menu-popup-stats').show()
-      $('#view-stats-btn').text('Match')
+      $('#view-stats-btn').text('Logger')
     } else {
       $('#menu-popup-stats').hide()
       $('#view-stats-btn').text('Stats')
@@ -540,6 +543,7 @@ $(document).ready(function(){
   function switchMatch(matchId) {
     currentMatchID = matchId;
 
+    // Update the names header in coach view.
     if (matches[currentMatchID].player1SideLeft) {
       $('#player_left.player_label').text(matches[currentMatchID].player1)
       $('#player_right.player_label').text(matches[currentMatchID].player2)
@@ -547,6 +551,11 @@ $(document).ready(function(){
       $('#player_right.player_label').text(matches[currentMatchID].player1)
       $('#player_left.player_label').text(matches[currentMatchID].player2)
     }    
+    
+    // Update the feedback name.
+    updateFeedbackPlayer();
+    
+    // Update the score.
     updateScore();
   }
   
@@ -567,7 +576,11 @@ $(document).ready(function(){
       $('#current-matches-list').append(e);
     }
   }
-
+  
+  // Update the feedback name in stats view.
+  function updateFeedbackPlayer() {
+    $('#feedback_player').text(matches[currentMatchID].player1);
+  }
   
   
   

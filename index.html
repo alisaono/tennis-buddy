@@ -35,7 +35,7 @@
             </div>
             <div id="history" class="menu-item">History</div>
             <div id="end-match" class="menu-item">End Current Match</div>
-            <div id="logout" class="menu-item">Log Out</div>
+            <div class="menu-item logout">Log Out</div>
           </div>
         </div>
       </div>
@@ -218,7 +218,7 @@
                 <div class="menu-item">April 8 - 11am</div>
               </div>
             </div>
-            <div id="logout" class="menu-item">Log Out</div>
+            <div class="menu-item logout">Log Out</div>
           </div>
         </div>
       </div>
@@ -283,5 +283,24 @@
     </div>
   </div>
   <!-- /Stats (Player View Content) -->
+
+
+
+
+
+  <!--------- LOGIN VIEW --------->
+  <div id="login-view">
+    <div id="login-container">
+      <div id="login-logo">Tennis Buddy</div>
+      <div id="login-title">Welcome!</div>
+      <div id="login-type">I am a
+        <label><input type="radio" name="user_type" value="coach" checked>Coach</label>
+        <label><input type="radio" name="user_type" value="player">Player</label>
+      </div>
+      <input id="login-username" type="text" placeholder="Username">
+      <input id="login-password" type="password" placeholder="Password">
+      <div id="login-button">Log In</div>
+    </div>
+  </div>
 </body>
 </html>

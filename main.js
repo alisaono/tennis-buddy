@@ -375,14 +375,33 @@ $(document).ready(function(){
   })
 
   function showPlayerView() {
+    $('#login-view').hide()
     $('#topbar').hide()
     $('#container').hide()
     $('#player-view-content').show()
   }
 
   function showCoachView() {
+    $('#login-view').hide()
     $('#topbar').show()
     $('#container').show()
     $('#player-view-content').hide()
   }
+
+  $('#login-button').on('click',function(){
+    if ($('#login-username').val() === '' || $('#login-password').val() === '') { return }
+    if ($('input[name="user_type"]:checked').val() === 'coach') {
+      showCoachView()
+    } else {
+      showPlayerView()
+    }
+  })
+
+  $('.logout').on('click',function(){
+    $('#login-type input[value="coach"]').prop('checked', true)
+    $('#login-type input[value="player"]').prop('checked', false)
+    $('#login-username').val('')
+    $('#login-password').val('')
+    $('#login-view').show()
+  })
 })

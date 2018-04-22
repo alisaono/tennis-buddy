@@ -12,6 +12,7 @@
 </head>
 
 <body>
+  <!--------- COACH VIEW --------->
   <div id="topbar">
     <div id="topbar-logo">Tennis Buddy</div>
     <div id="topbar-options">
@@ -34,6 +35,7 @@
             </div>
             <div id="history" class="menu-item">History</div>
             <div id="end-match" class="menu-item">End Current Match</div>
+            <div id="logout" class="menu-item">Log Out</div>
           </div>
         </div>
       </div>
@@ -191,5 +193,95 @@
     </div>
   </div>
   <!-- /Stats Popup -->
+
+
+
+
+
+  <!--------- PLAYER VIEW --------->
+
+  <!-- Stats (Player View Content) -->
+  <div id="player-view-topbar">
+    <div id="topbar-logo">Tennis Buddy</div>
+    <div id="topbar-options">
+      <div id="menu-menu" class="menu-item-wrapper">
+        <div class="menu-item">
+          <img src="./graphics/menu-icon.png" alt="Menu">
+        </div>
+        <div class="menu-popup">
+          <div class="menu-popup-container">
+            <div id="player-matches" class="menu-item-wrapper">
+              <div class="menu-item">Your Matches</div>
+              <div class="menu-dropdown">
+                <div class="menu-item">April 15 - 1pm</div>
+                <div class="menu-item">April 12 - 6pm</div>
+                <div class="menu-item">April 8 - 11am</div>
+              </div>
+            </div>
+            <div id="logout" class="menu-item">Log Out</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats (Player View Content) -->
+  <div id="player-view-content" class="menu-popup">
+    <div>
+      <div class="stats_menu_table_container">
+        <div class = "stats_menu_col" id = "stats-summary">
+          <div class="stats_menu_table_header">Your Recent Match</div>
+          <div class="stats_menu_table_subheader">April 20 10am</div>
+
+          <div class="stats_menu_table_row">
+            <img src="graphics/blue-pin.png" class="shot-pin-display">
+            <div class="stats_stroke_name">Forehands</div>
+            <img src="graphics/forehand_icon.png" class="stats_icon">
+            <div>35%</div>
+          </div>
+
+          <div class="stats_menu_table_row">
+              <img src="graphics/red-pin.png" class="shot-pin-display">
+
+              <div class="stats_stroke_name">Backhands</div>
+              <img src="graphics/backhand_icon.png" class="stats_icon">
+              <div>50%</div>
+          </div>
+
+          <div class="stats_menu_table_row">
+              <img src="graphics/pink-pin.png" class="shot-pin-display">
+
+              <div class="stats_stroke_name">Volleys</div>
+              <img src="graphics/volley_icon.png" class="stats_icon">
+              <div> 8%</div>
+          </div>
+
+          <div class="stats_menu_table_row">
+              <img src="graphics/black-pin.png" class="shot-pin-display">
+
+              <div class="stats_stroke_name">Slices</div>
+              <img src="graphics/slice_icon.png" class="stats_icon">
+              <div> 7%</div>
+          </div>
+        </div>
+        <div class = "stats_menu_col">
+            <img src="graphics/tennis-court-stats2.png" class="court_stats_icon">
+            <div id="tennis_stats_court">
+              <img src="graphics/blue-pin.png" class="shot-pin">
+            </div>
+        </div>
+      </div>
+
+      <div class="feedback_viewer_container">
+        <div class="feedback_viewer_header_container">
+          Feedback from Coach:
+        </div>
+        <div class="feedback_viewer_text_container">
+          Work on your forehands!
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Stats (Player View Content) -->
 </body>
 </html>

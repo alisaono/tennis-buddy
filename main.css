@@ -93,6 +93,10 @@
 	--stats-pin-icon-width: 50px;
 	--stats-table-font: 18px;
 	--stats-table-header-font: 28px;
+
+	--player-feedback-viewer-width: 800px;
+	--player-feedback-font-small: 15px;
+	--player-feedback-font-color-light: #666;
 }
 
 body {
@@ -115,7 +119,7 @@ body {
 
 
 /* Top Bar Style */
-#topbar {
+#topbar, #player-view-topbar {
 	position: fixed;
 	width: 100%;
 	height: var(--top-bar-height);
@@ -123,7 +127,12 @@ body {
 	flex-direction: row;
 	justify-content: center;
 	background-color: var(--color-top-bar);
+}
+#topbar {
 	z-index: 999;
+}
+#player-view-topbar {
+	z-index: 100;
 }
 
 #topbar-logo {
@@ -457,7 +466,7 @@ body {
 
 
 /* Stats Popups Style */
-#menu-popup-stats {
+#menu-popup-stats, #player-view-content {
 	padding: 0 calc((100vw - var(--container-width))/2);
 	position: absolute;
 	top: var(--top-bar-height);
@@ -466,7 +475,7 @@ body {
 	display: none;
 }
 
-#menu-popup-stats > div { /* Container for stats and feedback */
+#menu-popup-stats > div, #player-view-content > div { /* Container for stats and feedback */
 	width: var(--container-width);
 	min-height: calc(100vh - var(--top-bar-height));
 	display: flex;
@@ -527,7 +536,7 @@ body {
 	opacity: 0.8;
 }
 
-.feedback_menu_container {
+.feedback_menu_container, .feedback_viewer_container {
 	width: calc(var(--stats-feedback-text-width) + 2 * var(--stats-feedback-text-pad) + 4);
 	height: var(--stats-feedback-height);
 	margin-top: var(--stats-feedback-margin);
@@ -573,3 +582,22 @@ body {
 	text-decoration: none;
 }
 /* (...Stats Popups Style) */
+
+/* Additional Style for Player View */
+.feedback_viewer_container {
+	width: var(--player-feedback-viewer-width);
+	height: auto;
+}
+
+.feedback_viewer_header_container {
+	color: var(--player-feedback-font-color-light);
+	font-size: var(--player-feedback-font-small);
+}
+
+.stats_menu_table_subheader {
+	text-align: center;
+	font-size: var(--player-feedback-font-small);
+	margin-top: calc(-1 * var(--stats-table-margin));
+	margin-bottom: var(--stats-table-margin);
+}
+/* (...Additional Style for Player View) */

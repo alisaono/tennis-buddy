@@ -95,10 +95,8 @@ var currentMatchID = 0;
 
 $(document).ready(function(){
   $('body').on('click', function(e){
-    if ($('#menu-popup-stats').css('display') !== 'none') { return }
-    if ($(e.target).closest('.menu-item').length === 0 && $(e.target).closest('.menu-popup').length === 0) {
-      $('.menu-popup').hide()
-      $('.menu-subpopup').hide()
+    if ($(e.target).closest('#menu-menu .menu-item').length === 0 && $(e.target).closest('#menu-menu .menu-popup').length === 0) {
+      $('#menu-menu .menu-popup').hide()
     }
   })
 
@@ -375,4 +373,16 @@ $(document).ready(function(){
     let currentScore = $(this).attr('id') === 'dec_score_p1' ? parseInt($('#score_p1').text()) : parseInt($('#score_p2').text())
     console.log(currentScore)
   })
+
+  function showPlayerView() {
+    $('#topbar').hide()
+    $('#container').hide()
+    $('#player-view-content').show()
+  }
+
+  function showCoachView() {
+    $('#topbar').show()
+    $('#container').show()
+    $('#player-view-content').hide()
+  }
 })

@@ -4,13 +4,18 @@ var matches = {
     "player1": "Steve",
     "player2": "Jim",
     "player1SideLeft": true,
-    "courtEvents": []
+    "courtEvents": [],
+    "pointEvents": [0,1,1,0,0,0,1,1,1,1,1,0,0,1,1,1,0,0,0,0,0,0,1,1,0,1,1,1,0,0,1,1,1,1,0,0,1,1,0,1,0,1,1,0,0,0,1,1,0,1,1,0,0,1,1,1,0,1,1,0,0,1,0,0,1,1,1,0,0,0,0,0,1,1,0,1,1,0,0,1,1,1,1,0,0,0,1,1,0,1,1,0,0,0,0,1,1,1,0,0,1,1,1,0,1,1,0,0,1,1,1,0,0,0,1,1,1,1,0,0,0,0,1,1,0,0,1,0,0,0,1,1,0,1,1],
+    "setScore": [[3, 6], [6, 5]],
+    "gameScore": [1, 3]
   },
   "1": {
     "player1": "John",
     "player2": "Andrew",
     "player1SideLeft": true,
-    "courtEvents": []
+    "courtEvents": [],
+    "setScore": [[6, 5]],
+    "gameScore": [2, 2]
   }
 }
 
@@ -94,6 +99,9 @@ function draw_shot_placement(data){
 var currentMatchID = 0;
 
 $(document).ready(function(){
+  // Update the score at the start of the game
+  updateScore();
+  
   $('body').on('click', function(e){
     if ($(e.target).closest('.menu-item').length === 0 && $(e.target).closest('.menu-popup').length === 0) {
       $('.menu-popup').hide()
@@ -369,9 +377,155 @@ $(document).ready(function(){
     switchSides();
   });
 
+  // Helper function for updating score UI
+  function updateScoreUI() {
+    let setScore = matches[currentMatchID].setScore;
+    let gameScore = matches[currentMatchID].gameScore;
+    
+    let rowSelectors = 
+    [
+      '#score_column_player1 > .set_score_box',
+      '#score_column_player2 > .set_score_box'
+    ];
+    
+    let controllerSelectors =
+    [
+      '#score_column_player1 > .score_controller_container',
+      '#score_column_player2 > .score_controller_container'
+    ];
+    
+    let scoreSelectors =
+    [
+      '#score_p1',
+      '#score_p2'
+    ];
+    
+    let playerNames = 
+    [
+      matches[currentMatchID].player1,
+      matches[currentMatchID].player2
+    ];
+    
+    let gameScoreMap = ["0", "15", "30", "40", "Ad"]
+    
+    for (let playerId = 0; playerId < 2; playerId++) {
+      $(rowSelectors[playerId]).each((i, e) => {
+        if (i == 0) {
+          $(e).html('<div class="score_player_label">' + playerNames[playerId] + '</div>');
+        } else {
+          setIndex = i-1;
+          if (setIndex < setScore.length) {
+            $(e).html('<div class="set_score_displayed">' + setScore[setIndex][playerId] + '</div>');
+          } else {
+            $(e).remove();
+          }
+        }
+      });
+
+      if (setScore.length > $(rowSelectors[playerId]).length - 1) {
+        for (let setIndex = $(rowSelectors[playerId]).length - 1; setIndex < setScore.length; setIndex++) {
+          $(controllerSelectors[playerId]).before(`
+            <div class="set_score_box">
+              <div class="set_score_displayed">` + setScore[setIndex][playerId] + `</div>
+            </div>
+          `);
+          
+        }
+      }
+      
+      if (typeof gameScore[playerId] === "string") {
+        $(scoreSelectors[playerId]).html(gameScore[playerId]);
+      } else {
+        $(scoreSelectors[playerId]).html(gameScoreMap[gameScore[playerId]]);
+      }
+
+    }
+  }
+  
+  // Helper function for computing score, implements score changing logic.
+  function computeScore(pointEvents) {    
+    let setScore = [[0, 0]];
+    let gameScore = [0, 0];
+    
+    for (let e of pointEvents) {
+      let won = e ? 1 : 0;
+      let lost = 1 - won;
+      
+      if (gameScore[won] < 3) {
+        gameScore[won]++;
+      } else if (gameScore[won] == 3 && gameScore[lost] == 3) {
+        gameScore[won]++;
+      } else if (gameScore[won] == 3 && gameScore[lost] == 4) {
+        gameScore[lost]--;
+      } else {
+        // Won the game, increment set score.
+        gameScore = [0, 0];
+        let lastSet = setScore[setScore.length-1];
+        if (lastSet[won] < 5) {
+          lastSet[won]++;
+        } else if (lastSet[won] == 5 && lastSet[lost] >= 5){
+          lastSet[won]++;
+        } else {
+          // Won the set, make new set.
+          lastSet[won]++;
+          setScore.push([0, 0]);
+        }
+      }
+      
+      // If 6 sets detected, match is over.
+      if (setScore.length > 5) {
+        break;
+      }
+    }
+    
+    // Calculate who won if needed.
+    if (setScore.length > 5) {
+      setScore.pop();
+      let gamesWon = [0, 0]
+      for (let i = 0; i < 5; i++) {
+        if (setScore[i][0] > setScore[i][1]) {
+          gamesWon[0]++;
+        } else if (setScore[i][0] < setScore[i][1]) {
+          gamesWon[1]++;
+        }
+      }
+      
+      if (gamesWon[0] > gamesWon[1]) {
+        gameScore = ["Won", "Lost"];
+      } else if (gamesWon[0] < gamesWon[1]) {
+        gameScore = ["Lost", "Won"];
+      } else {
+        gameScore = ["Tie", "Tie"];
+      }
+    }
+    
+    return [setScore, gameScore];
+  }
+  
+  // Helper function for updating score, both state and UI.
+  function updateScore() {
+    let score = computeScore(matches[currentMatchID].pointEvents);
+    matches[currentMatchID].setScore = score[0];
+    matches[currentMatchID].gameScore = score[1];
+    
+    updateScoreUI();
+  }
+  
+  // Helper function for changing score, affects state but not UI.
+  function incrementScore(playerId) {
+    if (typeof matches[currentMatchID].gameScore[0] !== "string") {
+      matches[currentMatchID].pointEvents.push(playerId);
+      updateScore();
+    }
+  }
+  
+  
+  
+  
   $('.score_inc_btn').on('click', function(){
-    let currentScore = $(this).attr('id') === 'inc_score_p1' ? parseInt($('#score_p1').text()) : parseInt($('#score_p2').text())
-    console.log(currentScore)
+    let playerId = $(this).attr('id') === 'inc_score_p1' ? 0 : 1;
+    incrementScore(playerId);
+    updateScoreUI();
   })
 
   $('.score_dec_btn').on('click', function(){

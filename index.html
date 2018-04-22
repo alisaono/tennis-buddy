@@ -27,9 +27,9 @@
             <div id="new-match" class="menu-item">New Match</div>
             <div id="current-matches" class="menu-item-wrapper">
               <div class="menu-item">Current Matches</div>
-              <div class="menu-dropdown">
-                <div class="menu-item">Steve</div>
-                <div class="menu-item">John</div>
+              <div id="current-matches-list" class="menu-dropdown">
+                <div class="menu-item" data-match-id="0">Steve</div>
+                <div class="menu-item" data-match-id="1">John</div>
               </div>
             </div>
             <div id="history" class="menu-item">History</div>
@@ -72,12 +72,13 @@
 
       <!-- Scores -->
       <div class="score_menu_container" id="score_menu">
-        <div class="score_column_container">
+        <div class="score_column_container" id="score_column_player1">
 
           <div class="set_score_box">
             <div class="score_player_label">Steve</div>
           </div>
-
+          
+          <!--
           <div class="set_score_box">
             <div class="set_score_displayed">3</div>
           </div>
@@ -85,22 +86,24 @@
           <div class="set_score_box">
             <div class="set_score_displayed">6</div>
           </div>
+          -->
 
           <div class="score_controller_container">
             <div>
               <div class = "score_inc_btn" id="inc_score_p1">+</div>
               <div class = "score_dec_btn" id="dec_score_p1">-</div>
             </div>
-            <div class = "score_num" id ="score_p1">40</div>
+            <div class = "score_num" id ="score_p1">0</div>
           </div>
         </div>
 
-        <div class="score_column_container">
+        <div class="score_column_container" id="score_column_player2">
 
           <div class="set_score_box">
             <div class="score_player_label">Jim</div>
           </div>
 
+          <!--
           <div class="set_score_box">
             <div class="set_score_displayed">6</div>
           </div>
@@ -108,13 +111,14 @@
           <div class="set_score_box">
             <div class="set_score_displayed">5</div>
           </div>
+          -->
 
           <div class="score_controller_container">
             <div>
               <div class = "score_inc_btn" id="inc_score_p2">+</div>
               <div class = "score_dec_btn" id="dec_score_p2">-</div>
             </div>
-            <div class = "score_num" id ="score_p2">15</div>
+            <div class = "score_num" id ="score_p2">0</div>
           </div>
 
         </div>

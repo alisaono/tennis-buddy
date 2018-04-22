@@ -7,8 +7,8 @@ var matches = {
     "courtEvents": []
   },
   "1": {
-    "player1": "Andrew",
-    "player2": "Bill",
+    "player1": "John",
+    "player2": "Andrew",
     "player1SideLeft": true,
     "courtEvents": []
   }
@@ -117,6 +117,7 @@ $(document).ready(function(){
 
   $('#menu-stats > .menu-item').on('click', function(){
     let hidden = $('#menu-popup-stats').css('display') === 'none'
+    $('.menu-popup').hide()
     $('#menu-popup-stats').hide()
     $('#menu-popup-stats .menu-subpopup').hide()
     if (hidden) {

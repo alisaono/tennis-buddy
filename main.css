@@ -36,29 +36,113 @@
 	--title-font-size: 3em;
 
   --color-background: #f8a298;
+	--top-bar-height: 60px;
 }
 
 body {
     font-family: 'Open Sans', Arial, sans-serif;
-    overflow: hidden;
-
-    background-color: var(--color-background);
-
-    margin: 10px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+		background-color: #f0f0f0;
+		margin: 0;
 }
 
 #container {
-	width: 1000px;
-	/*height: 800px;*/
+		width: 1000px;
+		min-height: calc(100vh - var(--top-bar-height) - 10px);
+		margin: auto;
+		padding-top: calc(var(--top-bar-height) + 10px);
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+}
 
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    justify-content: stretch;
+/* Top Bar Style */
+#topbar {
+	position: fixed;
+	width: 100%;
+	height: var(--top-bar-height);
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	background-color: #333;
+	z-index: 1;
+}
+#topbar > .menu-item-wrapper {
+	position: relative;
+}
+#topbar .menu-item {
+	height: var(--top-bar-height);
+	padding: 0 15px;
+	color: #FFF;
+	display: flex;
+	align-items: center;
+	font-size: 20px;
+	cursor: pointer;
+}
+#topbar .menu-item:hover {
+	color: #DDD;
+}
+#topbar .menu-popup {
+	height: auto;
+	position: absolute;
+	top: var(--top-bar-height);
+	right: 0;
+	border-radius: 0 0 6px 6px;
+	background-color: #444;
+	text-align: left;
+	display: none;
+}
+#menu-menu .menu-popup .menu-popup-container {
+	display: flex;
+	flex-direction: column;
+	width: 220px;
+}
+#menu-menu .menu-popup .menu-item {
+	width: 180px;
+	padding: 0 20px;
+	text-align: left;
+	font-size: 18px;
+	cursor: pointer;
+  color: #FFF;
+}
+#menu-menu .menu-popup .menu-item:last-child {
+	border-radius: 0 0 6px 6px;
+}
+#menu-menu .menu-popup .menu-item:hover {
+	background-color: #333;
+}
+#menu-menu .menu-dropdown .menu-item {
+	width: 140px;
+	padding: 0 40px;
+	text-align: left;
+	font-size: 18px;
+	cursor: pointer;
+	background-color: #555;
+}
+#menu-menu .menu-dropdown .menu-item:last-child {
+	border-radius: 0;
+}
+#menu-menu .menu-dropdown .menu-item:hover {
+	background-color: #444;
+}
+#menu-popup-stats {
+	position: absolute;
+	top: calc(var(--top-bar-height) + 10px);
+	/* right: calc((100vw - 1000px)/2); */
+	right: 0;
+	width: 900px;
+	height: auto;
+	background-color: white;
+	display: none;
+}
+#menu-popup-stats .menu-subpopup {
+	position: absolute;
+	top: 10px;
+	right: 200px;
+	height: auto;
+	background-color: white;
+	display: none;
+  border-radius: 20px;
 }
 
 /* Left Content Bar*/
@@ -148,6 +232,7 @@ body {
 
 
 #right-column {
+		height: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -185,6 +270,16 @@ body {
 }
 #nav-bar .menu-item:hover {
 	background-color: #dddfe2;
+}
+#menu-undo {
+	margin-top: 10px;
+	margin-left: 10px;
+	background-color: #dc3545;
+	font-size: 20px;
+	color: #FFF;
+	padding: 8px 12px;
+	border-radius: 6px;
+	cursor: pointer;
 }
 
 
@@ -230,25 +325,17 @@ body {
 	display: none;
     border-radius: 20px;
 }
-#menu-menu .menu-popup .menu-popup-container, #menu-menu .menu-subpopup .menu-popup-container {
-	/* Add specific style for Menu popup here. */
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 20px;
-    border-radius: 10px;
-}
-#menu-menu .menu-popup .menu-item {
+/* #menu-menu .menu-popup .menu-item {
 	width: 260px;
 	padding: 30px 0;
 	margin: 10px;
-    text-align: center;
-    cursor: pointer;
-    background-color: #56b0ed;
-    color: #FFF;
-    border-radius: 10px;
-    font-size: 30px;
-}
+  text-align: center;
+  cursor: pointer;
+  background-color: #56b0ed;
+  color: #FFF;
+  border-radius: 10px;
+  font-size: 30px;
+} */
 #current-matches .menu-subpopup {
 	/* Add specific style for Current Matches popup here. */
 	top: 0;
@@ -261,16 +348,16 @@ body {
 /*stats menu pop up*/
 #menu-stats .menu-popup {
 	/* Add specific style for Menu popup here. */
-
+/*
 	position: absolute;
 	top: -100%;
-	right: 100%;
+	right: 100%; */
 	/*height: 600px;*/
 	/*width: 400px;*/
-	background-color: white;
+	/* background-color: white;
 	opacity: 1;
 	display: none;
-    padding: 20px;
+    padding: 20px; */
 }
 #menu-score .menu-popup {
 	/* Add specific style for Menu popup here. */

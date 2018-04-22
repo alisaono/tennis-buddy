@@ -55,7 +55,7 @@ function draw_shot_placement(data){
     pin.setAttribute('class', 'shot-pin');
     pin.setAttribute('id', "forehand_"+i);
     pin.style.left = data['forehand'][i][0]+"%";
-    pin.style.bottom = data['forehand'][i][1]+"%";  
+    pin.style.bottom = data['forehand'][i][1]+"%";
     court.append(pin);
   }
 
@@ -65,7 +65,7 @@ function draw_shot_placement(data){
     pin.setAttribute('class', 'shot-pin');
     pin.setAttribute('id', "backhand_"+i);
     pin.style.left = data['backhand'][i][0]+"%";
-    pin.style.bottom = data['backhand'][i][1]+"%";  
+    pin.style.bottom = data['backhand'][i][1]+"%";
     court.append(pin);
   }
 
@@ -75,7 +75,7 @@ function draw_shot_placement(data){
     pin.setAttribute('class', 'shot-pin');
     pin.setAttribute('id', "volley_"+i);
     pin.style.left = data['volley'][i][0]+"%";
-    pin.style.bottom = data['volley'][i][1]+"%";  
+    pin.style.bottom = data['volley'][i][1]+"%";
     court.append(pin);
   }
 
@@ -85,7 +85,7 @@ function draw_shot_placement(data){
     pin.setAttribute('class', 'shot-pin');
     pin.setAttribute('id', "slice_"+i);
     pin.style.left = data['slice'][i][0]+"%";
-    pin.style.bottom = data['slice'][i][1]+"%";  
+    pin.style.bottom = data['slice'][i][1]+"%";
     court.append(pin);
   }
 }
@@ -108,6 +108,19 @@ $(document).ready(function(){
     $('.menu-subpopup').hide()
     if (hidden) {
       $popup.show()
+    }
+  })
+
+  $('#menu-menu > .menu-item').on('click', function(){
+    $('#menu-menu > .menu-popup').toggle()
+  })
+
+  $('#menu-stats > .menu-item').on('click', function(){
+    let hidden = $('#menu-popup-stats').css('display') === 'none'
+    $('#menu-popup-stats').hide()
+    $('#menu-popup-stats .menu-subpopup').hide()
+    if (hidden) {
+      $('#menu-popup-stats').show()
     }
   })
 
@@ -216,10 +229,10 @@ $(document).ready(function(){
     let courtBounding = document.getElementById("tennis-court").getBoundingClientRect();
     let xBoundary = courtBounding.left + courtBounding.width/2;
     let yBoundary = courtBounding.top + courtBounding.height/2;
-    
+
     let percentX = (e.clientX - xBoundary)/courtBounding.width;
     let percentY = (e.clientY - yBoundary)/courtBounding.height;
-    
+
     if ((percentX <= 0 && matches[currentMatchID].player1SideLeft) ||
         (percentX > 0 && !matches[currentMatchID].player1SideLeft)) {
       matches[currentMatchID].courtEvents.push({
@@ -298,7 +311,7 @@ $(document).ready(function(){
           let courtBounding = document.getElementById("tennis-court").getBoundingClientRect();
           let xBoundary = courtBounding.left + courtBounding.width/2;
           let yBoundary = courtBounding.top + courtBounding.height/2;
-    
+
           let percentX = matches[currentMatchID].player1SideLeft ? lastEvent.percentX : -lastEvent.percentX;
           let percentY = matches[currentMatchID].player1SideLeft ? lastEvent.percentY : -lastEvent.percentY;
 
@@ -313,16 +326,16 @@ $(document).ready(function(){
           let courtBounding = document.getElementById("tennis-court").getBoundingClientRect();
           let xBoundary = courtBounding.left + courtBounding.width/2;
           let yBoundary = courtBounding.top + courtBounding.height/2;
-          
+
           let percentX = matches[currentMatchID].player1SideLeft ? lastEvent.percentX : -lastEvent.percentX;
           let percentY = matches[currentMatchID].player1SideLeft ? lastEvent.percentY : -lastEvent.percentY;
-          
-          
+
+
           $('#tennis-ball-red').css({
             "left": xBoundary + courtBounding.width * percentX,
             "top": yBoundary + courtBounding.height * percentY
-          }); 
-          
+          });
+
           stopAllCourtPopups();
           startBallRed();
         }
@@ -332,17 +345,17 @@ $(document).ready(function(){
   }
 
   // Bind undo to button.
-  $('#menu-undo > .menu-item').click(() => {
+  $('#menu-undo').click(() => {
     $('.menu-popup').hide()
     $('.menu-subpopup').hide()
     undo();
   });
-  
+
   // Helper function for switching sides.
   function switchSides() {
     matches[currentMatchID].player1SideLeft = !matches[currentMatchID].player1SideLeft;
   }
-  
+
   // Bind switch sides to button.
   $('#swap_btn').click(() => {
     switchSides();

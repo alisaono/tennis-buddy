@@ -531,9 +531,7 @@ $(document).ready(function(){
   $('.score_inc_btn').on('click', function(){
     let playerId = $(this).attr('id') === 'inc_score_p1' ? 0 : 1;
     incrementScore(playerId);
-    modal.style.display = "block";
-
-
+    $('#myModal').show();
   })
 
   // Bind undo score button to undoing the score.
@@ -587,45 +585,27 @@ $(document).ready(function(){
 
   // Setup Error UI
 
-  // Get the modal
-var modal = document.getElementById('myModal');
+  // Bind modal x to closing the modal.
+  $('#shot_modal_close').click(() => $('#myModal').hide());
 
-// Get the button that opens the modal
-//var btn = document.getElementById("myBtn");
+  // When the user clicks anywhere outside of the modal, close it
+  /*
+  window.onclick = function(event) {
+      if (event.target == document.getElementById('myModal')) {
+          $('#myModal').hide();
+      }
+  }
+  */
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
+  // When the user clicks a modal button, close it.
+  $('.shot_ending_type').click(() => $('#myModal').hide());
+  
+  // When the user presses the Esc key, close the modal.
+  $(document).keydown((e) => {
+    if (e.keyCode == 27) {
+      $('#myModal').hide();
     }
-}
-  
-document.getElementById('forced_error_btn').onclick = function() {
-  modal.style.display = "none";
-}
-
-document.getElementById('unforced_error_btn').onclick = function() {
-  modal.style.display = "none";
-}
-
-document.getElementById('ace_btn').onclick = function() {
-  modal.style.display = "none";
-}
-
-document.getElementById('winner_btn').onclick = function() {
-  modal.style.display = "none";
-}
-  
-  
+  });
   
   
   

@@ -245,20 +245,51 @@ $(document).ready(function(){
     }
   })
 
+
+  /* Functions related to the new match modal */
   $('#new-match').on('click', () => { $('#new-match-modal').show() })
+
   $('#new-match-modal .modal-submit').click(() => {
-    console.log($('#new-match-modal select').val())
-    console.log($('#new-match-modal input').val())
+    let playerName = $('#new-match-modal select').val()
+    playerName = playerName.charAt(0).toUpperCase() + playerName.slice(1)
+    let opponentName = $('#new-match-modal input').val()
+    if (opponentName === "") { opponentName = "Opponent" }
+
+    let newID = -1
+    for (let id of Object.keys(matches)) {
+      if (matches[id]['player1'] === playerName) {
+        alert(`${playerName} already has an ongoing match!`)
+        return
+      }
+      newID = Math.max(newID, parseInt(id))
+    }
+    newID += 1 //Increment the largest current ID by 1.
+
+    matches[newID.toString()] = {
+      player1: playerName,
+      player2: opponentName,
+      player1SideLeft: true,
+      courtEvents: [],
+      pointEvents: [],
+      setScore: [],
+      gameScore: []
+    }
+    updateCurrentMatchesList()
+    switchMatch(newID.toString())
     hideNewMatchModal()
   })
+
   $('#new-match-modal .close').click(() => {
     hideNewMatchModal()
   })
+
   function hideNewMatchModal() {
     $('#new-match-modal').hide()
     $('#new-match-modal select').prop('selectedIndex', 0) //Reset dropdown
     $('#new-match-modal input').val('') //Reset text field
   }
+  /* ... Functions related to the new match modal */
+
 
 
   $('#view-stats-btn').on('click', function(){

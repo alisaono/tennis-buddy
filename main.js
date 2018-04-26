@@ -47,6 +47,85 @@ var dummy_court_stats_0 = {
               [5,27]],
 }
 
+var court_stats_ds = {
+  "forehand":[],
+
+  "backhand":[],
+
+  "volley":  [],
+
+  "slice":   [],
+
+  "serve":  [],
+};
+
+var shot_stats_ds = {
+  "forehand":[],
+
+  "backhand":[],
+
+  "volley":  [],
+
+  "slice":   [],
+
+  "serve":  [],
+};
+
+function Transform_Rect_to_Trap_Coord()
+{
+  court_stats_ds = {
+    "forehand":[],
+  
+    "backhand":[],
+  
+    "volley":  [],
+  
+    "slice":   [],
+
+    "serve":  [],
+  };
+
+  shot_stats_ds = {
+    "forehand":[],
+  
+    "backhand":[],
+  
+    "volley":  [],
+  
+    "slice":   [],
+
+    "serve":  [],
+  };
+  const vertical_const = 0.63;
+
+  const horizontal_cont = 0.3;
+
+  for (i=0; i < matches[currentMatchID]["courtEvents"].length; i++)
+  {
+    x_rect = matches[currentMatchID]["courtEvents"][i]['percentX'];
+    y_rect = matches[currentMatchID]["courtEvents"][i]['percentY'];
+
+    bottom_trap = ((x_rect+0.5)/0.5)*vertical_const;
+
+    if (y_rect<0){
+      left_trap = y_rect*(1-horizontal_cont*((x_rect+0.5)/0.5))*1.1+0.5;
+    }else{
+      left_trap = y_rect*(1-horizontal_cont*((x_rect+0.5)/0.5))*1.1+0.5;
+    }
+
+    bottom_trap = bottom_trap*100;
+    bottom_trap = Math.max(bottom_trap,0);
+    bottom_trap = Math.min(bottom_trap,100);
+    left_trap = left_trap*100;
+    left_trap = Math.max(left_trap,0);
+    left_trap = Math.min(left_trap,100);
+    court_stats_ds[matches[currentMatchID]["courtEvents"][i]['shotType']].push([left_trap, bottom_trap]);
+  }
+
+  return court_stats_ds;
+  
+}
+
 function draw_shot_placement(data){
   var court = document.querySelector('#tennis_stats_court');
  	// Clean out all pins
@@ -55,12 +134,17 @@ function draw_shot_placement(data){
     court.removeChild(court.firstChild);
   }
 
+  const pin_width = 50;
+  var pin_court_ratio = 100*pin_width/document.getElementById('tennis_stats_court').offsetWidth;
+
+  console.log("Pin/Court width = "+pin_court_ratio);
+
   for (i=0;i < data['forehand'].length; i++){
     pin = document.createElement('img');
     pin.setAttribute('src', "graphics/blue-pin.png");
     pin.setAttribute('class', 'shot-pin');
     pin.setAttribute('id', "forehand_"+i);
-    pin.style.left = data['forehand'][i][0]+"%";
+    pin.style.left = data['forehand'][i][0]-pin_court_ratio/2+"%";
     pin.style.bottom = data['forehand'][i][1]+"%";
     court.append(pin);
   }
@@ -142,7 +226,21 @@ $(document).ready(function(){
   })
 
   $('#view-stats-btn').on('click', function(){
-    draw_shot_placement(dummy_court_stats_0);
+    draw_shot_placement(Transform_Rect_to_Trap_Coord());
+
+    // Update Stats!
+    num_forehands = court_stats_ds['forehand'].length;
+    num_backhands = court_stats_ds['backhand'].length;
+    num_volleys = court_stats_ds['volley'].length;
+    num_slices = court_stats_ds['slice'].length;
+
+    tot = num_forehands+num_backhands+num_volleys+num_slices;
+
+    document.getElementById("forehand_stat").innerHTML = num_forehands+"/"+tot+" ("+Math.floor(num_forehands*100/tot)+"%)";
+    document.getElementById("backhand_stat").innerHTML = num_backhands+"/"+tot+" ("+Math.floor(num_backhands*100/tot)+"%)";
+    document.getElementById("volley_stat").innerHTML = num_volleys+"/"+tot+" ("+Math.floor(num_volleys*100/tot)+"%)";
+    document.getElementById("slice_stat").innerHTML = num_slices+"/"+tot+" ("+Math.floor(num_slices*100/tot)+"%)";
+
   })
 
   $('#send_fb_btn').on('click', function(){
@@ -152,7 +250,7 @@ $(document).ready(function(){
   })
 
   // Types of shots in toolbar.
-  let shotTypes = ["forehand", "backhand", "volley", "serve"]
+  let shotTypes = ["forehand", "backhand", "volley", "slice"]
 
   // Make court undraggable.
   $('#tennis-court').on("dragstart", () => {

@@ -132,7 +132,7 @@
   	    <input type="button" class="toolbar-button borderless" id="forehand-button" value="(F)orehand">
   	    <input type="button" class="toolbar-button borderless" id="backhand-button" value="(B)ackhand">
         <input type="button" class="toolbar-button borderless" id="volley-button" value="(V)olley">
-        <input type="button" class="toolbar-button borderless" id="serve-button" value="(S)erve">
+        <input type="button" class="toolbar-button borderless" id="slice-button" value="(S)lice">
         <div id="menu-undo">Undo Shot</div>
       </div>
       <!-- /Logging Toolbar -->
@@ -143,7 +143,7 @@
 
   <!-- Stats Popup -->
   <div id="menu-popup-stats" class="menu-popup">
-    <div>
+    <div class="stats_menu_container">
       <div class="stats_menu_table_container">
         <div class = "stats_menu_col" id = "stats-summary">
           <div class="stats_menu_table_header">Match Statistics</div>
@@ -152,7 +152,7 @@
             <img src="graphics/blue-pin.png" class="shot-pin-display">
             <div class="stats_stroke_name">Forehands</div>
             <img src="graphics/forehand_icon.png" class="stats_icon">
-            <div>35%</div>
+            <div id="forehand_stat">35%</div>
           </div>
 
           <div class="stats_menu_table_row">
@@ -160,7 +160,7 @@
 
               <div class="stats_stroke_name">Backhands</div>
               <img src="graphics/backhand_icon.png" class="stats_icon">
-              <div>50%</div>
+              <div id="backhand_stat">50%</div>
           </div>
 
           <div class="stats_menu_table_row">
@@ -168,7 +168,7 @@
 
               <div class="stats_stroke_name">Volleys</div>
               <img src="graphics/volley_icon.png" class="stats_icon">
-              <div> 8%</div>
+              <div id="volley_stat"> 8%</div>
           </div>
 
           <div class="stats_menu_table_row">
@@ -176,16 +176,22 @@
 
               <div class="stats_stroke_name">Slices</div>
               <img src="graphics/slice_icon.png" class="stats_icon">
-              <div> 7%</div>
+              <div id="slice_stat"> 7%</div>
           </div>
         </div>
         <div class = "stats_menu_col">
-            <img src="graphics/tennis-court-stats2.png" class="court_stats_icon">
+            <img src="graphics/tennis-court-stats3.png" class="court_stats_icon">
             <div id="tennis_stats_court">
               <img src="graphics/blue-pin.png" class="shot-pin">
             </div>
         </div>
       </div>
+
+      <!--
+      <div>
+        <div id="court-view-text">Player Court Positions</div>
+        <button class="toggle_stats_btn" id="toggle_stats_btn">Toggle View</button>
+      </div>-->
 
       <div class="feedback_menu_container" id="feedback_menu">
         <div class="feedback_menu_header_container">
@@ -241,7 +247,7 @@
             <img src="graphics/blue-pin.png" class="shot-pin-display">
             <div class="stats_stroke_name">Forehands</div>
             <img src="graphics/forehand_icon.png" class="stats_icon">
-            <div>35%</div>
+            <div id="forehand_stat">35%</div>
           </div>
 
           <div class="stats_menu_table_row">
@@ -249,7 +255,7 @@
 
               <div class="stats_stroke_name">Backhands</div>
               <img src="graphics/backhand_icon.png" class="stats_icon">
-              <div>50%</div>
+              <div id="backhand_stat">50%</div>
           </div>
 
           <div class="stats_menu_table_row">
@@ -257,7 +263,7 @@
 
               <div class="stats_stroke_name">Volleys</div>
               <img src="graphics/volley_icon.png" class="stats_icon">
-              <div> 8%</div>
+              <div id="volley_stat"> 8%</div>
           </div>
 
           <div class="stats_menu_table_row">
@@ -265,7 +271,7 @@
 
               <div class="stats_stroke_name">Slices</div>
               <img src="graphics/slice_icon.png" class="stats_icon">
-              <div> 7%</div>
+              <div id="slice_stat"> 7%</div>
           </div>
         </div>
         <div class = "stats_menu_col">

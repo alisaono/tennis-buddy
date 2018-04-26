@@ -109,8 +109,6 @@
 	--login-logo-margin-bottom: 42px;
 	--login-title-font-size: 24px;
 	--login-title-margin-bottom: 60px;
-	--login-type-font-size: 16px;
-	--login-type-margin-bottom: 30px;
 	--login-text-font-size: 16px;
 	--login-text-margin-bottom: 30px;
 	--login-text-border-bottom: solid 1px #DDD;
@@ -703,11 +701,6 @@ body {
 #login-title {
 	margin-bottom: var(--login-title-margin-bottom);
 	font-size: var(--login-title-font-size);
-}
-
-#login-type {
-	margin-bottom: var(--login-type-margin-bottom);
-	font-size: var(--login-type-font-size);
 }
 
 #login-username, #login-password {

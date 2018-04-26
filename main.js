@@ -1,3 +1,23 @@
+// Our *SUPER SECURE* user database :)))
+var users = {
+  'dan': {
+    user_type: 'coach',
+    password: '1234',
+  },
+  'steve': {
+    user_type: 'player',
+    password: '1234',
+  },
+  'john': {
+    user_type: 'player',
+    password: '1234',
+  },
+  'kevin': {
+    user_type: 'player',
+    password: '1234',
+  },
+}
+
 // Global state for ongoing matches. Maps match IDs to match data.
 var matches = {
   "0": {
@@ -741,8 +761,13 @@ $(document).ready(function(){
 
   // Helper function for logging in
   function login() {
-    if ($('#login-username').val() === '' || $('#login-password').val() === '') { return }
-    if ($('input[name="user_type"]:checked').val() === 'coach') {
+    let username = $('#login-username').val()
+    let password = $('#login-password').val()
+    if (users[username] === undefined || users[username]['password'] !== password) {
+      alert('Login failed: Incorrect user name or password!')
+      return
+    }
+    if (users[username]['user_type'] === 'coach') {
       showCoachView()
     } else {
       showPlayerView()

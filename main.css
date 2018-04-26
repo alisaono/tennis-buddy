@@ -227,6 +227,10 @@ body {
 #menu-menu .menu-popup .menu-item:hover {
 	background-color: var(--color-top-bar);
 }
+#current-matches > .menu-item:hover { /* Not clickable */
+	background-color: var(--color-top-bar-popup) !important;
+	cursor: default;
+}
 
 #menu-menu .menu-dropdown .menu-item {
 	width: calc(var(--top-bar-popup-width) - 2 * var(--top-bar-dropdown-pad));
@@ -811,17 +815,17 @@ body {
 }
 
 /* New Match Modal Style */
-#new-match-modal .modal-row {
+#new-match-modal .modal-row, #end-match-modal .modal-row {
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
 	align-items: center;
 	padding: 10px 20px;
 }
-#new-match-modal .modal-row:nth-child(2) {
+#new-match-modal .modal-row:nth-child(2), #end-match-modal .modal-row:nth-child(2) {
 	padding-top: 20px;
 }
-#new-match-modal .modal-row.plain-text {
+#new-match-modal .modal-row.plain-text, #end-match-modal .modal-row.plain-text {
 	justify-content: center;
 }
 
@@ -844,7 +848,7 @@ body {
 	color: var(--top-bar-color);
 }
 
-#new-match-modal .modal-submit {
+#new-match-modal .modal-submit, #end-match-modal .modal-submit, #end-match-modal .modal-cancel {
 	margin: 10px 0;
 	border-radius: 20px;
 	width: 100px;
@@ -856,6 +860,17 @@ body {
 	text-align: center;
 	cursor: pointer;
 }
-#new-match-modal .-modal-submit:hover {
+#new-match-modal .modal-submit:hover, #end-match-modal .modal-cancel:hover {
   background-color: var(--score-board-button-color-hover);
+}
+
+/* End Match Modal Style */
+#end-match-modal .modal-cancel {
+	margin-right: 10px;
+}
+#end-match-modal .modal-submit {
+	background-color: var(--undo-button-background);
+}
+#end-match-modal .modal-submit:hover {
+  background-color: var(--undo-button-background-hover);
 }

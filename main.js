@@ -247,7 +247,10 @@ $(document).ready(function(){
 
 
   /* Functions related to the new match modal */
-  $('#new-match').on('click', () => { $('#new-match-modal').show() })
+  $('#new-match').on('click', () => {
+    $('.menu-popup').hide()
+    $('#new-match-modal').show()
+  })
 
   $('#new-match-modal .modal-submit').click(() => {
     let playerName = $('#new-match-modal select').val()
@@ -289,6 +292,31 @@ $(document).ready(function(){
     $('#new-match-modal input').val('') //Reset text field
   }
   /* ... Functions related to the new match modal */
+
+
+  /* Functions related to the end match modal */
+  $('#end-match').on('click', () => {
+    $('.menu-popup').hide()
+    $('#end-match-modal .current-player-name').text(matches[currentMatchID]['player1'])
+    $('#end-match-modal').show()
+  })
+
+  $('#end-match-modal .modal-submit').click(() => {
+    //console.log(matches[currentMatchID])
+    delete matches[currentMatchID]
+    updateCurrentMatchesList()
+    switchMatch(Object.keys(matches)[0])
+    $('#end-match-modal').hide()
+  })
+
+  $('#end-match-modal .modal-cancel').click(() => {
+    $('#end-match-modal').hide()
+  })
+
+  $('#end-match-modal .close').click(() => {
+    $('#end-match-modal').hide()
+  })
+  /* ... Functions related to the end match modal */
 
 
 
@@ -820,8 +848,6 @@ $(document).ready(function(){
 
 
   $('.logout').on('click',function(){
-    $('#login-type input[value="coach"]').prop('checked', true)
-    $('#login-type input[value="player"]').prop('checked', false)
     $('#login-username').val('')
     $('#login-password').val('')
     $('#login-view').show()

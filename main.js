@@ -75,11 +75,11 @@ function Transform_Rect_to_Trap_Coord()
 {
   court_stats_ds = {
     "forehand":[],
-  
+
     "backhand":[],
-  
+
     "volley":  [],
-  
+
     "slice":   [],
 
     "serve":  [],
@@ -87,11 +87,11 @@ function Transform_Rect_to_Trap_Coord()
 
   shot_stats_ds = {
     "forehand":[],
-  
+
     "backhand":[],
-  
+
     "volley":  [],
-  
+
     "slice":   [],
 
     "serve":  [],
@@ -123,7 +123,7 @@ function Transform_Rect_to_Trap_Coord()
   }
 
   return court_stats_ds;
-  
+
 }
 
 function draw_shot_placement(data){
@@ -186,13 +186,13 @@ var currentMatchID = 0;
 $(document).ready(function(){
   // Update the score UI at the start of the game
   updateScore();
-  
+
   // Update the list of matches in menu at the the start of the game
   updateCurrentMatchesList();
-  
+
   // Update the feedback name in stats view.
   updateFeedbackPlayer();
-  
+
   $('body').on('click', function(e){
     if ($(e.target).closest('#menu-menu .menu-item').length === 0 && $(e.target).closest('#menu-menu .menu-popup').length === 0) {
       $('#menu-menu .menu-popup').hide()
@@ -224,6 +224,22 @@ $(document).ready(function(){
       $('#view-stats-btn').text('Stats')
     }
   })
+
+  $('#new-match').on('click', () => { $('#new-match-modal').show() })
+  $('#new-match-modal .modal-submit').click(() => {
+    console.log($('#new-match-modal select').val())
+    console.log($('#new-match-modal input').val())
+    hideNewMatchModal()
+  })
+  $('#new-match-modal .close').click(() => {
+    hideNewMatchModal()
+  })
+  function hideNewMatchModal() {
+    $('#new-match-modal').hide()
+    $('#new-match-modal select').prop('selectedIndex', 0) //Reset dropdown
+    $('#new-match-modal input').val('') //Reset text field
+  }
+
 
   $('#view-stats-btn').on('click', function(){
     draw_shot_placement(Transform_Rect_to_Trap_Coord());
@@ -481,33 +497,33 @@ $(document).ready(function(){
   function updateScoreUI() {
     let setScore = matches[currentMatchID].setScore;
     let gameScore = matches[currentMatchID].gameScore;
-    
-    let rowSelectors = 
+
+    let rowSelectors =
     [
       '#score_column_player1 > .set_score_box',
       '#score_column_player2 > .set_score_box'
     ];
-    
+
     let controllerSelectors =
     [
       '#score_column_player1 > .score_controller_container',
       '#score_column_player2 > .score_controller_container'
     ];
-    
+
     let scoreSelectors =
     [
       '#score_p1',
       '#score_p2'
     ];
-    
-    let playerNames = 
+
+    let playerNames =
     [
       matches[currentMatchID].player1,
       matches[currentMatchID].player2
     ];
-    
+
     let gameScoreMap = ["0", "15", "30", "40", "Ad"]
-    
+
     for (let playerId = 0; playerId < 2; playerId++) {
       $(rowSelectors[playerId]).each((i, e) => {
         if (i == 0) {
@@ -529,10 +545,10 @@ $(document).ready(function(){
               <div class="set_score_displayed">` + setScore[setIndex][playerId] + `</div>
             </div>
           `);
-          
+
         }
       }
-      
+
       if (typeof gameScore[playerId] === "string") {
         $(scoreSelectors[playerId]).html(gameScore[playerId]);
       } else {
@@ -541,16 +557,16 @@ $(document).ready(function(){
 
     }
   }
-  
+
   // Helper function for computing score, implements score changing logic.
-  function computeScore(pointEvents) {    
+  function computeScore(pointEvents) {
     let setScore = [[0, 0]];
     let gameScore = [0, 0];
-    
+
     for (let e of pointEvents) {
       let won = e ? 1 : 0;
       let lost = 1 - won;
-      
+
       if (gameScore[won] < 3) {
         gameScore[won]++;
       } else if (gameScore[won] == 3 && gameScore[lost] == 3) {
@@ -571,13 +587,13 @@ $(document).ready(function(){
           setScore.push([0, 0]);
         }
       }
-      
+
       // If 6 sets detected, match is over.
       if (setScore.length > 5) {
         break;
       }
     }
-    
+
     // Calculate who won if needed.
     if (setScore.length > 5) {
       setScore.pop();
@@ -589,7 +605,7 @@ $(document).ready(function(){
           gamesWon[1]++;
         }
       }
-      
+
       if (gamesWon[0] > gamesWon[1]) {
         gameScore = ["Won", "Lost"];
       } else if (gamesWon[0] < gamesWon[1]) {
@@ -598,19 +614,19 @@ $(document).ready(function(){
         gameScore = ["Tie", "Tie"];
       }
     }
-    
+
     return [setScore, gameScore];
   }
-  
+
   // Helper function for updating score, both state and UI.
   function updateScore() {
     let score = computeScore(matches[currentMatchID].pointEvents);
     matches[currentMatchID].setScore = score[0];
     matches[currentMatchID].gameScore = score[1];
-    
+
     updateScoreUI();
   }
-  
+
   // Helper function for changing score.
   function incrementScore(playerId) {
     if (typeof matches[currentMatchID].gameScore[0] !== "string") {
@@ -618,13 +634,13 @@ $(document).ready(function(){
       updateScore();
     }
   }
-  
+
   // Helper function for undoing score.
   function undoScore() {
     matches[currentMatchID].pointEvents.pop();
     updateScore();
   }
-  
+
   // Bind score increment button to changing score.
   $('.score_inc_btn').on('click', function(){
     let playerId = $(this).attr('id') === 'inc_score_p1' ? 0 : 1;
@@ -637,7 +653,7 @@ $(document).ready(function(){
     undoScore();
   })
 
-  
+
   // Helper function for switching matches.
   function switchMatch(matchId) {
     currentMatchID = matchId;
@@ -649,33 +665,33 @@ $(document).ready(function(){
     } else {
       $('#player_right.player_label').text(matches[currentMatchID].player1)
       $('#player_left.player_label').text(matches[currentMatchID].player2)
-    }    
-    
+    }
+
     // Update the feedback name.
     updateFeedbackPlayer();
-    
+
     // Update the score.
     updateScore();
   }
-  
+
   // Updates the list of matches in the menu and binds the clicks.
   function updateCurrentMatchesList() {
     $('#current-matches-list').empty();
-    
+
     let nameIds = [];
     Object.keys(matches).forEach(k => {
       nameIds.push([matches[k].player1, k]);
     });
-    
+
     nameIds.sort((a, b) => a[0].localeCompare(b[0]));
-    
+
     for (let n of nameIds) {
       let e = $('<div class="menu-item">' + n[0] + '</div>');
       e.click(() => switchMatch(n[1]));
       $('#current-matches-list').append(e);
     }
   }
-  
+
   // Update the feedback name in stats view.
   function updateFeedbackPlayer() {
     $('#feedback_player').text(matches[currentMatchID].player1);
@@ -697,18 +713,18 @@ $(document).ready(function(){
 
   // When the user clicks a modal button, close it.
   $('.shot_ending_type').click(() => $('#myModal').hide());
-  
+
   // When the user presses the Esc key, close the modal.
   $(document).keydown((e) => {
     if (e.keyCode == 27) {
       $('#myModal').hide();
     }
   });
-  
-  
-  
-  
-  
+
+
+
+
+
   function showPlayerView() {
     $('#login-view').hide()
     $('#topbar').hide()
@@ -730,14 +746,14 @@ $(document).ready(function(){
       showCoachView()
     } else {
       showPlayerView()
-    }   
+    }
   }
-  
+
   // Bind login button
   $('#login-button').on('click',function(){
     login();
   })
-  
+
   // Bind enter key to log in
   $('#login-password').keypress((e) => {
     if (e.key == "Enter") {
@@ -745,7 +761,7 @@ $(document).ready(function(){
       return false;
     }
   });
-  
+
 
   $('.logout').on('click',function(){
     $('#login-type input[value="coach"]').prop('checked', true)

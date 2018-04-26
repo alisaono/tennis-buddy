@@ -756,11 +756,10 @@ body {
 .modal-content {
     background-color: #fefefe;
     margin: auto;
-    
     position: fixed;
-    top: 20%;
+		top: calc(var(--top-bar-height) + var(--container-margin));
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 0);
 }
 
 .modal-content-header {
@@ -768,10 +767,10 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    
+
     font-size: 22px;
     padding: 20px;
-    
+
     border-bottom: 3px solid var(--color-top-bar);
 }
 
@@ -781,13 +780,13 @@ body {
 	flex-direction: row;
 	justify-content: space-around;
 	align-items: center;
-    
+
     padding: 20px;
 }
 .shot_ending_type{
     margin: 40px 10px 20px;
 	border-radius: 20px;
-    
+
     min-width: 150px;
 
     background-color: var(--score-board-button-color);
@@ -818,5 +817,52 @@ body {
     cursor: pointer;
 }
 
+/* New Match Modal Style */
+#new-match-modal .modal-row {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+	padding: 10px 20px;
+}
+#new-match-modal .modal-row:nth-child(2) {
+	padding-top: 20px;
+}
+#new-match-modal .modal-row.plain-text {
+	justify-content: center;
+}
 
+#new-match-modal .modal-row label {
+	margin-right: 20px;
+}
 
+#new-match-modal .modal-row input {
+	font-family: var(--font-family-normal);
+	font-size: 18px;
+	padding: 5px;
+	width: calc(200px - 4px - 2*5px);
+}
+
+#new-match-modal .modal-row select {
+	height: 40px;
+	width: 200px;
+	font-size: 18px;
+	font-family: var(--font-family-normal);
+	color: var(--top-bar-color);
+}
+
+#new-match-modal .modal-submit {
+	margin: 10px 0;
+	border-radius: 20px;
+	width: 100px;
+	background-color: var(--score-board-button-color);
+	color: var(--score-board-button-font-color);
+	font-size: var(--undo-button-font);
+	padding: var(--undo-button-pad);
+	border-radius: var(--button-radius-normal);
+	text-align: center;
+	cursor: pointer;
+}
+#new-match-modal .-modal-submit:hover {
+  background-color: var(--score-board-button-color-hover);
+}

@@ -75,21 +75,21 @@
       <div class="score_menu_container" id="score_menu">
         <div class="score_column_container">
           <div class="score_column" id="score_column_player1">
-  
+
             <div class="set_score_box">
               <div class="score_player_label">Steve</div>
             </div>
-            
+
             <!--
             <div class="set_score_box">
               <div class="set_score_displayed">3</div>
             </div>
-  
+
             <div class="set_score_box">
               <div class="set_score_displayed">6</div>
             </div>
             -->
-  
+
             <div class="score_controller_container">
               <div class = "score_num" id ="score_p1">0</div>
               <div>
@@ -97,30 +97,30 @@
               </div>
             </div>
           </div>
-  
+
           <div class="score_column" id="score_column_player2">
-  
+
             <div class="set_score_box">
               <div class="score_player_label">Jim</div>
             </div>
-  
+
             <!--
             <div class="set_score_box">
               <div class="set_score_displayed">6</div>
             </div>
-  
+
             <div class="set_score_box">
               <div class="set_score_displayed">5</div>
             </div>
             -->
-  
+
             <div class="score_controller_container">
               <div class = "score_num" id ="score_p2">0</div>
               <div>
                 <div class = "score_inc_btn" id="inc_score_p2">+</div>
               </div>
             </div>
-  
+
           </div>
         </div>
         <div id="score_undo">Undo Score</div>
@@ -312,8 +312,8 @@
       <div id="login-button">Log In</div>
     </div>
   </div>
-  
-  
+
+
   <!-- Modal Stroke Error Confirmation Box -->
   <div id="myModal" class="modal">
 
@@ -332,8 +332,35 @@
       </div>
     </div>
   </div>
-  
-  
-  
+
+  <!-- Modal for Creating a New Match -->
+  <div id="new-match-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-content-header">
+         <div>Create a New Match</div>
+         <div class="close">&times;</div>
+      </div>
+      <div class="modal-row">
+        <label for="player-name-input">Player Name:</label>
+        <select id="player-name-input">
+          <option value="steve">Steve</option>
+          <option value="john">John</option>
+          <option value="kevin">Kevin</option>
+          <option value="pete">Pete</option>
+        </select>
+      </div>
+      <div class="modal-row plain-text">
+        vs.
+      </div>
+      <div class="modal-row">
+        <label for="opponent-name-input">Opponent Name:</label>
+        <input id="opponent-name-input" type="text" placeholder="(optional)">
+      </div>
+      <div class="modal-row">
+        <div class="modal-submit">Create</div>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>

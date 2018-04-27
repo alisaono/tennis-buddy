@@ -645,6 +645,20 @@ body {
 	text-decoration: none;
 	cursor: pointer;
 }
+
+.feedback_btn_disabled {
+	width: var(--stats-feedback-button-width);
+	margin-left: auto;
+	padding: var(--stats-feedback-button-pad);
+	background-color: grey;
+	border: var(--stats-feedback-button-border);
+	border-radius: var(--button-radius-normal);
+	color: var(--stats-feedback-button-font-color);
+	font-size: var(--stats-feedback-font-large);
+	font-weight: var(--stats-feedback-font-large-weight);
+	text-decoration: none;
+	cursor: pointer;
+}
 .feedback_btn:hover {
 	background: var(--stats-feedback-button-color-hover);
 	text-decoration: none;

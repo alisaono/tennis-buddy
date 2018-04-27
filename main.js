@@ -199,6 +199,17 @@ function draw_shot_placement(data){
     court.append(pin);
   }
 }
+function Check_FB_Btn(){
+  if (document.getElementById("feedback_text").value.length > 0){
+    ele = document.getElementById("send_fb_btn");
+    ele.disabled = false;
+    ele.setAttribute("class","feedback_btn");
+  }else{
+    ele = document.getElementById("send_fb_btn");
+    ele.disabled = true;
+    ele.setAttribute("class","feedback_btn_disabled");
+  }
+ }
 
 // Global state for current ongoing match.
 var currentMatchID = 0;
@@ -322,7 +333,7 @@ $(document).ready(function(){
 
   $('#view-stats-btn').on('click', function(){
     draw_shot_placement(Transform_Rect_to_Trap_Coord());
-
+    Check_FB_Btn();
     // Update Stats!
     num_forehands = court_stats_ds['forehand'].length;
     num_backhands = court_stats_ds['backhand'].length;
@@ -330,19 +341,36 @@ $(document).ready(function(){
     num_slices = court_stats_ds['slice'].length;
 
     tot = num_forehands+num_backhands+num_volleys+num_slices;
-
-    document.getElementById("forehand_stat").innerHTML = num_forehands+"/"+tot+" ("+Math.floor(num_forehands*100/tot)+"%)";
-    document.getElementById("backhand_stat").innerHTML = num_backhands+"/"+tot+" ("+Math.floor(num_backhands*100/tot)+"%)";
-    document.getElementById("volley_stat").innerHTML = num_volleys+"/"+tot+" ("+Math.floor(num_volleys*100/tot)+"%)";
-    document.getElementById("slice_stat").innerHTML = num_slices+"/"+tot+" ("+Math.floor(num_slices*100/tot)+"%)";
-
+    if (tot > 0){
+      document.getElementById("forehand_stat").innerHTML = num_forehands+"/"+tot+" ("+Math.floor(num_forehands*100/tot)+"%)";
+      document.getElementById("backhand_stat").innerHTML = num_backhands+"/"+tot+" ("+Math.floor(num_backhands*100/tot)+"%)";
+      document.getElementById("volley_stat").innerHTML = num_volleys+"/"+tot+" ("+Math.floor(num_volleys*100/tot)+"%)";
+      document.getElementById("slice_stat").innerHTML = num_slices+"/"+tot+" ("+Math.floor(num_slices*100/tot)+"%)";
+    }else{
+      document.getElementById("forehand_stat").innerHTML = num_forehands+"/"+tot;
+      document.getElementById("backhand_stat").innerHTML = num_backhands+"/"+tot;
+      document.getElementById("volley_stat").innerHTML = num_volleys+"/"+tot;
+      document.getElementById("slice_stat").innerHTML = num_slices+"/"+tot;
+    }
   })
 
   $('#send_fb_btn').on('click', function(){
+    
+    
     setTimeout(function(){
-      $('#feedback_text').val('')
+      $('#feedback_text').val('');
+      Check_FB_Btn();
     }, 300)
+
+    document.getElementById("feedback_text").placeholder = "Sent! Write more feedback here";
   })
+
+
+
+  $('#feedback_text').on('keyup', function(){
+    Check_FB_Btn();
+  })
+
 
   // Types of shots in toolbar.
   let shotTypes = ["forehand", "backhand", "volley", "slice"]

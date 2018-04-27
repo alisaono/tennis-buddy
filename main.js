@@ -530,7 +530,7 @@ $(document).ready(function(){
       } else if (e.key == "v" || e.key == "V") {
         toolbarClick("volley");
       } else if (e.key == "s" || e.key == "S") {
-        toolbarClick("serve");
+        toolbarClick("slice");
       }
     }
   })

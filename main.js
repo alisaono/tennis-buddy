@@ -333,7 +333,7 @@ $(document).ready(function(){
 
 
 
-  $('#view-stats-btn').on('click', function(){
+  $('#tab-stats').on('click', function(){
     draw_shot_placement(Transform_Rect_to_Trap_Coord());
     Check_FB_Btn();
     // Update Stats!

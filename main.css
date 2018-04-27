@@ -167,6 +167,41 @@ body {
 	font-size: var(--top-bar-font-large);
 }
 
+#menu-tabs {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+}
+
+#menu-tabs input {
+    display: none;
+}
+
+#menu-tabs label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    padding: 0px var(--top-bar-options-pad);
+	color: var(--top-bar-font-color);
+	font-size: var(--top-bar-font-normal);
+	cursor: pointer;
+}
+#menu-tabs label:hover {
+  color: var(--top-bar-font-color-hover);
+}
+
+#menu-tabs input:checked + label {
+  color: orange;
+  border-left: 2px solid orange;
+  border-right: 2px solid orange;
+  border-top: 6px solid orange;
+}
+
+
+
 #topbar-options {
 	width: var(--top-bar-options-width);
 	display: flex;

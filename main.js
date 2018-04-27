@@ -243,18 +243,20 @@ $(document).ready(function(){
   $('#menu-menu > .menu-item').on('click', function(){
     $('#menu-menu > .menu-popup').toggle()
   })
-
-  $('#menu-stats > .menu-item').on('click', function(){
-    let hidden = $('#menu-popup-stats').css('display') === 'none'
-    $('.menu-popup').hide()
-    if (hidden) {
-      $('#menu-popup-stats').show()
-      $('#view-stats-btn').text('Logger')
-    } else {
-      $('#menu-popup-stats').hide()
-      $('#view-stats-btn').text('Stats')
-    }
-  })
+  
+  
+  // Bind tab buttons to tab switching
+  $('#tab-logger').click(() => {
+    $('.menu-popup').hide();
+    $('#menu-popup-stats').hide();
+  });
+  
+  $('#tab-stats').click(() => {
+    $('.menu-popup').hide();
+    $('#menu-popup-stats').show();
+  });
+  
+  
 
 
   /* Functions related to the new match modal */

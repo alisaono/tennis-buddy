@@ -197,13 +197,12 @@ body {
   color: var(--top-bar-font-color-hover);
 }
 
-#menu-tabs input:checked + label {
+#menu-tabs:not(.inactive) input:checked + label {
   color: orange;
   border-left: 2px solid orange;
   border-right: 2px solid orange;
   border-top: 6px solid orange;
 }
-
 
 
 #topbar-options {

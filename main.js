@@ -299,6 +299,8 @@ $(document).ready(function(){
     updateCurrentMatchesList()
     switchMatch(nextMatchID.toString())
     hideNewMatchModal()
+    $('#menu-tabs').show()
+    $('#tab-logger').prop('checked', true)
     nextMatchID += 1
   })
 
@@ -316,6 +318,7 @@ $(document).ready(function(){
 
   /* Functions related to the end match modal */
   $('#end-match').on('click', () => {
+    $('#menu-tabs').addClass('inactive')
     $('.menu-popup').hide()
     $('#end-match-modal .current-player-name').text(matches[currentMatchID]['player1'])
     $('#end-match-modal').show()
@@ -324,17 +327,29 @@ $(document).ready(function(){
   $('#end-match-modal .modal-submit').click(() => {
     archiveCurrentMatch()
     updateCurrentMatchesList()
-    switchMatch(Object.keys(matches)[0])
+    if (Object.keys(matches).length > 0) {
+      switchMatch(Object.keys(matches)[0])
+    } else {
+      $('#menu-tabs').hide()
+      $('#menu-popup-history').show()
+    }
     $('#end-match-modal').hide()
+    $('#menu-tabs').removeClass('inactive')
   })
 
   $('#end-match-modal .modal-cancel').click(() => {
-    $('#end-match-modal').hide()
+    cancelEndMatch()
   })
 
   $('#end-match-modal .close').click(() => {
-    $('#end-match-modal').hide()
+    cancelEndMatch()
   })
+
+  function cancelEndMatch() {
+    $('#end-match-modal').hide()
+    $('#menu-tabs').show().removeClass('inactive')
+    $('#tab-logger').prop('checked', true)
+  }
 
   // Move current match to  past matches, delete it from current matches
   // Add it to the history list view.
@@ -358,8 +373,10 @@ $(document).ready(function(){
   }
   /* ... Functions related to the end match modal */
 
+
   /* Functions related to the 'history' menu */
   $('#history').on('click', () => {
+    $('#menu-tabs').hide()
     $('#topbar-options .menu-popup').hide()
     $('#menu-popup-history').show()
   })
@@ -822,6 +839,8 @@ $(document).ready(function(){
     updateScore();
 
     // Hide all popups including history view
+    $('#menu-tabs').show();
+    $('#tab-logger').prop('checked', true)
     $('.menu-popup').hide();
   }
 
@@ -925,5 +944,5 @@ $(document).ready(function(){
     $('#login-view').show()
   })
 
-  // showCoachView()
+  showCoachView()
 })

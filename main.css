@@ -745,6 +745,15 @@ body {
 	color: var(--history-font-highlight);
 	cursor: pointer;
 }
+
+#menu-popup-history table.history-table tr.history-table-empty > td {
+	color: #666;
+	font-size: 16px;
+}
+#menu-popup-history table.history-table tr.history-table-empty:hover > td {
+	color: #666;
+	cursor: default;
+}
 /* (...Additional Style for History View) */
 
 /* Log In View Style */

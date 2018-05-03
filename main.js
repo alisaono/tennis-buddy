@@ -40,6 +40,23 @@ var matches = {
   }
 }
 
+// Variable to keep track of the next match ID
+var nextMatchID = 2
+
+// Global state for completed matches.
+var pastMatches = {}
+
+// Helpers for formatting date/time in history view.
+const monthToString = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+const dayToString = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+function formatTime(time) {
+  let month = monthToString[time.getMonth()]
+  let date = time.getDate()
+  let hour = (time.getHours() % 12 === 0) ? 12 : time.getHours() % 12
+  let period = time.getHours() < 12 ? 'pm' : 'am'
+  return [month, date, hour, period]
+}
+
 var dummy_court_stats_0 = {
   "forehand":[[80,8],
               [70,15],
@@ -91,7 +108,7 @@ var shot_stats_ds = {
   "serve":  [],
 };
 
-function Transform_Rect_to_Trap_Coord()
+function Transform_Rect_to_Trap_Coord(courtEvents)
 {
   court_stats_ds = {
     "forehand":[],
@@ -120,10 +137,10 @@ function Transform_Rect_to_Trap_Coord()
 
   const horizontal_cont = 0.3;
 
-  for (i=0; i < matches[currentMatchID]["courtEvents"].length; i++)
+  for (i=0; i < courtEvents.length; i++)
   {
-    x_rect = matches[currentMatchID]["courtEvents"][i]['percentX'];
-    y_rect = matches[currentMatchID]["courtEvents"][i]['percentY'];
+    x_rect = courtEvents[i]['percentX'];
+    y_rect = courtEvents[i]['percentY'];
 
     bottom_trap = ((x_rect+0.5)/0.5)*vertical_const;
 
@@ -139,7 +156,7 @@ function Transform_Rect_to_Trap_Coord()
     left_trap = left_trap*100;
     left_trap = Math.max(left_trap,0);
     left_trap = Math.min(left_trap,100);
-    court_stats_ds[matches[currentMatchID]["courtEvents"][i]['shotType']].push([left_trap, bottom_trap]);
+    court_stats_ds[courtEvents[i]['shotType']].push([left_trap, bottom_trap]);
   }
 
   return court_stats_ds;
@@ -261,17 +278,14 @@ $(document).ready(function(){
     let opponentName = $('#new-match-modal input').val()
     if (opponentName === "") { opponentName = "Opponent" }
 
-    let newID = -1
     for (let id of Object.keys(matches)) {
       if (matches[id]['player1'] === playerName) {
         alert(`${playerName} already has an ongoing match!`)
         return
       }
-      newID = Math.max(newID, parseInt(id))
     }
-    newID += 1 //Increment the largest current ID by 1.
 
-    matches[newID.toString()] = {
+    matches[nextMatchID.toString()] = {
       player1: playerName,
       player2: opponentName,
       player1SideLeft: true,
@@ -281,8 +295,9 @@ $(document).ready(function(){
       gameScore: []
     }
     updateCurrentMatchesList()
-    switchMatch(newID.toString())
+    switchMatch(nextMatchID.toString())
     hideNewMatchModal()
+    nextMatchID += 1
   })
 
   $('#new-match-modal .close').click(() => {
@@ -305,8 +320,7 @@ $(document).ready(function(){
   })
 
   $('#end-match-modal .modal-submit').click(() => {
-    //console.log(matches[currentMatchID])
-    delete matches[currentMatchID]
+    archiveCurrentMatch()
     updateCurrentMatchesList()
     switchMatch(Object.keys(matches)[0])
     $('#end-match-modal').hide()
@@ -319,6 +333,22 @@ $(document).ready(function(){
   $('#end-match-modal .close').click(() => {
     $('#end-match-modal').hide()
   })
+
+  // Move current match to  past matches, delete it from current matches
+  // Add it to the history list view.
+  function archiveCurrentMatch() {
+    let now = new Date()
+    let nowStrings = formatTime(now)
+    pastMatches[currentMatchID] = matches[currentMatchID]
+    pastMatches[currentMatchID]['time'] = now
+
+    let $historyRow = $('<tr>')
+    $historyRow.append(`<td>${nowStrings[0]} ${nowStrings[1]}</td>`)
+    $historyRow.append(`<td>${nowStrings[2]} ${nowStrings[3]}</td>`)
+    $historyRow.append(`<td>${matches[currentMatchID].player1} vs. ${matches[currentMatchID].player2}</td>`)
+    $('#menu-popup-history .history-table').append($historyRow)
+    delete matches[currentMatchID]
+  }
   /* ... Functions related to the end match modal */
 
   /* Functions related to the 'history' menu */
@@ -329,7 +359,7 @@ $(document).ready(function(){
   /* ... Functions related to the 'history' menu */
 
   $('#tab-stats').on('click', function(){
-    draw_shot_placement(Transform_Rect_to_Trap_Coord());
+    draw_shot_placement(Transform_Rect_to_Trap_Coord(matches[currentMatchID]["courtEvents"]));
     Check_FB_Btn();
     // Update Stats!
     num_forehands = court_stats_ds['forehand'].length;

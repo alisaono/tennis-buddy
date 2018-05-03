@@ -259,6 +259,8 @@ $(document).ready(function(){
   });
 
   $('#tab-stats').click(() => {
+    updateFeedbackPlayer();
+    updateStatsView(matches[currentMatchID]["courtEvents"]);
     $('#topbar-options .menu-popup').hide();
     $('#menu-popup-stats').show();
   });
@@ -339,15 +341,20 @@ $(document).ready(function(){
   function archiveCurrentMatch() {
     let now = new Date()
     let nowStrings = formatTime(now)
-    pastMatches[currentMatchID] = matches[currentMatchID]
-    pastMatches[currentMatchID]['time'] = now
+    let matchID = currentMatchID
+    pastMatches[matchID] = matches[matchID]
+    pastMatches[matchID]['time'] = now
 
     let $historyRow = $('<tr>')
+    $historyRow.attr('id', matchID)
     $historyRow.append(`<td>${nowStrings[0]} ${nowStrings[1]}</td>`)
     $historyRow.append(`<td>${nowStrings[2]} ${nowStrings[3]}</td>`)
     $historyRow.append(`<td>${matches[currentMatchID].player1} vs. ${matches[currentMatchID].player2}</td>`)
+    $historyRow.on('click', () => {showPastMatchStats(matchID)})
+
+    $('#menu-popup-history .history-table .history-table-empty').hide()
     $('#menu-popup-history .history-table').append($historyRow)
-    delete matches[currentMatchID]
+    delete matches[matchID]
   }
   /* ... Functions related to the end match modal */
 
@@ -356,10 +363,19 @@ $(document).ready(function(){
     $('#topbar-options .menu-popup').hide()
     $('#menu-popup-history').show()
   })
+
+  function showPastMatchStats(matchID) {
+    $('#feedback_player').text(pastMatches[matchID].player1)
+    updateStatsView(pastMatches[matchID]['courtEvents'])
+    $('#menu-popup-history').hide()
+    $('#menu-popup-stats').show()
+  }
   /* ... Functions related to the 'history' menu */
 
-  $('#tab-stats').on('click', function(){
-    draw_shot_placement(Transform_Rect_to_Trap_Coord(matches[currentMatchID]["courtEvents"]));
+
+
+  function updateStatsView(courtEvents) {
+    draw_shot_placement(Transform_Rect_to_Trap_Coord(courtEvents));
     Check_FB_Btn();
     // Update Stats!
     num_forehands = court_stats_ds['forehand'].length;
@@ -379,7 +395,7 @@ $(document).ready(function(){
       document.getElementById("volley_stat").innerHTML = num_volleys+"/"+tot;
       document.getElementById("slice_stat").innerHTML = num_slices+"/"+tot;
     }
-  })
+  }
 
   $('#send_fb_btn').on('click', function(){
 

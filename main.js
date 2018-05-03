@@ -300,6 +300,7 @@ $(document).ready(function(){
     switchMatch(nextMatchID.toString())
     hideNewMatchModal()
     $('#menu-tabs').show()
+    $('#end-match').show()
     $('#tab-logger').prop('checked', true)
     nextMatchID += 1
   })
@@ -331,6 +332,7 @@ $(document).ready(function(){
       switchMatch(Object.keys(matches)[0])
     } else {
       $('#menu-tabs').hide()
+      $('#end-match').hide()
       $('#menu-popup-history').show()
     }
     $('#end-match-modal').hide()
@@ -846,6 +848,7 @@ $(document).ready(function(){
 
   // Updates the list of matches in the menu and binds the clicks.
   function updateCurrentMatchesList() {
+    $('#current-matches-empty').hide();
     $('#current-matches-list').empty();
 
     let nameIds = [];
@@ -859,6 +862,10 @@ $(document).ready(function(){
       let e = $('<div class="menu-item">' + n[0] + '</div>');
       e.click(() => switchMatch(n[1]));
       $('#current-matches-list').append(e);
+    }
+
+    if (nameIds.length === 0) {
+      $('#current-matches-empty').show();
     }
   }
 

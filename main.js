@@ -156,7 +156,9 @@ function Transform_Rect_to_Trap_Coord(courtEvents)
     left_trap = left_trap*100;
     left_trap = Math.max(left_trap,0);
     left_trap = Math.min(left_trap,100);
-    court_stats_ds[courtEvents[i]['shotType']].push([left_trap, bottom_trap]);
+    if (court_stats_ds[courtEvents[i]['shotType']]) { // In case the shotType is 'undefined'
+      court_stats_ds[courtEvents[i]['shotType']].push([left_trap, bottom_trap]);
+    }
   }
 
   return court_stats_ds;

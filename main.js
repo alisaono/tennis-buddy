@@ -18,6 +18,9 @@ var users = {
   },
 }
 
+// Variable to keep track of the current username
+var currentUser = null
+
 // Global state for ongoing matches. Maps match IDs to match data.
 var matches = {
   "0": {
@@ -392,6 +395,44 @@ $(document).ready(function(){
     $('#menu-popup-stats').show()
   }
   /* ... Functions related to the 'history' menu */
+
+
+  /* Functions related to the player-side history menu */
+  $('#player-matches').on('click', () => {
+    updatePlayerHistoryView()
+    $('#topbar-options .menu-popup').hide()
+    $('#menu-popup-player-history').show()
+  })
+
+  function updatePlayerHistoryView() {
+    $('#menu-popup-player-history .history-table tr').not('.history-table-empty').remove()
+    let empty = true
+    for (let matchID of Object.keys(pastMatches)) {
+      if (pastMatches[matchID].player1.toLowerCase() === currentUser) {
+        empty = false
+        let timeStrings = formatTime(pastMatches[matchID]['time'])
+        let $historyRow = $('<tr>')
+        $historyRow.attr('id', matchID)
+        $historyRow.append(`<td>${timeStrings[0]} ${timeStrings[1]}</td>`)
+        $historyRow.append(`<td>${timeStrings[2]} ${timeStrings[3]}</td>`)
+        $historyRow.append(`<td>You vs. ${pastMatches[matchID].player2}</td>`)
+        $historyRow.on('click', () => {showPlayerMatchStats(matchID)})
+        $('#menu-popup-player-history .history-table').append($historyRow)
+      }
+    }
+    if (empty) {
+      $('#menu-popup-player-history .history-table .history-table-empty').show()
+    } else {
+      $('#menu-popup-player-history .history-table .history-table-empty').hide()
+    }
+  }
+
+  function showPlayerMatchStats(matchID) {
+    console.log(pastMatches[matchID])
+    // updateStatsView(pastMatches[matchID]['courtEvents'])
+    $('#menu-popup-player-history').hide()
+  }
+  /* ... Functions related to the player-side history menuu */
 
 
 
@@ -909,6 +950,8 @@ $(document).ready(function(){
     $('#topbar').hide()
     $('#container').hide()
     $('#player-view-content').show()
+    updatePlayerHistoryView()
+    $('#menu-popup-player-history').show()
   }
 
   function showCoachView() {
@@ -916,6 +959,7 @@ $(document).ready(function(){
     $('#topbar').show()
     $('#container').show()
     $('#player-view-content').hide()
+    $('#menu-popup-player-history').hide()
   }
 
   // Helper function for logging in
@@ -926,6 +970,7 @@ $(document).ready(function(){
       alert('Login failed: Incorrect user name or password!')
       return
     }
+    currentUser = username
     if (users[username]['user_type'] === 'coach') {
       showCoachView()
     } else {
@@ -952,6 +997,4 @@ $(document).ready(function(){
     $('#login-password').val('')
     $('#login-view').show()
   })
-
-  showCoachView()
 })

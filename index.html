@@ -224,7 +224,7 @@
 
   <!--------- PLAYER VIEW --------->
 
-  <!-- Stats (Player View Content) -->
+  <!-- Stats (Player View Topbar) -->
   <div id="player-view-topbar">
     <div id="topbar-logo">Tennis Buddy</div>
     <div id="topbar-options">
@@ -234,14 +234,7 @@
         </div>
         <div class="menu-popup">
           <div class="menu-popup-container">
-            <div id="player-matches" class="menu-item-wrapper">
-              <div class="menu-item">Your Matches</div>
-              <div class="menu-dropdown">
-                <div class="menu-item">April 15 - 1pm</div>
-                <div class="menu-item">April 12 - 6pm</div>
-                <div class="menu-item">April 8 - 11am</div>
-              </div>
-            </div>
+            <div id="player-matches" class="menu-item">Your Matches</div>
             <div class="menu-item logout">Log Out</div>
           </div>
         </div>
@@ -308,7 +301,18 @@
   </div>
   <!-- /Stats (Player View Content) -->
 
-
+  <!-- History Popup (Player View History) -->
+  <div id="menu-popup-player-history" class="menu-popup">
+    <div class="history-menu-container">
+      <div class="history-table-header">Your Matches</div>
+      <table class="history-table">
+        <tr class="history-table-empty"><td>
+          No match recorded yet.
+        </td></tr>
+      </table>
+    </div>
+  </div>
+  <!-- /History Popup (Player View History) -->
 
 
 

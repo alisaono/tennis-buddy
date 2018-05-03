@@ -100,6 +100,10 @@
 	--player-feedback-font-small: 15px;
 	--player-feedback-font-color-light: #666;
 
+	--history-header-margin: 30px;
+	--history-table-padding: 20px;
+	--history-font-highlight: #3498db;
+
 	--login-container-width: 370px;
 	--login-container-height: 460px;
 	--login-container-pad: 48px 40px 36px 40px;
@@ -183,7 +187,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
+
     padding: 0px var(--top-bar-options-pad);
 	color: var(--top-bar-font-color);
 	font-size: var(--top-bar-font-normal);
@@ -559,7 +563,7 @@ body {
 
 
 /* Stats Popups Style */
-#menu-popup-stats, #player-view-content {
+#menu-popup-stats, #player-view-content, #menu-popup-history {
 	padding: 0 calc((100vw - var(--container-width))/2);
 	position: absolute;
 	top: var(--top-bar-height);
@@ -568,7 +572,7 @@ body {
 	display: none;
 }
 
-#menu-popup-stats > div, #player-view-content > div { /* Container for stats and feedback */
+#menu-popup-stats > div, #player-view-content > div, #menu-popup-history > div { /* Container for stats and feedback */
 	width: var(--container-width);
 	min-height: calc(100vh - var(--top-bar-height));
 	display: flex;
@@ -719,6 +723,29 @@ body {
 }
 /* (...Additional Style for Player View) */
 
+/* Additional Style for History View */
+#menu-popup-history .history-table-header {
+	font-size: var(--stats-table-header-font);
+	margin-bottom: var(--history-header-margin);
+}
+
+#menu-popup-history table.history-table {
+	padding: var(--history-table-padding);
+	background-color: var(--stats-feedback-background);
+  border: var(--stats-feedback-border);
+  border-radius: var(--button-radius-normal);
+}
+
+#menu-popup-history table.history-table td {
+	padding: var(--history-table-padding);
+	font-size: var(--stats-table-font);
+}
+
+#menu-popup-history table.history-table tr:hover > td {
+	color: var(--history-font-highlight);
+	cursor: pointer;
+}
+/* (...Additional Style for History View) */
 
 /* Log In View Style */
 #login-view {

@@ -230,38 +230,28 @@ $(document).ready(function(){
     }
   })
 
-  $('#nav-bar > .menu-item-wrapper > .menu-item').not('#menu-undo .menu-item').on('click', function(){
-    let $popup = $(this).parent().children('.menu-popup')
-    let hidden = $popup.css('display') === 'none'
-    $('.menu-popup').hide()
-    $('.menu-subpopup').hide()
-    if (hidden) {
-      $popup.show()
-    }
-  })
-
   $('#menu-menu > .menu-item').on('click', function(){
     $('#menu-menu > .menu-popup').toggle()
   })
-  
-  
+
+
   // Bind tab buttons to tab switching
   $('#tab-logger').click(() => {
-    $('.menu-popup').hide();
+    $('#topbar-options .menu-popup').hide();
     $('#menu-popup-stats').hide();
   });
-  
+
   $('#tab-stats').click(() => {
-    $('.menu-popup').hide();
+    $('#topbar-options .menu-popup').hide();
     $('#menu-popup-stats').show();
   });
-  
-  
+
+
 
 
   /* Functions related to the new match modal */
   $('#new-match').on('click', () => {
-    $('.menu-popup').hide()
+    $('#topbar-options .menu-popup').hide()
     $('#new-match-modal').show()
   })
 
@@ -331,7 +321,12 @@ $(document).ready(function(){
   })
   /* ... Functions related to the end match modal */
 
-
+  /* Functions related to the 'history' menu */
+  $('#history').on('click', () => {
+    $('#topbar-options .menu-popup').hide()
+    $('#menu-popup-history').show()
+  })
+  /* ... Functions related to the 'history' menu */
 
   $('#tab-stats').on('click', function(){
     draw_shot_placement(Transform_Rect_to_Trap_Coord());
@@ -357,8 +352,8 @@ $(document).ready(function(){
   })
 
   $('#send_fb_btn').on('click', function(){
-    
-    
+
+
     setTimeout(function(){
       $('#feedback_text').val('');
       Check_FB_Btn();
@@ -580,8 +575,6 @@ $(document).ready(function(){
 
   // Bind undo to button.
   $('#menu-undo').click(() => {
-    $('.menu-popup').hide()
-    $('.menu-subpopup').hide()
     undo();
   });
 
@@ -781,6 +774,9 @@ $(document).ready(function(){
 
     // Update the score.
     updateScore();
+
+    // Hide all popups including history view
+    $('.menu-popup').hide();
   }
 
   // Updates the list of matches in the menu and binds the clicks.
@@ -882,4 +878,6 @@ $(document).ready(function(){
     $('#login-password').val('')
     $('#login-view').show()
   })
+
+  // showCoachView()
 })

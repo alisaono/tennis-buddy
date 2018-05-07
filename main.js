@@ -96,7 +96,7 @@ var court_stats_ds = {
 
   "slice":   [],
 
-  "serve":  [],
+  "unspecified":  [],
 };
 
 var shot_stats_ds = {
@@ -108,7 +108,7 @@ var shot_stats_ds = {
 
   "slice":   [],
 
-  "serve":  [],
+  "unspecified":  [],
 };
 
 function Transform_Rect_to_Trap_Coord(courtEvents)
@@ -122,7 +122,7 @@ function Transform_Rect_to_Trap_Coord(courtEvents)
 
     "slice":   [],
 
-    "serve":  [],
+    "unspecified":  [],
   };
 
   shot_stats_ds = {
@@ -134,8 +134,9 @@ function Transform_Rect_to_Trap_Coord(courtEvents)
 
     "slice":   [],
 
-    "serve":  [],
+    "unspecified":  [],
   };
+  /*
   const vertical_const = 0.63;
 
   const horizontal_cont = 0.3;
@@ -162,8 +163,29 @@ function Transform_Rect_to_Trap_Coord(courtEvents)
     if (court_stats_ds[courtEvents[i]['shotType']]) { // In case the shotType is 'undefined'
       court_stats_ds[courtEvents[i]['shotType']].push([left_trap, bottom_trap]);
     }
-  }
+  }*/
+  for (i=0; i < courtEvents.length; i++)
+  {
+    x_rect = courtEvents[i]['percentX'];
+    y_rect = courtEvents[i]['percentY'];
 
+    bottom_trap = x_rect+0.5;
+
+    left_trap = y_rect+0.5;
+
+    bottom_trap = bottom_trap*100;
+    //bottom_trap = Math.max(bottom_trap,0);
+    //bottom_trap = Math.min(bottom_trap,100);
+    left_trap = left_trap*100;
+    //left_trap = Math.max(left_trap,0);
+    //left_trap = Math.min(left_trap,100);
+    console.log("Converted "+x_rect+","+y_rect+" to: ");
+    console.log("Converted "+bottom_trap+","+left_trap);
+
+    if (court_stats_ds[courtEvents[i]['shotType']]) { // In case the shotType is 'undefined'
+      court_stats_ds[courtEvents[i]['shotType']].push([left_trap, bottom_trap]);
+    }
+  }
   return court_stats_ds;
 
 }
@@ -176,17 +198,18 @@ function draw_shot_placement(data){
     court.removeChild(court.firstChild);
   }
 
-  const pin_width = 50;
-  var pin_court_ratio = 100*pin_width/document.getElementById('tennis_stats_court').offsetWidth;
+  //const pin_width = 50;
+  //console.log(document.getElementById('tennis_stats_court').offsetWidth);
+  //var pin_court_ratio = 100*pin_width/document.getElementById('tennis_stats_court').offsetWidth;
 
-  console.log("Pin/Court width = "+pin_court_ratio);
+  //console.log("Pin/Court width = "+pin_court_ratio);
 
   for (i=0;i < data['forehand'].length; i++){
     pin = document.createElement('img');
     pin.setAttribute('src', "graphics/blue-pin.png");
     pin.setAttribute('class', 'shot-pin');
     pin.setAttribute('id', "forehand_"+i);
-    pin.style.left = data['forehand'][i][0]-pin_court_ratio/2+"%";
+    pin.style.left = data['forehand'][i][0]+"%";
     pin.style.bottom = data['forehand'][i][1]+"%";
     court.append(pin);
   }
@@ -218,6 +241,16 @@ function draw_shot_placement(data){
     pin.setAttribute('id', "slice_"+i);
     pin.style.left = data['slice'][i][0]+"%";
     pin.style.bottom = data['slice'][i][1]+"%";
+    court.append(pin);
+  }
+
+  for (i=0;i < data['unspecified'].length; i++){
+    pin = document.createElement('img');
+    pin.setAttribute('src', "graphics/green-pin.png");
+    pin.setAttribute('class', 'shot-pin');
+    pin.setAttribute('id', "unspecified_"+i);
+    pin.style.left = data['unspecified'][i][0]+"%";
+    pin.style.bottom = data['unspecified'][i][1]+"%";
     court.append(pin);
   }
 }
@@ -444,6 +477,7 @@ $(document).ready(function(){
     num_backhands = court_stats_ds['backhand'].length;
     num_volleys = court_stats_ds['volley'].length;
     num_slices = court_stats_ds['slice'].length;
+    num_unspec = court_stats_ds['unspecified'].length;
 
     tot = num_forehands+num_backhands+num_volleys+num_slices;
     if (tot > 0){
@@ -451,11 +485,14 @@ $(document).ready(function(){
       document.getElementById("backhand_stat").innerHTML = num_backhands+"/"+tot+" ("+Math.floor(num_backhands*100/tot)+"%)";
       document.getElementById("volley_stat").innerHTML = num_volleys+"/"+tot+" ("+Math.floor(num_volleys*100/tot)+"%)";
       document.getElementById("slice_stat").innerHTML = num_slices+"/"+tot+" ("+Math.floor(num_slices*100/tot)+"%)";
+      document.getElementById("unspecified_stat").innerHTML = num_unspec+"/"+tot+" ("+Math.floor(num_unspec*100/tot)+"%)";
+
     }else{
       document.getElementById("forehand_stat").innerHTML = num_forehands+"/"+tot;
       document.getElementById("backhand_stat").innerHTML = num_backhands+"/"+tot;
       document.getElementById("volley_stat").innerHTML = num_volleys+"/"+tot;
       document.getElementById("slice_stat").innerHTML = num_slices+"/"+tot;
+      document.getElementById("unspecified_stat").innerHTML = num_unspec+"/"+tot;
     }
   }
 

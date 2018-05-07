@@ -644,12 +644,12 @@ body {
     width: 100%;
     height: 100%;
 }
+
+
 .shot-pin {
 	position: absolute;
 	width: var(--stats-pin-icon-width);
-	left: 80%;
-	bottom: 5%;
-	opacity: 0.8;
+	opacity: 0.6;
 }
 
 .feedback_menu_container, .feedback_viewer_container {

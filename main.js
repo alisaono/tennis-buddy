@@ -212,7 +212,7 @@ function draw_shot_placement(selector, data){
 
   //console.log("Pin/Court width = "+pin_court_ratio);
   if (display_player_stats){
-  
+
     for (i=0;i < data['forehand'].length; i++){
       if (data['forehand'][i][1] <= 50){
         pin = document.createElement('img');
@@ -386,11 +386,7 @@ $(document).ready(function(){
 
   $('#tab-stats').click(() => {
     updateFeedbackPlayer();
-<<<<<<< HEAD
     updateStatsView('#tennis_stats_court', matches[currentMatchID]["courtEvents"]);
-=======
-    update_stats_toggle(matches[currentMatchID]["courtEvents"]);
->>>>>>> a12e16643f8e3dd08c46f6999b914c9c5c8dbade
     $('#topbar-options .menu-popup').hide();
     $('#menu-popup-stats').show();
   });
@@ -517,11 +513,7 @@ $(document).ready(function(){
   function showPastMatchStats(matchID) {
     currentStatsMatch = pastMatches[matchID]
     $('#feedback_player').text(pastMatches[matchID].player1)
-<<<<<<< HEAD
     updateStatsView('#tennis_stats_court', pastMatches[matchID]['courtEvents'])
-=======
-    update_stats_toggle(pastMatches[matchID]['courtEvents'])
->>>>>>> a12e16643f8e3dd08c46f6999b914c9c5c8dbade
     $('#menu-popup-history').hide()
     $('#menu-popup-stats').show()
   }

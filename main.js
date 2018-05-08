@@ -30,7 +30,8 @@ var matches = {
     "courtEvents": [],
     "pointEvents": [0,1,1,0,0,0,1,1,1,1,1,0,0,1,1,1,0,0,0,0,0,0,1,1,0,1,1,1,0,0,1,1,1,1,0,0,1,1,0,1,0,1,1,0,0,0,1,1,0,1,1,0,0,1,1,1,0,1,1,0,0,1,0,0,1,1,1,0,0,0,0,0,1,1,0,1,1,0,0,1,1,1,1,0,0,0,1,1,0,1,1,0,0,0,0,1,1,1,0,0,1,1,1,0,1,1,0,0,1,1,1,0,0,0,1,1,1,1,0,0,0,0,1,1,0,0,1,0,0,0,1,1,0,1,1,0],
     "setScore": [[3, 6], [6, 5]],
-    "gameScore": [1, 3]
+    "gameScore": [1, 3],
+    "feedback": [],
   },
   "1": {
     "player1": "John",
@@ -39,7 +40,8 @@ var matches = {
     "courtEvents": [],
     "pointEvents": [0,1,1,0,0,0,1,1,1,1,1,0,0,1,1,1,0,0,0,0,0,0,1,1,0,1,1,1,0,0,1,1,1,1,0,0,1,1],
     "setScore": [[2, 4]],
-    "gameScore": [2, 2]
+    "gameScore": [2, 2],
+    "feedback": [],
   }
 }
 
@@ -49,6 +51,9 @@ var nextMatchID = 2
 // Global state for completed matches.
 var pastMatches = {}
 
+// Current match that's being shown on the stats view.
+var currentStatsMatch = null
+
 // Helpers for formatting date/time in history view.
 const monthToString = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 const dayToString = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
@@ -56,7 +61,7 @@ function formatTime(time) {
   let month = monthToString[time.getMonth()]
   let date = time.getDate()
   let hour = (time.getHours() % 12 === 0) ? 12 : time.getHours() % 12
-  let period = time.getHours() < 12 ? 'pm' : 'am'
+  let period = time.getHours() < 12 ? 'am' : 'pm'
   return [month, date, hour, period]
 }
 
@@ -190,8 +195,8 @@ function Transform_Rect_to_Trap_Coord(courtEvents)
 
 }
 
-function draw_shot_placement(data){
-  var court = document.querySelector('#tennis_stats_court');
+function draw_shot_placement(selector, data){
+  var court = document.querySelector(selector);
  	// Clean out all pins
   while (court.firstChild)
   {
@@ -298,7 +303,7 @@ $(document).ready(function(){
 
   $('#tab-stats').click(() => {
     updateFeedbackPlayer();
-    updateStatsView(matches[currentMatchID]["courtEvents"]);
+    updateStatsView('#tennis_stats_court', matches[currentMatchID]["courtEvents"]);
     $('#topbar-options .menu-popup').hide();
     $('#menu-popup-stats').show();
   });
@@ -332,7 +337,8 @@ $(document).ready(function(){
       courtEvents: [],
       pointEvents: [],
       setScore: [],
-      gameScore: []
+      gameScore: [],
+      feedback: [],
     }
     updateCurrentMatchesList()
     switchMatch(nextMatchID.toString())
@@ -422,8 +428,9 @@ $(document).ready(function(){
   })
 
   function showPastMatchStats(matchID) {
+    currentStatsMatch = pastMatches[matchID]
     $('#feedback_player').text(pastMatches[matchID].player1)
-    updateStatsView(pastMatches[matchID]['courtEvents'])
+    updateStatsView('#tennis_stats_court', pastMatches[matchID]['courtEvents'])
     $('#menu-popup-history').hide()
     $('#menu-popup-stats').show()
   }
@@ -461,16 +468,33 @@ $(document).ready(function(){
   }
 
   function showPlayerMatchStats(matchID) {
-    console.log(pastMatches[matchID])
-    // updateStatsView(pastMatches[matchID]['courtEvents'])
+    updateStatsView('#tennis_player_stats_court', pastMatches[matchID]['courtEvents'])
+    $('#player-view-content .feedback_viewer_text_container').remove()
+    let feedbacks = pastMatches[matchID].feedback
+    if (feedbacks.length > 0) {
+      $('#player-view-content .feedback_viewer_header_container')
+        .html('Feedback from coach:')
+        .css('text-align', 'left')
+      for (let f of feedbacks) {
+        let coachName = f.coach.charAt(0).toUpperCase() + f.coach.slice(1)
+        let $feedback = $('<div>')
+        $feedback.addClass('feedback_viewer_text_container')
+        $feedback.html(`${coachName} said "${f.text}"`)
+        $('#player-view-content .feedback_viewer_container').append($feedback)
+      }
+    } else {
+      $('#player-view-content .feedback_viewer_header_container')
+        .html('No feedback from coach yet.')
+        .css('text-align', 'center')
+    }
     $('#menu-popup-player-history').hide()
   }
   /* ... Functions related to the player-side history menuu */
 
 
 
-  function updateStatsView(courtEvents) {
-    draw_shot_placement(Transform_Rect_to_Trap_Coord(courtEvents));
+  function updateStatsView(courtSelector, courtEvents) {
+    draw_shot_placement(courtSelector, Transform_Rect_to_Trap_Coord(courtEvents));
     Check_FB_Btn();
     // Update Stats!
     num_forehands = court_stats_ds['forehand'].length;
@@ -479,32 +503,37 @@ $(document).ready(function(){
     num_slices = court_stats_ds['slice'].length;
     num_unspec = court_stats_ds['unspecified'].length;
 
-    tot = num_forehands+num_backhands+num_volleys+num_slices;
+    tot = num_forehands+num_backhands+num_volleys+num_slices+num_unspec;
     if (tot > 0){
-      document.getElementById("forehand_stat").innerHTML = num_forehands+"/"+tot+" ("+Math.floor(num_forehands*100/tot)+"%)";
-      document.getElementById("backhand_stat").innerHTML = num_backhands+"/"+tot+" ("+Math.floor(num_backhands*100/tot)+"%)";
-      document.getElementById("volley_stat").innerHTML = num_volleys+"/"+tot+" ("+Math.floor(num_volleys*100/tot)+"%)";
-      document.getElementById("slice_stat").innerHTML = num_slices+"/"+tot+" ("+Math.floor(num_slices*100/tot)+"%)";
-      document.getElementById("unspecified_stat").innerHTML = num_unspec+"/"+tot+" ("+Math.floor(num_unspec*100/tot)+"%)";
+      $(".forehand_stat").html(num_forehands+"/"+tot+" ("+Math.floor(num_forehands*100/tot)+"%)")
+      $(".backhand_stat").html(num_backhands+"/"+tot+" ("+Math.floor(num_backhands*100/tot)+"%)")
+      $(".volley_stat").html(num_volleys+"/"+tot+" ("+Math.floor(num_volleys*100/tot)+"%)")
+      $(".slice_stat").html(num_slices+"/"+tot+" ("+Math.floor(num_slices*100/tot)+"%)")
+      $(".unspecified_stat").html(num_unspec+"/"+tot+" ("+Math.floor(num_unspec*100/tot)+"%)")
 
     }else{
-      document.getElementById("forehand_stat").innerHTML = num_forehands+"/"+tot;
-      document.getElementById("backhand_stat").innerHTML = num_backhands+"/"+tot;
-      document.getElementById("volley_stat").innerHTML = num_volleys+"/"+tot;
-      document.getElementById("slice_stat").innerHTML = num_slices+"/"+tot;
-      document.getElementById("unspecified_stat").innerHTML = num_unspec+"/"+tot;
+      $(".forehand_stat").html(num_forehands+"/"+tot)
+      $(".backhand_stat").html(num_backhands+"/"+tot)
+      $(".volley_stat").html(num_volleys+"/"+tot)
+      $(".slice_stat").html(num_slices+"/"+tot)
+      $(".unspecified_stat").html(num_unspec+"/"+tot)
     }
   }
 
   $('#send_fb_btn').on('click', function(){
-
-
+    let feedback = $('#feedback_text').val()
+    if (feedback.length === 0) { return }
+    $('#feedback_text').prop('disabled', true)
+    $('#send_fb_btn').prop('disabled', true).removeClass('feedback_btn').addClass('feedback_btn_disabled')
     setTimeout(function(){
-      $('#feedback_text').val('');
-      Check_FB_Btn();
+      currentStatsMatch.feedback.push({
+        coach: currentUser,
+        text: feedback
+      })
+      $('#feedback_text').val('')
+      $('#feedback_text').attr('placeholder', "Sent! Write more feedback here")
+      $('#feedback_text').prop('disabled', false)
     }, 300)
-
-    document.getElementById("feedback_text").placeholder = "Sent! Write more feedback here";
   })
 
 
@@ -951,6 +980,7 @@ $(document).ready(function(){
 
   // Update the feedback name in stats view.
   function updateFeedbackPlayer() {
+    currentStatsMatch = matches[currentMatchID]
     $('#feedback_player').text(matches[currentMatchID].player1);
   }
 

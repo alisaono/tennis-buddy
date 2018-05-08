@@ -627,7 +627,7 @@ $(document).ready(function(){
     }else{
       document.getElementById("toggle_stats_btn").innerHTML = "View Player Position";
     }
-    updateStatsView(courtEvents);// ASSUMES CURRENT MATCH
+    updateStatsView('#tennis_stats_court', courtEvents);// ASSUMES CURRENT MATCH
   }
 
   //toggle_stats_btn

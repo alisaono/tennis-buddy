@@ -386,7 +386,7 @@ $(document).ready(function(){
 
   $('#tab-stats').click(() => {
     updateFeedbackPlayer();
-    updateStatsView('#tennis_stats_court', matches[currentMatchID]["courtEvents"]);
+    update_stats_toggle('#tennis_stats_court', matches[currentMatchID]["courtEvents"]);
     $('#topbar-options .menu-popup').hide();
     $('#menu-popup-stats').show();
   });
@@ -620,14 +620,14 @@ $(document).ready(function(){
   })
 
 
-  function update_stats_toggle(courtEvents){
+  function update_stats_toggle(courtSelector, courtEvents){
 
     if (display_player_stats){
       document.getElementById("toggle_stats_btn").innerHTML = "View Shots Placed";
     }else{
       document.getElementById("toggle_stats_btn").innerHTML = "View Player Position";
     }
-    updateStatsView('#tennis_stats_court', courtEvents);// ASSUMES CURRENT MATCH
+    updateStatsView(courtSelector, courtEvents);// ASSUMES CURRENT MATCH
   }
 
   //toggle_stats_btn
@@ -641,7 +641,7 @@ $(document).ready(function(){
     }else{
       display_player_stats = true;
     }
-    update_stats_toggle(matches[currentMatchID]['courtEvents']);
+    update_stats_toggle('#tennis_stats_court',matches[currentMatchID]['courtEvents']);
 
   })
 

@@ -629,6 +629,23 @@ body {
 	align-items: center;
 }
 
+.toggle_stats_container{
+	width: 25%;
+	padding: 0.1in;
+}
+#toggle_stats_btn{
+	width: 100%;
+	padding: var(--stats-feedback-button-pad);
+	background-color: var(--stats-feedback-button-color);
+	border: var(--stats-feedback-button-border);
+	border-radius: var(--button-radius-normal);
+	color: var(--stats-feedback-button-font-color);
+	font-size: var(--stats-feedback-font-large);
+	font-weight: var(--stats-feedback-font-large-weight);
+	text-decoration: none;
+	cursor: pointer;
+}
+
 .shot-pin-display {
 	width: var(--stats-pin-icon-width);
 }

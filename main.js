@@ -18,6 +18,9 @@ var users = {
   },
 }
 
+var display_player_stats = true;
+
+
 // Variable to keep track of the current username
 var currentUser = null
 
@@ -203,55 +206,135 @@ function draw_shot_placement(data){
   //var pin_court_ratio = 100*pin_width/document.getElementById('tennis_stats_court').offsetWidth;
 
   //console.log("Pin/Court width = "+pin_court_ratio);
+  if (display_player_stats){
+  
+    for (i=0;i < data['forehand'].length; i++){
+      if (data['forehand'][i][1] <= 50){
+        pin = document.createElement('img');
+        pin.setAttribute('src', "graphics/blue-pin.png");
+        pin.setAttribute('class', 'shot-pin');
+        pin.setAttribute('id', "forehand_"+i);
+        pin.style.left = data['forehand'][i][0]+"%";
+        pin.style.bottom = data['forehand'][i][1]+"%";
+        court.append(pin);
+      }
+    }
 
-  for (i=0;i < data['forehand'].length; i++){
-    pin = document.createElement('img');
-    pin.setAttribute('src', "graphics/blue-pin.png");
-    pin.setAttribute('class', 'shot-pin');
-    pin.setAttribute('id', "forehand_"+i);
-    pin.style.left = data['forehand'][i][0]+"%";
-    pin.style.bottom = data['forehand'][i][1]+"%";
-    court.append(pin);
-  }
+    for (i=0;i < data['backhand'].length; i++){
+      if (data['backhand'][i][1] <= 50){
+        pin = document.createElement('img');
+        pin.setAttribute('src', "graphics/red-pin.png");
+        pin.setAttribute('class', 'shot-pin');
+        pin.setAttribute('id', "backhand_"+i);
+        pin.style.left = data['backhand'][i][0]+"%";
+        pin.style.bottom = data['backhand'][i][1]+"%";
+        court.append(pin);
+      }
+    }
 
-  for (i=0;i < data['backhand'].length; i++){
-    pin = document.createElement('img');
-    pin.setAttribute('src', "graphics/red-pin.png");
-    pin.setAttribute('class', 'shot-pin');
-    pin.setAttribute('id', "backhand_"+i);
-    pin.style.left = data['backhand'][i][0]+"%";
-    pin.style.bottom = data['backhand'][i][1]+"%";
-    court.append(pin);
-  }
+    for (i=0;i < data['volley'].length; i++){
+      if (data['volley'][i][1] <= 50){
 
-  for (i=0;i < data['volley'].length; i++){
-    pin = document.createElement('img');
-    pin.setAttribute('src', "graphics/pink-pin.png");
-    pin.setAttribute('class', 'shot-pin');
-    pin.setAttribute('id', "volley_"+i);
-    pin.style.left = data['volley'][i][0]+"%";
-    pin.style.bottom = data['volley'][i][1]+"%";
-    court.append(pin);
-  }
+        pin = document.createElement('img');
+        pin.setAttribute('src', "graphics/pink-pin.png");
+        pin.setAttribute('class', 'shot-pin');
+        pin.setAttribute('id', "volley_"+i);
+        pin.style.left = data['volley'][i][0]+"%";
+        pin.style.bottom = data['volley'][i][1]+"%";
+        court.append(pin);
+      }
+    }
 
-  for (i=0;i < data['slice'].length; i++){
-    pin = document.createElement('img');
-    pin.setAttribute('src', "graphics/black-pin.png");
-    pin.setAttribute('class', 'shot-pin');
-    pin.setAttribute('id', "slice_"+i);
-    pin.style.left = data['slice'][i][0]+"%";
-    pin.style.bottom = data['slice'][i][1]+"%";
-    court.append(pin);
-  }
+    for (i=0;i < data['slice'].length; i++){
+      if (data['slice'][i][1] <= 50){
 
-  for (i=0;i < data['unspecified'].length; i++){
-    pin = document.createElement('img');
-    pin.setAttribute('src', "graphics/green-pin.png");
-    pin.setAttribute('class', 'shot-pin');
-    pin.setAttribute('id', "unspecified_"+i);
-    pin.style.left = data['unspecified'][i][0]+"%";
-    pin.style.bottom = data['unspecified'][i][1]+"%";
-    court.append(pin);
+        pin = document.createElement('img');
+        pin.setAttribute('src', "graphics/black-pin.png");
+        pin.setAttribute('class', 'shot-pin');
+        pin.setAttribute('id', "slice_"+i);
+        pin.style.left = data['slice'][i][0]+"%";
+        pin.style.bottom = data['slice'][i][1]+"%";
+        court.append(pin);
+      }
+    }
+
+    for (i=0;i < data['unspecified'].length; i++){
+      if (data['unspecified'][i][1] <= 50){
+
+        pin = document.createElement('img');
+        pin.setAttribute('src', "graphics/green-pin.png");
+        pin.setAttribute('class', 'shot-pin');
+        pin.setAttribute('id', "unspecified_"+i);
+        pin.style.left = data['unspecified'][i][0]+"%";
+        pin.style.bottom = data['unspecified'][i][1]+"%";
+        court.append(pin);
+      }
+    }
+
+  }else{
+    for (i=0;i < data['forehand'].length; i++){
+      if (data['forehand'][i][1] > 50){
+        pin = document.createElement('img');
+        pin.setAttribute('src', "graphics/blue-pin.png");
+        pin.setAttribute('class', 'shot-pin');
+        pin.setAttribute('id', "forehand_"+i);
+        pin.style.left = data['forehand'][i][0]+"%";
+        pin.style.bottom = data['forehand'][i][1]+"%";
+        court.append(pin);
+      }
+    }
+
+    for (i=0;i < data['backhand'].length; i++){
+      if (data['backhand'][i][1] > 50){
+        pin = document.createElement('img');
+        pin.setAttribute('src', "graphics/red-pin.png");
+        pin.setAttribute('class', 'shot-pin');
+        pin.setAttribute('id', "backhand_"+i);
+        pin.style.left = data['backhand'][i][0]+"%";
+        pin.style.bottom = data['backhand'][i][1]+"%";
+        court.append(pin);
+      }
+    }
+
+    for (i=0;i < data['volley'].length; i++){
+      if (data['volley'][i][1] > 50){
+
+        pin = document.createElement('img');
+        pin.setAttribute('src', "graphics/pink-pin.png");
+        pin.setAttribute('class', 'shot-pin');
+        pin.setAttribute('id', "volley_"+i);
+        pin.style.left = data['volley'][i][0]+"%";
+        pin.style.bottom = data['volley'][i][1]+"%";
+        court.append(pin);
+      }
+    }
+
+    for (i=0;i < data['slice'].length; i++){
+      if (data['slice'][i][1] > 50){
+
+        pin = document.createElement('img');
+        pin.setAttribute('src', "graphics/black-pin.png");
+        pin.setAttribute('class', 'shot-pin');
+        pin.setAttribute('id', "slice_"+i);
+        pin.style.left = data['slice'][i][0]+"%";
+        pin.style.bottom = data['slice'][i][1]+"%";
+        court.append(pin);
+      }
+    }
+
+    for (i=0;i < data['unspecified'].length; i++){
+      if (data['unspecified'][i][1] > 50){
+
+        pin = document.createElement('img');
+        pin.setAttribute('src', "graphics/green-pin.png");
+        pin.setAttribute('class', 'shot-pin');
+        pin.setAttribute('id', "unspecified_"+i);
+        pin.style.left = data['unspecified'][i][0]+"%";
+        pin.style.bottom = data['unspecified'][i][1]+"%";
+        court.append(pin);
+      }
+    }
+
   }
 }
 function Check_FB_Btn(){
@@ -298,7 +381,7 @@ $(document).ready(function(){
 
   $('#tab-stats').click(() => {
     updateFeedbackPlayer();
-    updateStatsView(matches[currentMatchID]["courtEvents"]);
+    update_stats_toggle(matches[currentMatchID]["courtEvents"]);
     $('#topbar-options .menu-popup').hide();
     $('#menu-popup-stats').show();
   });
@@ -423,7 +506,7 @@ $(document).ready(function(){
 
   function showPastMatchStats(matchID) {
     $('#feedback_player').text(pastMatches[matchID].player1)
-    updateStatsView(pastMatches[matchID]['courtEvents'])
+    update_stats_toggle(pastMatches[matchID]['courtEvents'])
     $('#menu-popup-history').hide()
     $('#menu-popup-stats').show()
   }
@@ -508,6 +591,30 @@ $(document).ready(function(){
   })
 
 
+  function update_stats_toggle(courtEvents){
+
+    if (display_player_stats){
+      document.getElementById("toggle_stats_btn").innerHTML = "View Shots Placed";
+    }else{
+      document.getElementById("toggle_stats_btn").innerHTML = "View Player Position";
+    }
+    updateStatsView(courtEvents);// ASSUMES CURRENT MATCH
+  }
+
+  //toggle_stats_btn
+  $('#toggle_stats_btn').on('click', function(){
+
+    //if (display_player_stats){
+
+    //}
+    if (display_player_stats){
+      display_player_stats = false;
+    }else{
+      display_player_stats = true;
+    }
+    update_stats_toggle(matches[currentMatchID]['courtEvents']);
+
+  })
 
   $('#feedback_text').on('keyup', function(){
     Check_FB_Btn();

@@ -51,8 +51,8 @@
 	--score-board-button-size: 25px;
 	--score-board-button-color: 25px;
 	--score-board-button-font-color: #FFF;
-	--score-board-button-color: #999;
-	--score-board-button-color-hover: #CCC;
+	--score-board-button-color: #444;
+	--score-board-button-color-hover: #333;
 
 	--player-names-label-font: xx-large;
 	--right-column-margin-left: 20px;
@@ -902,7 +902,7 @@ table.history-table tr.history-table-empty:hover > td {
 }
 
 /* Modal Content Buttons */
-#point_end_options_container{
+#point_end_options_container {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
@@ -910,8 +910,15 @@ table.history-table tr.history-table-empty:hover > td {
 
     padding: 20px;
 }
-.shot_ending_type{
+.point_end_btn_container {
     margin: 40px 10px 20px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.shot_ending_type {
+    margin: 10px 0px 5px;
 	border-radius: 20px;
 
     min-width: 150px;

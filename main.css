@@ -424,6 +424,19 @@ body {
   justify-content: space-around;
 }
 
+#end-match {
+	background-color: var(--undo-button-background);
+	font-size: var(--undo-button-font);
+	color: var(--undo-button-font-color);
+	padding: var(--undo-button-pad);
+	border-radius: var(--button-radius-normal);
+	text-align: center;
+	cursor: pointer;
+}
+#end-match:hover {
+	background-color: var(--undo-button-background-hover);
+}
+
 
 /* Scores Style */
 .score_menu_container {
@@ -997,8 +1010,9 @@ table.history-table tr.history-table-empty:hover > td {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	align-items: center;
 	padding: 20px;
+	max-height: 200px;
+	overflow-y: scroll;
 }
 
 #all-current-matches-modal table {

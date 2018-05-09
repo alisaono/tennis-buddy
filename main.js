@@ -876,10 +876,10 @@ $(document).ready(function(){
     matches[currentMatchID].player1SideLeft = !matches[currentMatchID].player1SideLeft;
     if (matches[currentMatchID].player1SideLeft) {
       $('#player_left.player_label').text(matches[currentMatchID].player1)
-      $('#player_right.player_label').text(matches[currentMatchID].player2)
+      $('#player_right.player_label').text("( "+matches[currentMatchID].player2+" )")
     } else {
       $('#player_right.player_label').text(matches[currentMatchID].player1)
-      $('#player_left.player_label').text(matches[currentMatchID].player2)
+      $('#player_left.player_label').text("( "+matches[currentMatchID].player2+" )")
     }
   }
 
@@ -1056,10 +1056,10 @@ $(document).ready(function(){
     // Update the names header in coach view.
     if (matches[currentMatchID].player1SideLeft) {
       $('#player_left.player_label').text(matches[currentMatchID].player1)
-      $('#player_right.player_label').text(matches[currentMatchID].player2)
+      $('#player_right.player_label').text("( "+matches[currentMatchID].player2+" )")
     } else {
       $('#player_right.player_label').text(matches[currentMatchID].player1)
-      $('#player_left.player_label').text(matches[currentMatchID].player2)
+      $('#player_left.player_label').text("( "+matches[currentMatchID].player2+" )")
     }
 
     // Update the feedback name.
@@ -1141,6 +1141,7 @@ $(document).ready(function(){
     $('#topbar').hide()
     $('#container').hide()
     $('#player-view-content').show()
+    
     updatePlayerHistoryView()
     $('#menu-popup-player-history').show()
   }
@@ -1149,6 +1150,8 @@ $(document).ready(function(){
     $('#login-view').hide()
     $('#topbar').show()
     $('#container').show()
+    switchSides();
+    switchSides();// Hack
     $('#player-view-content').hide()
     $('#menu-popup-player-history').hide()
   }

@@ -444,6 +444,18 @@ $(document).ready(function(){
   /* ... Functions related to the new match modal */
 
 
+  /* Functions related to the all current matches modal */
+  $('#current-matches > .menu-item').on ('click', () => {
+    $('#topbar-options .menu-popup').hide()
+    $('#all-current-matches-modal').show()
+  })
+
+  $('#all-current-matches-modal .close').click(() => {
+    $('#all-current-matches-modal').hide()
+  })
+  /* ... Functions related to the all current matches modal */
+
+
   /* Functions related to the end match modal */
   $('#end-match').on('click', () => {
     $('#menu-tabs').addClass('inactive')
@@ -1066,6 +1078,8 @@ $(document).ready(function(){
   function updateCurrentMatchesList() {
     $('#current-matches-empty').hide();
     $('#current-matches-list').empty();
+    $('#all-current-matches-modal table').empty();
+    $('#current-matches > .menu-item').show();
 
     let nameIds = [];
     Object.keys(matches).forEach(k => {
@@ -1075,12 +1089,15 @@ $(document).ready(function(){
     nameIds.sort((a, b) => a[0].localeCompare(b[0]));
 
     for (let n of nameIds) {
-      let e = $('<div class="menu-item">' + n[0] + '</div>');
-      e.click(() => switchMatch(n[1]));
-      $('#current-matches-list').append(e);
+      let $tr = $('<tr>').append(`<td>${n[0]}</td>`).click(function(){
+        $('#all-current-matches-modal').hide();
+        switchMatch(n[1]);
+      })
+      $('#all-current-matches-modal table').append($tr);
     }
 
     if (nameIds.length === 0) {
+      $('#current-matches > .menu-item').hide();
       $('#current-matches-empty').show();
     }
   }

@@ -51,8 +51,8 @@
 	--score-board-button-size: 25px;
 	--score-board-button-color: 25px;
 	--score-board-button-font-color: #FFF;
-	--score-board-button-color: #444;
-	--score-board-button-color-hover: #333;
+	--score-board-button-color: #999;
+	--score-board-button-color-hover: #CCC;
 
 	--player-names-label-font: xx-large;
 	--right-column-margin-left: 20px;
@@ -668,6 +668,10 @@ body {
 .stats_icon {
 	width: var(--stats-stroke-icon-width);
 	margin-right: var(--stats-table-margin);
+}
+
+.point_icon{
+	width: 100%;
 }
 
 .court_stats_icon {

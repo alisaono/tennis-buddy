@@ -887,15 +887,24 @@ $(document).ready(function(){
     undo();
   });
 
+  // Helper function for modifying opponent names.
+  function opponentName(s) {
+    if (s.toLowerCase() === "opponent") {
+      return "Opponent";
+    } else {
+      return "Opponent ( " + s + " )";
+    }
+  }
+  
   // Helper function for switching sides.
   function switchSides() {
     matches[currentMatchID].player1SideLeft = !matches[currentMatchID].player1SideLeft;
     if (matches[currentMatchID].player1SideLeft) {
       $('#player_left.player_label').text(matches[currentMatchID].player1)
-      $('#player_right.player_label').text("( "+matches[currentMatchID].player2+" )")
+      $('#player_right.player_label').text(opponentName(matches[currentMatchID].player2))
     } else {
       $('#player_right.player_label').text(matches[currentMatchID].player1)
-      $('#player_left.player_label').text("( "+matches[currentMatchID].player2+" )")
+      $('#player_left.player_label').text(opponentName(matches[currentMatchID].player2))
     }
   }
 
@@ -1088,10 +1097,10 @@ $(document).ready(function(){
     // Update the names header in coach view.
     if (matches[currentMatchID].player1SideLeft) {
       $('#player_left.player_label').text(matches[currentMatchID].player1)
-      $('#player_right.player_label').text("( "+matches[currentMatchID].player2+" )")
+      $('#player_right.player_label').text(opponentName(matches[currentMatchID].player2))
     } else {
       $('#player_right.player_label').text(matches[currentMatchID].player1)
-      $('#player_left.player_label').text("( "+matches[currentMatchID].player2+" )")
+      $('#player_left.player_label').text(opponentName(matches[currentMatchID].player2))
     }
 
     // Update the feedback name.

@@ -888,11 +888,11 @@ $(document).ready(function(){
   });
 
   // Helper function for modifying opponent names.
-  function opponentName(s) {
+  function opponentNameChanger(s) {
     if (s.toLowerCase() === "opponent") {
       return "Opponent";
     } else {
-      return "Opponent ( " + s + " )";
+      return "Opponent (&nbsp;" + s + "&nbsp;)";
     }
   }
   
@@ -900,11 +900,11 @@ $(document).ready(function(){
   function switchSides() {
     matches[currentMatchID].player1SideLeft = !matches[currentMatchID].player1SideLeft;
     if (matches[currentMatchID].player1SideLeft) {
-      $('#player_left.player_label').text(matches[currentMatchID].player1)
-      $('#player_right.player_label').text(opponentName(matches[currentMatchID].player2))
+      $('#player_left.player_label').html(matches[currentMatchID].player1)
+      $('#player_right.player_label').html(opponentNameChanger(matches[currentMatchID].player2))
     } else {
-      $('#player_right.player_label').text(matches[currentMatchID].player1)
-      $('#player_left.player_label').text(opponentName(matches[currentMatchID].player2))
+      $('#player_right.player_label').html(matches[currentMatchID].player1)
+      $('#player_left.player_label').html(opponentNameChanger(matches[currentMatchID].player2))
     }
   }
 
@@ -1096,11 +1096,11 @@ $(document).ready(function(){
 
     // Update the names header in coach view.
     if (matches[currentMatchID].player1SideLeft) {
-      $('#player_left.player_label').text(matches[currentMatchID].player1)
-      $('#player_right.player_label').text(opponentName(matches[currentMatchID].player2))
+      $('#player_left.player_label').html(matches[currentMatchID].player1)
+      $('#player_right.player_label').html(opponentNameChanger(matches[currentMatchID].player2))
     } else {
-      $('#player_right.player_label').text(matches[currentMatchID].player1)
-      $('#player_left.player_label').text(opponentName(matches[currentMatchID].player2))
+      $('#player_right.player_label').html(matches[currentMatchID].player1)
+      $('#player_left.player_label').html(opponentNameChanger(matches[currentMatchID].player2))
     }
 
     // Update the feedback name.
@@ -1181,6 +1181,8 @@ $(document).ready(function(){
     $('#login-view').hide()
     $('#topbar').hide()
     $('#container').hide()
+    
+    $('#player-view-topbar').show()
     $('#player-view-content').show()
     
     updatePlayerHistoryView()
@@ -1189,6 +1191,9 @@ $(document).ready(function(){
 
   function showCoachView() {
     $('#login-view').hide()
+    $('#player-view-topbar').hide()
+    $('#player-view-content').hide()
+
     $('#topbar').show()
     $('#container').show()
     switchSides();

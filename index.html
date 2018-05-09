@@ -6,6 +6,7 @@
   <title>Tennis Buddy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Audiowide" rel="stylesheet">
   <link rel="stylesheet" href="main.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="main.js"></script>
@@ -14,7 +15,7 @@
 <body>
   <!--------- COACH VIEW --------->
   <div id="topbar">
-    <div id="topbar-logo">Tennis Buddy</div>
+    <div id="topbar-logo" class="tennis-buddy-logo">Tennis Buddy</div>
     <div id="topbar-options">
       <div id="menu-tabs">
         <input id="tab-logger" type="radio" name="tabs" checked>
@@ -131,7 +132,7 @@
         </div>
         <!-- /Scores -->
       </div>
-      
+
       <!-- Logging Toolbar -->
       <div id="logging-toolbar">
   	    <input type="button" class="toolbar-button borderless" id="forehand-button" value="(F)orehand">
@@ -241,7 +242,7 @@
 
   <!-- Stats (Player View Topbar) -->
   <div id="player-view-topbar">
-    <div id="topbar-logo">Tennis Buddy</div>
+    <div id="topbar-logo" class="tennis-buddy-logo">Tennis Buddy</div>
     <div id="topbar-options">
       <div id="menu-menu" class="menu-item-wrapper">
         <div class="menu-item">
@@ -319,7 +320,7 @@
   	    <input type="button" class="stats-toggle-button borderless" id="player-player-position-button" value="View Player Position">
   	    <input type="button" class="stats-toggle-button borderless" id="player-shot-position-button" value="View Shot Placement">
       </div>
-      
+
       <div class="feedback_viewer_container">
         <div class="feedback_viewer_header_container"></div>
       </div>
@@ -345,7 +346,7 @@
   <!--------- LOGIN VIEW --------->
   <div id="login-view">
     <div id="login-container">
-      <div id="login-logo">Tennis Buddy</div>
+      <div id="login-logo" class="tennis-buddy-logo">Tennis Buddy</div>
       <div id="login-title">Welcome!</div>
       <input id="login-username" type="text" placeholder="Username" autofocus>
       <input id="login-password" type="password" placeholder="Password">

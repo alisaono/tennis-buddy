@@ -663,7 +663,7 @@ $(document).ready(function(){
 
 
   // Types of shots in toolbar.
-  let shotTypes = ["forehand", "backhand", "volley", "slice"]
+  let shotTypes = ["forehand", "backhand", "volley", "slice", "unspecified"]
 
   // Make court undraggable.
   $('#tennis-court').on("dragstart", () => {
@@ -819,6 +819,8 @@ $(document).ready(function(){
         toolbarClick("volley");
       } else if (e.key == "s" || e.key == "S") {
         toolbarClick("slice");
+      } else if (e.key == "u" || e.key == "U") {
+        toolbarClick("unspecified");
       }
     }
   })
@@ -1154,6 +1156,7 @@ $(document).ready(function(){
     switchSides();// Hack
     $('#player-view-content').hide()
     $('#menu-popup-player-history').hide()
+    toolbarClick("unspecified")
   }
 
   // Helper function for logging in

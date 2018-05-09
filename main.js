@@ -1169,7 +1169,8 @@ $(document).ready(function(){
   // When the user presses the Esc key, close the modal.
   $(document).keydown((e) => {
     if (e.keyCode == 27) {
-      $('#myModal').hide();
+      $('.modal-content .close:visible').trigger('click');
+      //$('#myModal').hide();
     }
   });
 

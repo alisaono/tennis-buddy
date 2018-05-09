@@ -947,9 +947,13 @@ $(document).ready(function(){
       }
 
       if (typeof gameScore[playerId] === "string") {
+        // Won, Lost, or Tie
         $(scoreSelectors[playerId]).html(gameScore[playerId]);
+        $('.score_inc_btn').hide();
       } else {
+        // Game still ongoing
         $(scoreSelectors[playerId]).html(gameScoreMap[gameScore[playerId]]);
+        $('.score_inc_btn').show();
       }
 
     }
@@ -989,23 +993,35 @@ $(document).ready(function(){
       if (setScore.length > 5) {
         break;
       }
+      
+      // If someone has won 3 sets, match is over.
+      let setsWon = [0, 0]
+      for (let i = 0; i < setScore.length-1; i++) {
+        if (setScore[i][0] > setScore[i][1]) {
+          setsWon[0]++;
+        } else if (setScore[i][0] < setScore[i][1]) {
+          setsWon[1]++;
+        }
+      }
+      if (setsWon[0] >= 3 || setsWon[1] >= 3) {
+        break;
+      }
     }
 
     // Calculate who won if needed.
-    if (setScore.length > 5) {
-      setScore.pop();
-      let gamesWon = [0, 0]
-      for (let i = 0; i < 5; i++) {
-        if (setScore[i][0] > setScore[i][1]) {
-          gamesWon[0]++;
-        } else if (setScore[i][0] < setScore[i][1]) {
-          gamesWon[1]++;
-        }
+    let setsWon = [0, 0]
+    for (let i = 0; i < setScore.length-1; i++) {
+      if (setScore[i][0] > setScore[i][1]) {
+        setsWon[0]++;
+      } else if (setScore[i][0] < setScore[i][1]) {
+        setsWon[1]++;
       }
-
-      if (gamesWon[0] > gamesWon[1]) {
+    }
+    if (setsWon[0] >= 3 || setsWon[1] >= 3 || setScore.length > 5) {
+      setScore.pop();
+      if (setsWon[0] > setsWon[1]) {
         gameScore = ["Won", "Lost"];
-      } else if (gamesWon[0] < gamesWon[1]) {
+      } else if (setsWon[0] < setsWon[1]) {
         gameScore = ["Lost", "Won"];
       } else {
         gameScore = ["Tie", "Tie"];

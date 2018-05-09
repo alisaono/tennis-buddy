@@ -659,7 +659,7 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 	padding-bottom: 30px;
-	height: calc(100vh - var(--top-bar-height) - 30px);
+	min-height: calc(100vh - var(--top-bar-height) - 30px);
 	display: flex;
 	flex-direction: column;
 	align-items: center;

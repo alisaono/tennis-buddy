@@ -824,7 +824,7 @@ $(document).ready(function(){
 
   // Keyboard bindings for toolbar buttons.
   $('body').keydown(function(e) {
-    if ($('#logging-toolbar').is(':visible')) {
+    if ($('#logging-toolbar').is(':visible') && !($('.modal').is(':visible'))) {
       if (e.key == "f" || e.key == "F") {
         toolbarClick("forehand");
       } else if (e.key == "b" || e.key == "B") {

@@ -386,7 +386,8 @@ $(document).ready(function(){
 
   $('#tab-stats').click(() => {
     updateFeedbackPlayer();
-    update_stats_toggle('#tennis_stats_court', matches[currentMatchID]["courtEvents"]);
+    updateStatsView('#tennis_stats_court', matches[currentMatchID]["courtEvents"]);
+    coachToggleClick(true);
     $('#topbar-options .menu-popup').hide();
     $('#menu-popup-stats').show();
   });
@@ -526,6 +527,7 @@ $(document).ready(function(){
     currentStatsMatch = pastMatches[matchID]
     $('#feedback_player').text(pastMatches[matchID].player1)
     updateStatsView('#tennis_stats_court', pastMatches[matchID]['courtEvents'])
+    coachToggleClick(true)
     $('#menu-popup-history').hide()
     $('#menu-popup-stats').show()
   }
@@ -563,7 +565,9 @@ $(document).ready(function(){
   }
 
   function showPlayerMatchStats(matchID) {
+    currentStatsMatch = pastMatches[matchID]
     updateStatsView('#tennis_player_stats_court', pastMatches[matchID]['courtEvents'])
+    playerToggleClick(true)
     $('#player-view-content .feedback_viewer_text_container').remove()
     let feedbacks = pastMatches[matchID].feedback
     if (feedbacks.length > 0) {
@@ -631,32 +635,42 @@ $(document).ready(function(){
     }, 300)
   })
 
-
-  function update_stats_toggle(courtSelector, courtEvents){
-
-    if (display_player_stats){
-      document.getElementById("toggle_stats_btn").innerHTML = "View Shots Placed";
-    }else{
-      document.getElementById("toggle_stats_btn").innerHTML = "View Player Position";
+  // Helper functions for stats toggle button clicks.
+  function coachToggleClick(isPlayerPosition) {
+    $('.stats-toggle-button').removeClass("active");
+    display_player_stats = isPlayerPosition;
+    if (isPlayerPosition) {
+      $('#coach-player-position-button').addClass("active");
+    } else {
+      $('#coach-shot-position-button').addClass("active");
     }
-    updateStatsView(courtSelector, courtEvents);// ASSUMES CURRENT MATCH
+    
+    // Checks if past match is being viewed by visibility of the menu tabs.
+    if ($('#menu-tabs').is(':visible')) {
+      updateStatsView('#tennis_stats_court', matches[currentMatchID]['courtEvents']);      
+    } else {
+      updateStatsView('#tennis_stats_court', currentStatsMatch['courtEvents']);
+    }
   }
-
-  //toggle_stats_btn
-  $('#toggle_stats_btn').on('click', function(){
-
-    //if (display_player_stats){
-
-    //}
-    if (display_player_stats){
-      display_player_stats = false;
-    }else{
-      display_player_stats = true;
+  function playerToggleClick(isPlayerPosition) {
+    $('.stats-toggle-button').removeClass("active");
+    display_player_stats = isPlayerPosition;
+    if (isPlayerPosition) {
+      $('#player-player-position-button').addClass("active");
+    } else {
+      $('#player-shot-position-button').addClass("active");
     }
-    update_stats_toggle('#tennis_stats_court',matches[currentMatchID]['courtEvents']);
+    
+    updateStatsView('#tennis_player_stats_court', currentStatsMatch['courtEvents']);
+  }
+  
+  // Bind stats toggle button clicks.
+  $('#coach-shot-position-button').click(() => coachToggleClick(false));
+  $('#coach-player-position-button').click(() => coachToggleClick(true));
+  $('#player-shot-position-button').click(() => playerToggleClick(false));
+  $('#player-player-position-button').click(() => playerToggleClick(true));
 
-  })
-
+  
   $('#feedback_text').on('keyup', function(){
     Check_FB_Btn();
   })

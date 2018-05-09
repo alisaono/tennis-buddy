@@ -554,7 +554,7 @@ body {
 .toolbar-button:first-child {
     border-radius: var(--button-radius-normal) var(--button-radius-normal) 0 0;
 }
-.toolbar-button:nth-child(4) {
+.toolbar-button:nth-child(5) {
     border-radius: 0 0 var(--button-radius-normal) var(--button-radius-normal);
 }
 .toolbar-button.active {
@@ -642,21 +642,36 @@ body {
 	align-items: center;
 }
 
-.toggle_stats_container{
-	width: 25%;
-	padding: 0.1in;
+
+/* Toggle Stats Style */
+.toggle_stats_container {
+    margin: 20px 10px 10px;
+    
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
 }
-#toggle_stats_btn{
-	width: 100%;
-	padding: var(--stats-feedback-button-pad);
-	background-color: var(--stats-feedback-button-color);
-	border: var(--stats-feedback-button-border);
-	border-radius: var(--button-radius-normal);
-	color: var(--stats-feedback-button-font-color);
-	font-size: var(--stats-feedback-font-large);
-	font-weight: var(--stats-feedback-font-large-weight);
-	text-decoration: none;
-	cursor: pointer;
+.stats-toggle-button {
+    padding: var(--toolbar-button-pad);
+	background-color: var(--toolbar-button-background);
+	border: var(--toolbar-button-border);
+	box-shadow: none;
+    color: var(--toolbar-button-font-color);
+    font-size: var(--toolbar-button-font);
+}
+.stats-toggle-button:hover {
+    background-color: var(--toolbar-button-background-hover);
+}
+.stats-toggle-button:first-child {
+    border-radius: var(--button-radius-normal) 0 0 var(--button-radius-normal);
+}
+.stats-toggle-button:nth-child(2) {
+    border-radius: 0 var(--button-radius-normal) var(--button-radius-normal) 0;
+}
+.stats-toggle-button.active {
+    background-color: var(--toolbar-button-background-active);
+    color: var(--toolbar-button-font-color-active);
 }
 
 .shot-pin-display {
@@ -717,8 +732,8 @@ body {
 
 .feedback_btn {
 	width: var(--stats-feedback-button-width);
+    padding: var(--stats-feedback-button-pad);
 	margin-left: auto;
-	height: 100px;
 	background-color: var(--stats-feedback-button-color);
 	border: var(--stats-feedback-button-border);
 	border-radius: var(--button-radius-normal);
@@ -731,8 +746,8 @@ body {
 
 .feedback_btn_disabled {
 	width: var(--stats-feedback-button-width);
+    padding: var(--stats-feedback-button-pad);
 	margin-left: auto;
-	height: 100px;
 	background-color: #CCC;
 	border: 1px solid #BBB;
 	border-radius: var(--button-radius-normal);

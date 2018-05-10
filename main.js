@@ -538,6 +538,7 @@ $(document).ready(function(){
   $('#player-matches').on('click', () => {
     updatePlayerHistoryView()
     $('#topbar-options .menu-popup').hide()
+    $('#player-view-content').hide()
     $('#menu-popup-player-history').show()
   })
 
@@ -586,6 +587,7 @@ $(document).ready(function(){
         .html('No feedback from coach yet.')
         .css('text-align', 'center')
     }
+    $('#player-view-content').show()
     $('#menu-popup-player-history').hide()
   }
   /* ... Functions related to the player-side history menuu */
@@ -644,10 +646,10 @@ $(document).ready(function(){
     } else {
       $('#coach-shot-position-button').addClass("active");
     }
-    
+
     // Checks if past match is being viewed by visibility of the menu tabs.
     if ($('#menu-tabs').is(':visible')) {
-      updateStatsView('#tennis_stats_court', matches[currentMatchID]['courtEvents']);      
+      updateStatsView('#tennis_stats_court', matches[currentMatchID]['courtEvents']);
     } else {
       updateStatsView('#tennis_stats_court', currentStatsMatch['courtEvents']);
     }
@@ -660,17 +662,17 @@ $(document).ready(function(){
     } else {
       $('#player-shot-position-button').addClass("active");
     }
-    
+
     updateStatsView('#tennis_player_stats_court', currentStatsMatch['courtEvents']);
   }
-  
+
   // Bind stats toggle button clicks.
   $('#coach-shot-position-button').click(() => coachToggleClick(false));
   $('#coach-player-position-button').click(() => coachToggleClick(true));
   $('#player-shot-position-button').click(() => playerToggleClick(false));
   $('#player-player-position-button').click(() => playerToggleClick(true));
 
-  
+
   $('#feedback_text').on('keyup', function(){
     Check_FB_Btn();
   })
@@ -895,7 +897,7 @@ $(document).ready(function(){
       return "Opponent (&nbsp;" + s + "&nbsp;)";
     }
   }
-  
+
   // Helper function for switching sides.
   function switchSides() {
     matches[currentMatchID].player1SideLeft = !matches[currentMatchID].player1SideLeft;
@@ -1016,7 +1018,7 @@ $(document).ready(function(){
       if (setScore.length > 5) {
         break;
       }
-      
+
       // If someone has won 3 sets, match is over.
       let setsWon = [0, 0]
       for (let i = 0; i < setScore.length-1; i++) {
@@ -1182,10 +1184,10 @@ $(document).ready(function(){
     $('#login-view').hide()
     $('#topbar').hide()
     $('#container').hide()
-    
+
     $('#player-view-topbar').show()
-    $('#player-view-content').show()
-    
+    $('#menu-popup-stats').hide()
+
     updatePlayerHistoryView()
     $('#menu-popup-player-history').show()
   }

@@ -156,7 +156,7 @@
     --right-column-margin: 0px 0px 0px var(--right-column-margin-left);
     --logging-toolbar-margin-top: 50px;
     }
-    
+
     .stats_icon {
         display: block;
     }
@@ -994,7 +994,7 @@ table.history-table tr.history-table-empty:hover > td {
 }
 .point_end_btn_container {
     flex: 1;
-    margin: 40px 10px 20px;
+    margin: 10px 10px 10px;
 
     display: flex;
     flex-direction: column;

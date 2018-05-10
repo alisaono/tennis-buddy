@@ -994,7 +994,7 @@ table.history-table tr.history-table-empty:hover > td {
 }
 .point_end_btn_container {
     flex: 1;
-    margin: 40px 10px 20px;
+    margin: 10px 10px 10px;
 
     display: flex;
     flex-direction: column;

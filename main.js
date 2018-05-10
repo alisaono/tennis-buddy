@@ -382,6 +382,8 @@ $(document).ready(function(){
   $('#tab-logger').click(() => {
     $('#topbar-options .menu-popup').hide();
     $('#menu-popup-stats').hide();
+    $('#menu-popup-history').hide()
+    $('#container').show();
   });
 
   $('#tab-stats').click(() => {
@@ -389,6 +391,8 @@ $(document).ready(function(){
     updateStatsView('#tennis_stats_court', matches[currentMatchID]["courtEvents"]);
     coachToggleClick(true);
     $('#topbar-options .menu-popup').hide();
+    $('#container').hide();
+    $('#menu-popup-history').hide()
     $('#menu-popup-stats').show();
   });
 
@@ -427,6 +431,11 @@ $(document).ready(function(){
     updateCurrentMatchesList()
     switchMatch(nextMatchID.toString())
     hideNewMatchModal()
+    
+    $('#menu-popup-stats').hide()
+    $('#menu-popup-history').hide()
+    $('#container').show()
+    
     $('#menu-tabs').show()
     $('#end-match').show()
     $('#tab-logger').prop('checked', true)
@@ -473,6 +482,9 @@ $(document).ready(function(){
     } else {
       $('#menu-tabs').hide()
       $('#end-match').hide()
+      
+      $('#container').hide()
+      $('#menu-popup-stats').hide()
       $('#menu-popup-history').show()
     }
     $('#end-match-modal').hide()
@@ -520,6 +532,9 @@ $(document).ready(function(){
   $('#history').on('click', () => {
     $('#menu-tabs').hide()
     $('#topbar-options .menu-popup').hide()
+    
+    $('#container').hide()
+    $('#menu-popup-stats').hide()
     $('#menu-popup-history').show()
   })
 
@@ -528,6 +543,8 @@ $(document).ready(function(){
     $('#feedback_player').text(pastMatches[matchID].player1)
     updateStatsView('#tennis_stats_court', pastMatches[matchID]['courtEvents'])
     coachToggleClick(true)
+    
+    $('#container').hide()
     $('#menu-popup-history').hide()
     $('#menu-popup-stats').show()
   }
@@ -538,6 +555,7 @@ $(document).ready(function(){
   $('#player-matches').on('click', () => {
     updatePlayerHistoryView()
     $('#topbar-options .menu-popup').hide()
+    
     $('#player-view-content').hide()
     $('#menu-popup-player-history').show()
   })
@@ -1115,6 +1133,7 @@ $(document).ready(function(){
     $('#menu-tabs').show();
     $('#tab-logger').prop('checked', true)
     $('.menu-popup').hide();
+    $('#container').show();
   }
 
   // Updates the list of matches in the menu and binds the clicks.
@@ -1182,28 +1201,50 @@ $(document).ready(function(){
 
   function showPlayerView() {
     $('#login-view').hide()
+    
     $('#topbar').hide()
     $('#container').hide()
+    $('#menu-popup-stats').hide()
+    $('#menu-popup-history').hide()
+    
+    $('.modal').hide()
 
     $('#player-view-topbar').show()
-    $('#menu-popup-stats').hide()
 
     updatePlayerHistoryView()
     $('#menu-popup-player-history').show()
+    $('#player-view-content').hide()
   }
 
   function showCoachView() {
     $('#login-view').hide()
+    
     $('#player-view-topbar').hide()
     $('#player-view-content').hide()
-
-    $('#topbar').show()
-    $('#container').show()
-    switchSides();
-    switchSides();// Hack
-    $('#player-view-content').hide()
     $('#menu-popup-player-history').hide()
-    toolbarClick("unspecified")
+
+    $('.modal').hide()
+    
+    $('#topbar').show()
+
+    if (Object.keys(matches).length > 0) {
+      $('#menu-popup-stats').hide()
+      $('#menu-popup-history').hide()
+      $('#container').show()
+    
+      switchSides();
+      switchSides();// Hack
+      toolbarClick("unspecified")
+      
+      switchMatch(Object.keys(matches)[0])
+    } else {
+      $('#menu-tabs').hide()
+      $('#end-match').hide()
+      
+      $('#container').hide()
+      $('#menu-popup-stats').hide()
+      $('#menu-popup-history').show()
+    }
   }
 
   // Helper function for logging in

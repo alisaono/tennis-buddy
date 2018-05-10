@@ -334,7 +334,7 @@ body {
 }
 
 #current-matches-empty {
-	width: var(--top-bar-popup-width);
+	max-width: var(--top-bar-popup-width);
 	padding: 20px;
 	background-color: var(--color-top-bar-dropdown);
 	color: var(--top-bar-font-color);
